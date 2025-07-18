@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "./assets/paz-logo.png";
-import benji from "./assets/benji-mascot.png";
+import pazLogo from './assets/paz-logo.png'; 
+import benjiMascot from './assets/benji-mascot.png';
 
 export default function Home() {
   return (
