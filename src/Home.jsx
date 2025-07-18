@@ -11,7 +11,7 @@ const Home = () => {
         Appraisals so good, they could bring world peace.
       </p>
       <img src={benji} alt="Benji the Mascot" className="w-40 mt-8 rounded-full shadow-lg" />
-      <p className="text-sm italic text-gray-500 mt-2">Benji the Peace Pup™</p>
+      <p className="text-sm italic text-gray-500 mt-2">Benji the Pup of Peace™</p>
     </div>
   );
 };
