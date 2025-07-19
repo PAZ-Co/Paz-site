@@ -22,7 +22,6 @@ const Home = () => {
           <li><strong>Diminished Value Reports:</strong> Certified reports that quantify loss in vehicle value after repairs.</li>
           <li><strong>Loss of Use Reports:</strong> Accurate reimbursement estimates for the time your vehicle was undriveable.</li>
            <li><strong>Total Loss Valuation Support:</strong> Fight undervalued total loss settlements with certified appraisals.</li>
-          <li><strong>Repair Estimate Disputes:</strong> We advocate on your behalf to challenge lowball insurer estimates.</li>
         </ul>
       </div>
 
