@@ -73,9 +73,7 @@ const Home = () => {
             className="w-14 h-14 rounded-full shadow-md border border-gray-300 transition-transform hover:scale-110"
           />
           <span className="text-xs mt-1 font-medium">Benji the Pup of Peace</span>
-          <p className="text-center mt-2 text-gray-600 max-w-md italic">
-        Appraisals so good, they could bring world peace.
-      </p>
+    
         </div>
       </div>
     </div>
