@@ -9,7 +9,7 @@ const Home = () => {
       <h1 className="text-3xl font-bold text-center">Precision Appraisal Zone</h1>
       <h2 className="text-red-600 text-xl mt-2">TEST</h2>
       <p className="text-center mt-4 text-gray-600 max-w-md">
-        Appraisals so good, they could bring world peace.
+        Appraisals so good, they could bring world peace;)
       </p>
       <img src={benji} alt="Benji the Mascot" className="w-40 mt-8 rounded-full shadow-lg" />
       <p className="text-sm italic text-gray-500 mt-2">Benji the Pup of Peace</p>
