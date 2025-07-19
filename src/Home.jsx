@@ -23,13 +23,13 @@ const Home = () => {
         </ul>
       </div>
 
-      <div className="mt-10 text-center">
+     <div className="fixed bottom-4 right-4 text-center z-50">
   <img
     src={benji}
     alt="Benji the Mascot"
-    className="w-24 mx-auto rounded-full shadow-md border border-gray-300 transition-transform hover:scale-105"
+    className="w-16 h-16 rounded-full shadow-md border border-gray-300 transition-transform hover:scale-110"
   />
-  <p className="text-xs italic text-gray-500 mt-2">Benji the Pup of Peace</p>
+  <p className="text-[10px] italic text-gray-500 mt-1">Benji the Pup of Peace</p>
 </div>
 
     </div>
