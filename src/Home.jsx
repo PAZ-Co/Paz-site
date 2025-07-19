@@ -7,9 +7,7 @@ const Home = () => {
     <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-start py-10 px-4 text-gray-800">
       {/* Logo & Slogan */}
       <img src={logo} alt="PAZ Logo" className="w-64 mb-4" />
-      <p className="text-center mt-2 text-gray-600 max-w-md italic">
-        Appraisals so good, they could bring world peace.
-      </p>
+      
 
       {/* Our Services */}
       <div className="mt-10 p-6 bg-white rounded-xl shadow-md max-w-2xl w-full">
@@ -75,6 +73,9 @@ const Home = () => {
             className="w-14 h-14 rounded-full shadow-md border border-gray-300 transition-transform hover:scale-110"
           />
           <span className="text-xs mt-1 font-medium">Benji the Pup of Peace</span>
+          <p className="text-center mt-2 text-gray-600 max-w-md italic">
+        Appraisals so good, they could bring world peace.
+      </p>
         </div>
       </div>
     </div>
