@@ -15,10 +15,10 @@ const Home = () => {
       <div className="mt-10 p-6 bg-white rounded-xl shadow-md max-w-md w-full">
         <h2 className="text-xl font-semibold text-center mb-4">Our Services</h2>
         <ul className="text-left space-y-2 text-gray-700">
-          <li>✅ Certified Diminished Value Reports</li>
-          <li>✅ Expert Loss of Use Claims</li>
-          <li>✅ Repair Estimate Disputes</li>
-          <li>✅ Total Loss Valuation Support</li>
+          <li>✔️ Certified Diminished Value Reports</li>
+          <li>✔️ Expert Loss of Use Claims</li>
+          <li>✔️ Repair Estimate Disputes</li>
+          <li>✔️ Total Loss Valuation Support</li>
         </ul>
       </div>
 
