@@ -28,7 +28,7 @@ const Home = () => {
     alt="Benji the Mascot"
     className="w-16 h-16 rounded-full shadow-md border border-gray-300 transition-transform hover:scale-110"
   />
-  <p className="text-[10px] italic text-gray-500 mt-1">Benji the Pup of Peace</p>
+  <p className="text-[10px] italic text-gray-500 mt-1">Benji - Pup of Peace</p>
 </div>
 
     </div>
