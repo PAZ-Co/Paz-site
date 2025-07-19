@@ -47,7 +47,7 @@ const Home = () => {
       <div className="mt-10 p-6 bg-white rounded-xl shadow-md max-w-2xl w-full">
         <h2 className="text-2xl font-semibold text-center mb-4">About Us</h2>
         <p className="text-center">
-          Founded by David Paz, Precision Appraisal Zone is dedicated to helping vehicle owners, law firms, and repair shops fight for fair valuations after an accident. Whether it’s Diminished Value or Total Loss disputes — we’ve got your back.
+          Precision Appraisal Zone is dedicated to helping vehicle owners, law firms, and repair shops fight for fair valuations after an accident. Whether it’s Diminished Value or Total Loss disputes — we’ve got your back.
         </p>
       </div>
 
