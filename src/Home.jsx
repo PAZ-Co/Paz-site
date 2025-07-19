@@ -57,7 +57,7 @@ const Home = () => {
         <ul className="text-center space-y-1">
           <li><strong>Email:</strong> PrecisionAppraisalZone@Gmail.com</li>
           <li><strong>Phone:</strong> 954.839.7653</li>
-          </strong> Florida</li>
+          <li><strong>Phone:</strong> South Florida</li>
         </ul>
       </div>
 
