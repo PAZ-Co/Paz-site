@@ -6,7 +6,12 @@ const Home = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-start py-10 px-4 text-gray-800">
       {/* Logo & Slogan */}
-      <img src={logo} alt="PAZ Logo" className="w-64 mb-4" />
+      <img
+  src={logo}
+  alt="PAZ Logo"
+  className="w-64 mb-6 rounded-lg shadow-sm opacity-90"
+/>
+
       
 
       {/* Our Services */}
