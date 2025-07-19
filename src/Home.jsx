@@ -4,10 +4,10 @@ import benji from './assets/benji-mascot.png';
 
 const Home = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-red">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-red-100">
       <img src={logo} alt="PAZ Logo" className="w-64 mb-6" />
       <h1 className="text-3xl font-bold text-center">Precision Appraisal Zone</h1>
-      <h2 className="text-red-600 text-xl mt-2">TEST1</h2>
+      <h2 className="text-red-600 text-xl mt-2">TEST2</h2>
       <p className="text-center mt-4 text-gray-600 max-w-md">
         Appraisals so good, they could bring world peace;)
       </p>
