@@ -22,13 +22,21 @@ const Home = () => {
         </ul>
       </div>
 
-     <div className="fixed bottom-4 right-4 z-50 flex flex-col items-center text-center">
-  <img
-    src={benji}
-    alt="Benji the Mascot"
-    className="w-16 h-16 rounded-full shadow-md border border-gray-300 transition-transform hover:scale-110"
-  />
-  <p className="text-[10px] italic text-gray-500 mt-1">Benji – Pup of Peace</p>
+     <div className="fixed bottom-4 right-4 z-50 flex items-end gap-2">
+  {/* Chat Bubble */}
+  <div className="bg-white text-gray-800 text-xs px-3 py-2 rounded-lg shadow-md max-w-[150px]">
+    Hi there! Need help?
+  </div>
+
+  {/* Benji Image + Label */}
+  <div className="flex flex-col items-center text-center">
+    <img
+      src={benji}
+      alt="Benji the Mascot"
+      className="w-16 h-16 rounded-full shadow-md border border-gray-300 transition-transform hover:scale-110"
+    />
+    <p className="text-[10px] italic text-gray-500 mt-1">Benji – Pup of Peace</p>
+  </div>
 </div>
 
     </div>
