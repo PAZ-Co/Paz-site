@@ -24,9 +24,14 @@ const Home = () => {
       </div>
 
       <div className="mt-10 text-center">
-        <img src={benji} alt="Benji the Mascot" className="w-40 mx-auto rounded-full shadow-lg" />
-        <p className="text-sm italic text-gray-500 mt-2">Benji the Pup of Peace</p>
-      </div>
+  <img
+    src={benji}
+    alt="Benji the Mascot"
+    className="w-24 mx-auto rounded-full shadow-md border border-gray-300 transition-transform hover:scale-105"
+  />
+  <p className="text-xs italic text-gray-500 mt-2">Benji the Pup of Peace</p>
+</div>
+
     </div>
   );
 };
