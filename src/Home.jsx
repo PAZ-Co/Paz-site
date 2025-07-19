@@ -31,7 +31,6 @@ const Home = () => {
           <li>✔️ 5-Star Rated Service</li>
           <li>✔️ Fast Turnaround Times</li>
           <li>✔️ Works with Attorneys & Shops</li>
-          <li>✔️ Money-Back Guarantee</li>
         </ul>
       </div>
 
