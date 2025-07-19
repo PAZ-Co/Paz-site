@@ -7,7 +7,6 @@ const Home = () => {
     <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-start py-10 px-4 text-gray-800">
       {/* Logo & Slogan */}
       <img src={logo} alt="PAZ Logo" className="w-64 mb-4" />
-      <h1 className="text-3xl font-bold text-center">Precision Appraisal Zone</h1>
       <p className="text-center mt-2 text-gray-600 max-w-md italic">
         Appraisals so good, they could bring world peace.
       </p>
