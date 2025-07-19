@@ -19,7 +19,6 @@ const Home = () => {
           <li>✅ Expert Loss of Use Claims</li>
           <li>✅ Repair Estimate Disputes</li>
           <li>✅ Total Loss Valuation Support</li>
-          <li>✅ Insurance Settlement Consulting</li>
         </ul>
       </div>
 
