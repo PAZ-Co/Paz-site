@@ -55,7 +55,7 @@ const Home = () => {
       <div className="mt-10 mb-24 p-6 bg-white rounded-xl shadow-md max-w-2xl w-full">
         <h2 className="text-2xl font-semibold text-center mb-4">Contact</h2>
         <ul className="text-center space-y-1">
-          <li><strong>Email:</strong> info@precisionappraisalzone.com</li>
+          <li><strong>Email:</strong> PrecisionAppraisalZone@Gmail.com</li>
           <li><strong>Phone:</strong> 954.839.7653</li>
           <li><strong>Location:</strong> Florida</li>
         </ul>
