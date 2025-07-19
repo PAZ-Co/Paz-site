@@ -22,13 +22,13 @@ const Home = () => {
         </ul>
       </div>
 
-     <div className="fixed bottom-4 right-4 text-center z-50">
+     <div className="fixed bottom-4 right-4 z-50 flex flex-col items-center text-center">
   <img
     src={benji}
     alt="Benji the Mascot"
     className="w-16 h-16 rounded-full shadow-md border border-gray-300 transition-transform hover:scale-110"
   />
-  <p className="text-[10px] italic text-gray-500 mt-1">Benji - Pup of Peace</p>
+  <p className="text-[10px] italic text-gray-500 mt-1">Benji – Pup of Peace</p>
 </div>
 
     </div>
