@@ -56,8 +56,8 @@ const Home = () => {
         <h2 className="text-2xl font-semibold text-center mb-4">Contact</h2>
         <ul className="text-center space-y-1">
           <li><strong>Email:</strong> info@precisionappraisalzone.com</li>
-          <li><strong>Phone:</strong> (786) 210-3179</li>
-          <li><strong>Location:</strong> Hallandale Beach, FL</li>
+          <li><strong>Phone:</strong> 954.839.7653</li>
+          <li><strong>Location:</strong> Florida</li>
         </ul>
       </div>
 
