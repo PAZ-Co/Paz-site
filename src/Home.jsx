@@ -16,7 +16,7 @@ const Home = () => {
       <div className="mt-10 p-6 bg-white rounded-xl shadow-md max-w-2xl w-full">
         <h2 className="text-2xl font-semibold text-center mb-4">Our Services</h2>
         <ul className="space-y-2 text-left list-disc list-inside">
-          <li><strong>Certified Diminished Value Reports:</strong> Expert reports that quantify loss in vehicle value after repairs.</li>
+          <li><strong>Diminished Value Reports:</strong> Certified reports that quantify loss in vehicle value after repairs.</li>
           <li><strong>Loss of Use Reports:</strong> Accurate reimbursement estimates for the time your vehicle was undriveable.</li>
           <li><strong>Repair Estimate Disputes:</strong> We advocate on your behalf to challenge lowball insurer estimates.</li>
           <li><strong>Total Loss Valuation Support:</strong> Fight undervalued total loss settlements with certified appraisals.</li>
