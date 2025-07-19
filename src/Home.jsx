@@ -9,7 +9,7 @@ const Home = () => {
       <img
   src={logo}
   alt="PAZ Logo"
-  className="w-64 h-24 mb-6 object-contain rounded-lg shadow-sm opacity-90"
+  className="w-64 mb-6 rounded-lg shadow-sm opacity-90"
 />
 
 
