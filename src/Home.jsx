@@ -141,11 +141,8 @@ const Home = () => {
         { label: '✉️ Email', href: mailHref, kind: 'email' },
         { label: '📞 Call', href: telHref, kind: 'call' },
         { label: '💬 WhatsApp', href: waHref, kind: 'whatsapp' },
-        { label: 📱' Text (SMS)', href: smsHref, kind: 'sms' }, // NOTE: we’ll fix this literal below
+        { label: '📱 Text (SMS)', href: smsHref, kind: 'sms' },
       ];
-
-  // ^ Quick fix for the icon literal above (to avoid JSX parsing issues in some setups)
-  if (!isCoarse) actions[3].label = '📱 Text (SMS)';
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-start pb-28 text-gray-800">
