@@ -82,6 +82,13 @@ const Home = () => {
     };
   }, [benjiOpen]);
 
+  // Listen for a global "open-benji" event so other buttons can open the popover
+  useEffect(() => {
+    const open = () => setBenjiOpen(true);
+    document.addEventListener('open-benji', open);
+    return () => document.removeEventListener('open-benji', open);
+  }, []);
+
   // Cleanup timeouts on unmount
   useEffect(() => {
     return () => {
@@ -252,6 +259,7 @@ const Home = () => {
               <li>✔️ 5-Star Rated Service</li>
               <li>✔️ Fast Turnaround Times</li>
               <li>✔️ Works with Attorneys & Shops</li>
+              <li>✔️ {combinedYearsLabel}</li>
             </ul>
           </div>
         </div>
@@ -412,7 +420,7 @@ const Home = () => {
             <h2 className="text-xl font-semibold mb-2">Get a Free Quote</h2>
             <p className="mb-4">Upload your estimate and photos—an appraiser will respond within one business day.</p>
             <button
-              onClick={() => handleScrollTo('contact')}
+              onClick={() => document.dispatchEvent(new CustomEvent('open-benji'))}
               className="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition"
             >
               Submit & Upload Files
