@@ -22,7 +22,7 @@ const Home = () => {
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="PAZ Logo" className="h-9 w-auto rounded-md" />
+            <img src={logo} alt="PAZ Logo" className="h-9 w-auto rounded-none border-none shadow-none ring-0" />
             <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
           </div>
           <nav className="hidden sm:flex gap-6 text-sm">
@@ -41,7 +41,7 @@ const Home = () => {
       {/* Hero Band */}
       <section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
         <div className="max-w-5xl mx-auto px-4 py-10 sm:py-14 text-center">
-          <img src={logo} alt="PAZ Logo" className="w-48 sm:w-56 mx-auto mb-6 rounded-lg shadow-sm opacity-90" />
+         <img src={logo} alt="PAZ Logo" className="w-48 sm:w-56 mx-auto mb-6 rounded-none border-none shadow-none ring-0 opacity-100" />
           <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">Defensible automotive valuations that move insurers to yes.</h1>
           <p className="max-w-2xl mx-auto mt-3 text-gray-600">Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence‑based methodology.</p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
