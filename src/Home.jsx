@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from './assets/paz-logo-stacked-zslash.svg';
 import benji from './assets/benji-mascot.png';
 
@@ -11,6 +12,8 @@ import benji from './assets/benji-mascot.png';
  */
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const handleScrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -22,22 +25,22 @@ const Home = () => {
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="PAZ Logo" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
+            <img src={logo} alt="PAZ Logo" className="h-9 w-auto rounded-none border-none shadow-none ring-0" />
             <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
           </div>
           <nav className="hidden lg:flex gap-6 text-sm">
-            <a href="#services" className="hover:text-gray-900">Services</a>
-            <a href="#why" className="hover:text-gray-900">Why Us</a>
-            <a href="#process" className="hover:text-gray-900">Process</a>
-            <a href="#pricing" className="hover:text-gray-900">Pricing</a>
-            <a href="#calculator" className="hover:text-gray-900">Calculator</a>
-            <a href="#results" className="hover:text-gray-900">Results</a>
-            <a href="#state-laws" className="hover:text-gray-900">State Laws</a>
-            <a href="#faq" className="hover:text-gray-900">FAQ</a>
-            <a href="#contact" className="hover:text-gray-900">Contact</a>
+            <Link to="/#services" className="hover:text-gray-900">Services</Link>
+            <Link to="/#why" className="hover:text-gray-900">Why Us</Link>
+            <Link to="/#process" className="hover:text-gray-900">Process</Link>
+            <Link to="/pricing" className="hover:text-gray-900">Pricing</Link>
+            <Link to="/calculator" className="hover:text-gray-900">Calculator</Link>
+            <Link to="/results" className="hover:text-gray-900">Results</Link>
+            <Link to="/state-laws" className="hover:text-gray-900">State Laws</Link>
+            <Link to="/#faq" className="hover:text-gray-900">FAQ</Link>
+            <Link to="/contact" className="hover:text-gray-900">Contact</Link>
           </nav>
           <button
-            onClick={() => handleScrollTo('quote')}
+            onClick={() => navigate('/contact')}
             className="hidden sm:inline-flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-xl text-sm shadow hover:shadow-md"
           >
             Free Case Review
@@ -51,7 +54,7 @@ const Home = () => {
           <img
             src={logo}
             alt="PAZ Logo"
-            className="w-64 sm:w-72 md:w-80 lg:w-[28rem] mx-auto mb-6 rounded-none border-none shadow-none ring-0 opacity-100 block transform translate-x-2 sm:translate-x-3"
+            className="w-48 sm:w-56 mx-auto mb-6 rounded-none border-none shadow-none ring-0 opacity-100"
           />
           <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
             Defensible automotive valuations that move insurers to yes.
@@ -61,14 +64,14 @@ const Home = () => {
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <button
-              onClick={() => handleScrollTo('quote')}
+              onClick={() => navigate('/contact')}
               className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
             >
               Start My Quote
             </button>
-            <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100">
+            <Link to="/#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100">
               Explore Services
-            </a>
+            </Link>
           </div>
           <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
             <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
@@ -171,7 +174,7 @@ const Home = () => {
                   <div className="text-2xl mt-1">{c.price}</div>
                   <div className="text-sm text-gray-600 mt-1">{c.desc}</div>
                   <button
-                    onClick={() => handleScrollTo('quote')}
+                    onClick={() => navigate('/contact')}
                     className="mt-3 inline-flex items-center justify-center px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
                   >
                     Get Started
@@ -199,7 +202,7 @@ const Home = () => {
             <p className="text-center text-gray-600 mb-6 text-sm">
               Quick estimate for education only — not a formal appraisal. For a defensible report, start a free case review.
             </p>
-            <DVCalculator onStartQuote={() => handleScrollTo('quote')} />
+            <DVCalculator onStartQuote={() => navigate('/contact')} />
           </div>
         </div>
       </section>
@@ -234,7 +237,7 @@ const Home = () => {
             </div>
             <div className="text-center mt-6">
               <button
-                onClick={() => handleScrollTo('quote')}
+                onClick={() => navigate('/contact')}
                 className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-gray-900 text-white text-sm shadow hover:shadow-md"
               >
                 Start Your Free Review
@@ -264,7 +267,7 @@ const Home = () => {
                   <div className="text-xs text-gray-500">{s.status}</div>
                   <p className="text-sm text-gray-700 mt-2">{s.desc}</p>
                   <button
-                    onClick={() => handleScrollTo('quote')}
+                    onClick={() => navigate('/contact')}
                     className="mt-3 inline-flex items-center justify-center px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
                   >
                     Ask About {s.state}
@@ -283,7 +286,7 @@ const Home = () => {
             <h2 className="text-xl font-semibold mb-2">Get a Free Quote</h2>
             <p className="mb-4">Upload your estimate and photos—an appraiser will respond within one business day.</p>
             <button
-              onClick={() => handleScrollTo('contact')}
+              onClick={() => navigate('/contact')}
               className="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition"
             >
               Submit & Upload Files
@@ -360,7 +363,7 @@ const Home = () => {
         <button
           aria-label="Open Benji Assistant"
           className="flex flex-col items-center text-center focus:outline-none"
-          onClick={() => handleScrollTo('quote')}
+          onClick={() => navigate('/contact')}
         >
           <img
             src={benji}
