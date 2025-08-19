@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
-import logo from './assets/paz-logo-stacked-zslash.svg';
+import logo from './assets/paz-logo.png';
 import benji from './assets/benji-mascot.png';
 
 /**
