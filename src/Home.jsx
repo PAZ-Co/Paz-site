@@ -22,7 +22,7 @@ const Home = () => {
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="PAZ Logo" className="h-9 w-auto rounded-none border-none shadow-none ring-0" />
+            <img src={logo} alt="PAZ Logo" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
             <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
           </div>
           <nav className="hidden lg:flex gap-6 text-sm">
@@ -51,7 +51,7 @@ const Home = () => {
           <img
             src={logo}
             alt="PAZ Logo"
-            className="w-48 sm:w-56 mx-auto mb-6 rounded-none border-none shadow-none ring-0 opacity-100"
+            className="w-64 sm:w-72 md:w-80 lg:w-[28rem] mx-auto mb-6 rounded-none border-none shadow-none ring-0 opacity-100 block transform translate-x-2 sm:translate-x-3"
           />
           <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
             Defensible automotive valuations that move insurers to yes.
@@ -535,4 +535,3 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
-
