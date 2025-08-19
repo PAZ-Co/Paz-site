@@ -16,6 +16,9 @@ const Home = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  // NEW: combined experience label
+  const combinedYearsLabel = '10+ years combined experience';
+
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-start pb-28 text-gray-800">
       {/* Header */}
@@ -71,6 +74,7 @@ const Home = () => {
             </a>
           </div>
           <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
+            <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
             <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
             <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
             <span className="px-3 py-1 rounded-full border bg-white">Works with Attorneys & Shops</span>
@@ -123,6 +127,7 @@ const Home = () => {
               <li>✔️ 5-Star Rated Service</li>
               <li>✔️ Fast Turnaround Times</li>
               <li>✔️ Works with Attorneys & Shops</li>
+              <li>✔️ {combinedYearsLabel}</li>
             </ul>
           </div>
         </div>
