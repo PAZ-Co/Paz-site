@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './assets/paz-logo.png';
+import logo from './assets/paz-logo-stacked-zslash.svg';
 import benji from './assets/benji-mascot.png';
 
 /**
