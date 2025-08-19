@@ -259,7 +259,6 @@ const Home = () => {
               <li>✔️ 5-Star Rated Service</li>
               <li>✔️ Fast Turnaround Times</li>
               <li>✔️ Works with Attorneys & Shops</li>
-              <li>✔️ {combinedYearsLabel}</li>
             </ul>
           </div>
         </div>
