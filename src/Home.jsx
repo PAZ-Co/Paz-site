@@ -16,8 +16,26 @@ const Home = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // NEW: combined experience label
+  // Combined experience label
   const combinedYearsLabel = '10+ years combined experience';
+
+  // --- Ask Benji (Option A: Quick-Action Popover) ---
+  const [benjiOpen, setBenjiOpen] = useState(false);
+  const phone = '+19548397653'; // from 954.839.7653
+  const email = 'PrecisionAppraisalZone@gmail.com';
+
+  const smsHref = `sms:${phone}?&body=${encodeURIComponent(
+    "Hi PAZ, I'd like a DV quote. Year/Make/Model: ____  Repair total: $____  City/State: ____"
+  )}`;
+  const telHref = `tel:${phone}`;
+  const mailHref = `mailto:${email}?subject=${encodeURIComponent(
+    'Free Case Review'
+  )}&body=${encodeURIComponent(
+    'Name:\nPhone:\nYear/Make/Model:\nRepair total:\nCity/State:\n\nBrief details:'
+  )}`;
+  const waHref = `https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(
+    "Hi PAZ, I'd like a DV quote."
+  )}`;
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-start pb-28 text-gray-800">
@@ -127,6 +145,7 @@ const Home = () => {
               <li>✔️ 5-Star Rated Service</li>
               <li>✔️ Fast Turnaround Times</li>
               <li>✔️ Works with Attorneys & Shops</li>
+              <li>✔️ {combinedYearsLabel}</li>
             </ul>
           </div>
         </div>
@@ -314,7 +333,7 @@ const Home = () => {
         <div className="max-w-3xl mx-auto px-4">
           <div className="p-6 bg-white rounded-2xl shadow-md">
             <h2 className="text-2xl font-semibold text-center mb-4">FAQ</h2>
-            <div className="divide-y">
+          <div className="divide-y">
               {[
                 {
                   q: 'What documents do you need?',
@@ -356,23 +375,76 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Benji VA Bubble (preserved) */}
+      {/* Benji VA Bubble (Option A popover) */}
       <div className="fixed bottom-4 right-4 z-50 flex items-end gap-2 select-none">
+        {/* helper bubble */}
         <div className="bg-white text-gray-800 text-xs px-3 py-2 rounded-lg shadow-md max-w-[160px] border border-gray-200">
           Hi there! Need help?
         </div>
-        <button
-          aria-label="Open Benji Assistant"
-          className="flex flex-col items-center text-center focus:outline-none"
-          onClick={() => handleScrollTo('quote')}
-        >
-          <img
-            src={benji}
-            alt="Benji the Pup of Peace"
-            className="w-14 h-14 rounded-full shadow-md border border-gray-300 transition-transform hover:scale-110"
-          />
-          <span className="text-[11px] mt-1 font-medium">Ask Benji</span>
-        </button>
+
+        {/* Benji + popover container */}
+        <div className="relative">
+          {/* Popover */}
+          {benjiOpen && (
+            <div
+              className="absolute bottom-16 right-0 w-64 bg-white border border-gray-200 shadow-lg rounded-xl p-3 text-sm"
+              role="dialog"
+              aria-label="Contact options"
+            >
+              <div className="font-medium text-gray-800 mb-2">Ask Benji</div>
+              <div className="flex flex-col gap-2">
+                <a
+                  href={smsHref}
+                  onClick={() => setBenjiOpen(false)}
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100"
+                >
+                  📱 Text (SMS)
+                </a>
+                <a
+                  href={telHref}
+                  onClick={() => setBenjiOpen(false)}
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100"
+                >
+                  📞 Call
+                </a>
+                <a
+                  href={mailHref}
+                  onClick={() => setBenjiOpen(false)}
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100"
+                >
+                  ✉️ Email
+                </a>
+                <a
+                  href={waHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setBenjiOpen(false)}
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100"
+                >
+                  💬 WhatsApp
+                </a>
+              </div>
+              <div className="mt-2 text-[11px] text-gray-500 text-center">
+                SMS works best on mobile devices.
+              </div>
+            </div>
+          )}
+
+          {/* Benji button */}
+          <button
+            aria-label="Open Benji Assistant"
+            aria-expanded={benjiOpen}
+            className="flex flex-col items-center text-center focus:outline-none"
+            onClick={() => setBenjiOpen((v) => !v)}
+          >
+            <img
+              src={benji}
+              alt="Benji the Pup of Peace"
+              className="w-14 h-14 rounded-full shadow-md border border-gray-300 transition-transform hover:scale-110"
+            />
+            <span className="text-[11px] mt-1 font-medium">Ask Benji</span>
+          </button>
+        </div>
       </div>
     </div>
   );
