@@ -156,24 +156,10 @@ const Home = () => {
       {/* Header */}
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          {/* Top-left brand: Benji avatar linking home */}
-          <a
-            href="#top"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-          >
-            <div className="flex items-center gap-3">
-              <img
-                src={benji}
-                alt="Benji — PAZ mascot"
-                className="h-10 w-10 rounded-full border border-gray-300 shadow-sm"
-              />
-              <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
-            </div>
-          </a>
-
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="PAZ Logo" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
+            <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
+          </div>
           <nav className="hidden lg:flex gap-6 text-sm">
             <a href="#services" className="hover:text-gray-900">Services</a>
             <a href="#why" className="hover:text-gray-900">Why Us</a>
@@ -273,7 +259,6 @@ const Home = () => {
               <li>✔️ 5-Star Rated Service</li>
               <li>✔️ Fast Turnaround Times</li>
               <li>✔️ Works with Attorneys & Shops</li>
-              <li>✔️ {combinedYearsLabel}</li>
             </ul>
           </div>
         </div>
@@ -291,7 +276,7 @@ const Home = () => {
                 { step: '3', title: 'Report', desc: 'Clean PDF ready for negotiation or demand.' },
                 { step: '4', title: 'Support', desc: 'We clarify methods and addenda if needed.' },
               ].map((s) => (
-                <div key={s.step} className="border border-gray-2 00 rounded-xl p-4">
+                <div key={s.step} className="border border-gray-200 rounded-xl p-4">
                   <div className="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center font-semibold mb-2">
                     {s.step}
                   </div>
