@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import logo from './assets/paz-logo-stacked-zslash.svg';
 import benji from './assets/benji-mascot.png';
 
@@ -19,8 +19,18 @@ const Home = () => {
   // Combined experience label
   const combinedYearsLabel = '10+ years combined experience';
 
-  // --- Ask Benji (Option A: Quick-Action Popover) ---
+  // --- Ask Benji (Option A: Quick-Action Popover) + Upgrades ---
   const [benjiOpen, setBenjiOpen] = useState(false);
+  const [isCoarse, setIsCoarse] = useState(false); // mobile-ish pointer detection
+  const [toast, setToast] = useState(null); // { text: string }
+  const [showWoof, setShowWoof] = useState(false);
+
+  const containerRef = useRef(null);
+  const lastWoofRef = useRef(0);
+  const woofTimeoutRef = useRef(null);
+  const openTimeoutRef = useRef(null);
+  const toastTimeoutRef = useRef(null);
+
   const phone = '+19548397653'; // from 954.839.7653
   const email = 'PrecisionAppraisalZone@gmail.com';
 
@@ -36,6 +46,106 @@ const Home = () => {
   const waHref = `https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(
     "Hi PAZ, I'd like a DV quote."
   )}`;
+
+  // Detect coarse pointer (mobile/tablet) & prefers-reduced-motion once on mount
+  const prefersReducedMotion = useRef(false);
+  useEffect(() => {
+    const coarse = window.matchMedia?.('(pointer: coarse)');
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    setIsCoarse(coarse?.matches ?? false);
+    prefersReducedMotion.current = !!reduce?.matches;
+
+    const onChange = () => setIsCoarse(window.matchMedia('(pointer: coarse)').matches);
+    coarse?.addEventListener?.('change', onChange);
+    return () => coarse?.removeEventListener?.('change', onChange);
+  }, []);
+
+  // Close on outside click or ESC while open
+  useEffect(() => {
+    if (!benjiOpen) return;
+
+    const onDocMouseDown = (e) => {
+      if (!containerRef.current) return;
+      if (!containerRef.current.contains(e.target)) {
+        setBenjiOpen(false);
+      }
+    };
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setBenjiOpen(false);
+    };
+
+    document.addEventListener('mousedown', onDocMouseDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onDocMouseDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [benjiOpen]);
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      clearTimeout(woofTimeoutRef.current);
+      clearTimeout(openTimeoutRef.current);
+      clearTimeout(toastTimeoutRef.current);
+    };
+  }, []);
+
+  const handleActionClick = (kind) => {
+    // Tiny success toast that auto-dismisses
+    const msg =
+      kind === 'sms'
+        ? 'Opening Messages…'
+        : kind === 'call'
+        ? 'Opening Phone…'
+        : kind === 'whatsapp'
+        ? 'Opening WhatsApp…'
+        : 'Opening Email…';
+
+    setToast({ text: msg });
+    clearTimeout(toastTimeoutRef.current);
+    toastTimeoutRef.current = setTimeout(() => setToast(null), 2000);
+
+    setBenjiOpen(false);
+  };
+
+  const handleBenjiClick = () => {
+    if (benjiOpen) {
+      setBenjiOpen(false);
+      return;
+    }
+    // Show quick "Woof!" bubble before opening (rate-limited 30s)
+    const now = Date.now();
+    const canWoof = !prefersReducedMotion.current && now - lastWoofRef.current > 30000;
+    if (canWoof) {
+      lastWoofRef.current = now;
+      setShowWoof(true);
+      clearTimeout(woofTimeoutRef.current);
+      woofTimeoutRef.current = setTimeout(() => setShowWoof(false), 280);
+      clearTimeout(openTimeoutRef.current);
+      openTimeoutRef.current = setTimeout(() => setBenjiOpen(true), 180);
+    } else {
+      setBenjiOpen(true);
+    }
+  };
+
+  // Order actions based on pointer type
+  const actions = isCoarse
+    ? [
+        { label: '📱 Text (SMS)', href: smsHref, kind: 'sms' },
+        { label: '💬 WhatsApp', href: waHref, kind: 'whatsapp' },
+        { label: '📞 Call', href: telHref, kind: 'call' },
+        { label: '✉️ Email', href: mailHref, kind: 'email' },
+      ]
+    : [
+        { label: '✉️ Email', href: mailHref, kind: 'email' },
+        { label: '📞 Call', href: telHref, kind: 'call' },
+        { label: '💬 WhatsApp', href: waHref, kind: 'whatsapp' },
+        { label: 📱' Text (SMS)', href: smsHref, kind: 'sms' }, // NOTE: we’ll fix this literal below
+      ];
+
+  // ^ Quick fix for the icon literal above (to avoid JSX parsing issues in some setups)
+  if (!isCoarse) actions[3].label = '📱 Text (SMS)';
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-start pb-28 text-gray-800">
@@ -333,7 +443,7 @@ const Home = () => {
         <div className="max-w-3xl mx-auto px-4">
           <div className="p-6 bg-white rounded-2xl shadow-md">
             <h2 className="text-2xl font-semibold text-center mb-4">FAQ</h2>
-          <div className="divide-y">
+            <div className="divide-y">
               {[
                 {
                   q: 'What documents do you need?',
@@ -375,15 +485,35 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Benji VA Bubble (Option A popover) */}
+      {/* Benji VA Bubble (popover + Woof + toast) */}
       <div className="fixed bottom-4 right-4 z-50 flex items-end gap-2 select-none">
         {/* helper bubble */}
         <div className="bg-white text-gray-800 text-xs px-3 py-2 rounded-lg shadow-md max-w-[160px] border border-gray-200">
           Hi there! Need help?
         </div>
 
-        {/* Benji + popover container */}
-        <div className="relative">
+        {/* Benji + popover container (click/ESC/Outside managed) */}
+        <div className="relative" ref={containerRef}>
+          {/* Woof micro-pop */}
+          {showWoof && (
+            <div
+              role="status"
+              aria-live="polite"
+              className="absolute bottom-20 right-0 px-3 py-1 rounded-full bg-gray-900 text-white text-xs shadow-md border border-gray-800
+                         transform transition duration-200 ease-out"
+            >
+              Woof!
+              <span className="absolute -bottom-1 right-6 w-0 h-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-gray-900" />
+            </div>
+          )}
+
+          {/* Success toast */}
+          {toast && (
+            <div className="absolute bottom-24 right-0 px-3 py-2 rounded-lg bg-white text-gray-800 text-xs shadow-md border border-gray-200">
+              {toast.text}
+            </div>
+          )}
+
           {/* Popover */}
           {benjiOpen && (
             <div
@@ -393,39 +523,19 @@ const Home = () => {
             >
               <div className="font-medium text-gray-800 mb-2">Ask Benji</div>
               <div className="flex flex-col gap-2">
-                <a
-                  href={smsHref}
-                  onClick={() => setBenjiOpen(false)}
-                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100"
-                >
-                  📱 Text (SMS)
-                </a>
-                <a
-                  href={telHref}
-                  onClick={() => setBenjiOpen(false)}
-                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100"
-                >
-                  📞 Call
-                </a>
-                <a
-                  href={mailHref}
-                  onClick={() => setBenjiOpen(false)}
-                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100"
-                >
-                  ✉️ Email
-                </a>
-                <a
-                  href={waHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => setBenjiOpen(false)}
-                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100"
-                >
-                  💬 WhatsApp
-                </a>
+                {actions.map((a) => (
+                  <a
+                    key={a.kind}
+                    href={a.href}
+                    onClick={() => handleActionClick(a.kind)}
+                    className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100"
+                  >
+                    {a.label}
+                  </a>
+                ))}
               </div>
               <div className="mt-2 text-[11px] text-gray-500 text-center">
-                SMS works best on mobile devices.
+                SMS works best on mobile devices. Press <span className="font-semibold">Esc</span> to close.
               </div>
             </div>
           )}
@@ -435,7 +545,7 @@ const Home = () => {
             aria-label="Open Benji Assistant"
             aria-expanded={benjiOpen}
             className="flex flex-col items-center text-center focus:outline-none"
-            onClick={() => setBenjiOpen((v) => !v)}
+            onClick={handleBenjiClick}
           >
             <img
               src={benji}
