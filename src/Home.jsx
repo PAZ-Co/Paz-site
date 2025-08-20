@@ -3,11 +3,11 @@ import logo from './assets/logo.png';
 import benji from './assets/benji-mascot.png';
 
 /**
- * Precision Appraisal Zone — Home
- * Hero refactor (Option 4):
- * - Two-column hero (logo left, content right)
- * - Floating left-side logo dock that follows scroll on desktop
- * - Keeps all existing sections and Benji assistant
+ * Precision Appraisal Zone — Home (Autoloss-inspired upgrade)
+ * - Preserves Benji helper (bottom-right)
+ * - Adds: Pricing & Guarantee, DV Calculator (estimate-only), Results, State Laws hub
+ * - Expanded nav + smooth-scroll CTAs
+ * - TailwindCSS only; drop-in replacement for your existing <Home />
  */
 
 const Home = () => {
@@ -16,11 +16,12 @@ const Home = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  // Combined experience label
   const combinedYearsLabel = '10+ years combined experience';
 
-  // --- Ask Benji (popover) ---
+  // --- Ask Benji (Option A: Quick-Action Popover) + Upgrades ---
   const [benjiOpen, setBenjiOpen] = useState(false);
-  const [isCoarse, setIsCoarse] = useState(false);
+  const [isCoarse, setIsCoarse] = useState(false); // mobile-ish pointer detection
   const [toast, setToast] = useState(null); // { text: string }
   const [showWoof, setShowWoof] = useState(false);
 
@@ -46,7 +47,7 @@ const Home = () => {
     "Hi PAZ, I'd like a DV quote."
   )}`;
 
-  // Detect coarse pointer & reduced motion
+  // Detect coarse pointer (mobile/tablet) & prefers-reduced-motion once on mount
   const prefersReducedMotion = useRef(false);
   useEffect(() => {
     const coarse = window.matchMedia?.('(pointer: coarse)');
@@ -81,14 +82,14 @@ const Home = () => {
     };
   }, [benjiOpen]);
 
-  // Global "open-benji" event
+  // Listen for a global "open-benji" event so other buttons can open the popover
   useEffect(() => {
     const open = () => setBenjiOpen(true);
     document.addEventListener('open-benji', open);
     return () => document.removeEventListener('open-benji', open);
   }, []);
 
-  // Cleanup timeouts
+  // Cleanup timeouts on unmount
   useEffect(() => {
     return () => {
       clearTimeout(woofTimeoutRef.current);
@@ -98,6 +99,7 @@ const Home = () => {
   }, []);
 
   const handleActionClick = (kind) => {
+    // Tiny success toast that auto-dismisses
     const msg =
       kind === 'sms'
         ? 'Opening Messages…'
@@ -119,7 +121,7 @@ const Home = () => {
       setBenjiOpen(false);
       return;
     }
-    // Tiny "Woof!" micro-pop, rate-limited
+    // Show quick "Woof!" bubble before opening (rate-limited 30s)
     const now = Date.now();
     const canWoof = !prefersReducedMotion.current && now - lastWoofRef.current > 30000;
     if (canWoof) {
@@ -134,6 +136,7 @@ const Home = () => {
     }
   };
 
+  // Order actions based on pointer type
   const actions = isCoarse
     ? [
         { label: '📱 Text (SMS)', href: smsHref, kind: 'sms' },
@@ -154,13 +157,7 @@ const Home = () => {
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img
-              src={logo}
-              alt="PAZ Logo"
-              className="h-8 w-auto rounded-none border-none shadow-none ring-0"
-              loading="eager"
-              decoding="async"
-            />
+            <img src={logo} alt="PAZ Logo" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
             <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
           </div>
           <nav className="hidden lg:flex gap-6 text-sm">
@@ -183,68 +180,36 @@ const Home = () => {
         </div>
       </header>
 
-      {/* Floating left-side logo dock (desktop only) */}
-      <button
-        aria-label="Back to top"
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="hidden md:flex items-center gap-3 fixed left-3 top-1/2 -translate-y-1/2 z-30
-                   bg-white/90 backdrop-blur border border-gray-200 shadow-lg rounded-2xl px-3 py-2 group"
-      >
-        <img src={logo} alt="PAZ" className="h-8 w-auto" />
-        <span className="text-xs font-medium text-gray-700 pr-1 opacity-0 group-hover:opacity-100 transition-opacity">
-          Back to top
-        </span>
-      </button>
-
-      {/* Hero — split layout */}
+      {/* Hero */}
       <section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
-        <div className="max-w-6xl mx-auto px-4 py-10 sm:py-14">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            {/* Left: prominent logo block (not huge) */}
-            <div className="flex justify-center lg:justify-start">
-              <div className="relative">
-                {/* subtle card behind logo */}
-                <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-3xl bg-gray-200/50 blur-xl"></div>
-                <div className="relative rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
-                  <img
-                    src={logo}
-                    alt="Precision Appraisal Zone"
-                    className="w-48 sm:w-56 md:w-64 lg:w-72 h-auto"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Right: content */}
-            <div className="text-center lg:text-left">
-              <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
-                Defensible automotive valuations that move insurers to yes.
-              </h1>
-              <p className="max-w-2xl mt-3 text-gray-600 mx-auto lg:mx-0">
-                Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence‑based methodology.
-              </p>
-
-              <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <button
-                  onClick={() => handleScrollTo('quote')}
-                  className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
-                >
-                  Start My Quote
-                </button>
-                <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100">
-                  Explore Services
-                </a>
-              </div>
-
-              <div className="mt-4 flex flex-wrap gap-2 justify-center lg:justify-start text-xs">
-                <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
-                <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
-                <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
-                <span className="px-3 py-1 rounded-full border bg-white">Works with Attorneys & Shops</span>
-              </div>
-            </div>
+        <div className="max-w-6xl mx-auto px-4 py-10 sm:py-14 text-center">
+          <img
+            src={logo}
+            alt="PAZ Logo"
+            className="w-64 sm:w-72 md:w-80 lg:w-[28rem] mx-auto mb-6 rounded-none border-none shadow-none ring-0 opacity-100 block transform translate-x-2 sm:translate-x-3"
+          />
+          <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
+            Defensible automotive valuations that move insurers to yes.
+          </h1>
+          <p className="max-w-2xl mx-auto mt-3 text-gray-600">
+            Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence-based methodology.
+          </p>
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              onClick={() => handleScrollTo('quote')}
+              className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
+            >
+              Start My Quote
+            </button>
+            <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100">
+              Explore Services
+            </a>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
+            <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
+            <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
+            <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
+            <span className="px-3 py-1 rounded-full border bg-white">Works with Attorneys & Shops</span>
           </div>
         </div>
       </section>
@@ -415,7 +380,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* State Laws hub */}
+      {/* State Laws hub (starter) */}
       <section id="state-laws" className="w-full mt-8">
         <div className="max-w-5xl mx-auto px-4">
           <div className="p-6 bg-white rounded-2xl shadow-md">
@@ -530,14 +495,15 @@ const Home = () => {
           Hi there! Need help?
         </div>
 
-        {/* Benji + popover container */}
+        {/* Benji + popover container (click/ESC/Outside managed) */}
         <div className="relative" ref={containerRef}>
           {/* Woof micro-pop */}
           {showWoof && (
             <div
               role="status"
               aria-live="polite"
-              className="absolute bottom-20 right-0 px-3 py-1 rounded-full bg-gray-900 text-white text-xs shadow-md border border-gray-800 transform transition duration-200 ease-out"
+              className="absolute bottom-20 right-0 px-3 py-1 rounded-full bg-gray-900 text-white text-xs shadow-md border border-gray-800
+                         transform transition duration-200 ease-out"
             >
               Woof!
               <span className="absolute -bottom-1 right-6 w-0 h-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-gray-900" />
@@ -598,7 +564,10 @@ const Home = () => {
 };
 
 /** ===========================
- * DV Calculator component (unchanged)
+ * DV Calculator component
+ * Simple, front-end only, estimate for education (not an appraisal).
+ * Formula: base ~20% of repair total; +10% if frame; +5% if airbags; +1% per panel (max +5%).
+ * Outputs a range (±20%). Floor at $250, ceiling at 35% of repair total (soft).
  * =========================== */
 const DVCalculator = ({ onStartQuote }) => {
   const [form, setForm] = useState({
@@ -616,7 +585,7 @@ const DVCalculator = ({ onStartQuote }) => {
   const parsed = useMemo(() => {
     const repair = Math.max(0, Number(form.repairTotal) || 0);
     const panels = Math.min(10, Math.max(0, Number(form.panels) || 0));
-    let pct = 0.20; // 20% baseline
+    let pct = 0.20; // 20% of repair total baseline
     if (form.frame) pct += 0.10;
     if (form.airbags) pct += 0.05;
     pct += Math.min(0.05, 0.01 * panels); // +1% per panel, cap +5%
@@ -755,5 +724,6 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
+
 
 
