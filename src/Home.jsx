@@ -258,7 +258,6 @@ const Home = () => {
               <li>✔️ Certified Independent Appraisers</li>
               <li>✔️ 5-Star Rated Service</li>
               <li>✔️ Fast Turnaround Times</li>
-              <li>✔️ Works with Attorneys & Shops</li>
             </ul>
           </div>
         </div>
