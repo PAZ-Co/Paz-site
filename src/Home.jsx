@@ -3,11 +3,11 @@ import logo from './assets/logo.png';
 import benji from './assets/benji-mascot.png';
 
 /**
- * Precision Appraisal Zone — Home (Autoloss-inspired upgrade)
- * - Preserves Benji helper (bottom-right)
- * - Adds: Pricing & Guarantee, DV Calculator (estimate-only), Results, State Laws hub
- * - Expanded nav + smooth-scroll CTAs
- * - TailwindCSS only; drop-in replacement for your existing <Home />
+ * Precision Appraisal Zone — Home (Hero refactor: subtle logo watermark + text-first)
+ * - Hero logo is no longer a huge focal element.
+ * - Uses a low-opacity, non-interactive watermark in the background.
+ * - Tagline + CTAs are now the clear focus above the fold.
+ * - All existing features preserved.
  */
 
 const Home = () => {
@@ -16,12 +16,11 @@ const Home = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Combined experience label
   const combinedYearsLabel = '10+ years combined experience';
 
-  // --- Ask Benji (Option A: Quick-Action Popover) + Upgrades ---
+  // --- Ask Benji (popover) ---
   const [benjiOpen, setBenjiOpen] = useState(false);
-  const [isCoarse, setIsCoarse] = useState(false); // mobile-ish pointer detection
+  const [isCoarse, setIsCoarse] = useState(false);
   const [toast, setToast] = useState(null); // { text: string }
   const [showWoof, setShowWoof] = useState(false);
 
@@ -47,7 +46,7 @@ const Home = () => {
     "Hi PAZ, I'd like a DV quote."
   )}`;
 
-  // Detect coarse pointer (mobile/tablet) & prefers-reduced-motion once on mount
+  // Detect coarse pointer & reduced motion
   const prefersReducedMotion = useRef(false);
   useEffect(() => {
     const coarse = window.matchMedia?.('(pointer: coarse)');
@@ -82,14 +81,14 @@ const Home = () => {
     };
   }, [benjiOpen]);
 
-  // Listen for a global "open-benji" event so other buttons can open the popover
+  // Global "open-benji" event
   useEffect(() => {
     const open = () => setBenjiOpen(true);
     document.addEventListener('open-benji', open);
     return () => document.removeEventListener('open-benji', open);
   }, []);
 
-  // Cleanup timeouts on unmount
+  // Cleanup timeouts
   useEffect(() => {
     return () => {
       clearTimeout(woofTimeoutRef.current);
@@ -99,7 +98,6 @@ const Home = () => {
   }, []);
 
   const handleActionClick = (kind) => {
-    // Tiny success toast that auto-dismisses
     const msg =
       kind === 'sms'
         ? 'Opening Messages…'
@@ -121,7 +119,7 @@ const Home = () => {
       setBenjiOpen(false);
       return;
     }
-    // Show quick "Woof!" bubble before opening (rate-limited 30s)
+    // Tiny "Woof!" micro-pop, rate-limited
     const now = Date.now();
     const canWoof = !prefersReducedMotion.current && now - lastWoofRef.current > 30000;
     if (canWoof) {
@@ -136,7 +134,6 @@ const Home = () => {
     }
   };
 
-  // Order actions based on pointer type
   const actions = isCoarse
     ? [
         { label: '📱 Text (SMS)', href: smsHref, kind: 'sms' },
@@ -157,7 +154,14 @@ const Home = () => {
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="PAZ Logo" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
+            {/* SMALL header logo only (keeps brand presence without big hero logo) */}
+            <img
+              src={logo}
+              alt="PAZ Logo"
+              className="h-8 w-auto rounded-none border-none shadow-none ring-0"
+              loading="eager"
+              decoding="async"
+            />
             <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
           </div>
           <nav className="hidden lg:flex gap-6 text-sm">
@@ -180,20 +184,38 @@ const Home = () => {
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
-        <div className="max-w-6xl mx-auto px-4 py-10 sm:py-14 text-center">
-          <img
-            src={logo}
-            alt="PAZ Logo"
-            className="w-64 sm:w-72 md:w-80 lg:w-[28rem] mx-auto mb-6 rounded-none border-none shadow-none ring-0 opacity-100 block transform translate-x-2 sm:translate-x-3"
-          />
+      {/* Hero — text-first with subtle logo watermark */}
+      <section className="w-full relative overflow-hidden bg-gradient-to-b from-gray-100 to-gray-50">
+        {/* Watermark layer (non-interactive) */}
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none select-none">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <img
+              src={logo}
+              alt=""
+              className="w-[420px] sm:w-[520px] md:w-[620px] lg:w-[720px] opacity-10 blur-[1px]"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+          {/* soft vignette to keep text readable */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white/80" />
+        </div>
+
+        {/* Foreground content */}
+        <div className="relative max-w-6xl mx-auto px-4 py-10 sm:py-14 text-center">
+          {/* Tiny brand chip instead of big logo */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-200 bg-white/90 text-xs mb-3 shadow-sm">
+            <img src={logo} alt="PAZ" className="h-4 w-auto" />
+            Precision Appraisal Zone
+          </div>
+
           <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
             Defensible automotive valuations that move insurers to yes.
           </h1>
           <p className="max-w-2xl mx-auto mt-3 text-gray-600">
             Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence-based methodology.
           </p>
+
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={() => handleScrollTo('quote')}
@@ -201,15 +223,16 @@ const Home = () => {
             >
               Start My Quote
             </button>
-            <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100">
+            <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white/90 hover:bg-white">
               Explore Services
             </a>
           </div>
+
           <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
-            <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
-            <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
-            <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
-            <span className="px-3 py-1 rounded-full border bg-white">Works with Attorneys & Shops</span>
+            <span className="px-3 py-1 rounded-full border bg-white/90">{combinedYearsLabel}</span>
+            <span className="px-3 py-1 rounded-full border bg-white/90">48–72h avg turnaround</span>
+            <span className="px-3 py-1 rounded-full border bg-white/90">Florida + Nationwide Remote</span>
+            <span className="px-3 py-1 rounded-full border bg-white/90">Works with Attorneys & Shops</span>
           </div>
         </div>
       </section>
@@ -380,7 +403,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* State Laws hub (starter) */}
+      {/* State Laws hub */}
       <section id="state-laws" className="w-full mt-8">
         <div className="max-w-5xl mx-auto px-4">
           <div className="p-6 bg-white rounded-2xl shadow-md">
@@ -495,15 +518,14 @@ const Home = () => {
           Hi there! Need help?
         </div>
 
-        {/* Benji + popover container (click/ESC/Outside managed) */}
+        {/* Benji + popover container */}
         <div className="relative" ref={containerRef}>
           {/* Woof micro-pop */}
           {showWoof && (
             <div
               role="status"
               aria-live="polite"
-              className="absolute bottom-20 right-0 px-3 py-1 rounded-full bg-gray-900 text-white text-xs shadow-md border border-gray-800
-                         transform transition duration-200 ease-out"
+              className="absolute bottom-20 right-0 px-3 py-1 rounded-full bg-gray-900 text-white text-xs shadow-md border border-gray-800 transform transition duration-200 ease-out"
             >
               Woof!
               <span className="absolute -bottom-1 right-6 w-0 h-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-gray-900" />
@@ -565,9 +587,7 @@ const Home = () => {
 
 /** ===========================
  * DV Calculator component
- * Simple, front-end only, estimate for education (not an appraisal).
- * Formula: base ~20% of repair total; +10% if frame; +5% if airbags; +1% per panel (max +5%).
- * Outputs a range (±20%). Floor at $250, ceiling at 35% of repair total (soft).
+ * (unchanged)
  * =========================== */
 const DVCalculator = ({ onStartQuote }) => {
   const [form, setForm] = useState({
@@ -585,7 +605,7 @@ const DVCalculator = ({ onStartQuote }) => {
   const parsed = useMemo(() => {
     const repair = Math.max(0, Number(form.repairTotal) || 0);
     const panels = Math.min(10, Math.max(0, Number(form.panels) || 0));
-    let pct = 0.20; // 20% of repair total baseline
+    let pct = 0.20; // 20% baseline
     if (form.frame) pct += 0.10;
     if (form.airbags) pct += 0.05;
     pct += Math.min(0.05, 0.01 * panels); // +1% per panel, cap +5%
@@ -724,3 +744,4 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
+
