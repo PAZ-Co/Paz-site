@@ -180,53 +180,74 @@ const Home = () => {
         </div>
       </header>
 
-  {/* Hero */}
-<section
-  className="relative w-full"
-  style={{
-    backgroundImage: `url(${carbon})`,
-    backgroundSize: "200px 200px",   // tweak to 150/250 to change weave scale
-    backgroundRepeat: "repeat",
-    backgroundPosition: "center"
-  }}
->
-  {/* Dim overlay so the weave is subtle */}
-  <div className="absolute inset-0 bg-black/55"></div>
+      {/* Hero */}
+      <section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
+        <div className="max-w-6xl mx-auto px-4 py-10 sm:py-14 text-center">
+          <img
+            src={logo}
+            alt="PAZ Logo"
+            className="w-64 sm:w-72 md:w-80 lg:w-[28rem] mx-auto mb-6 rounded-none border-none shadow-none ring-0 opacity-100 block transform translate-x-2 sm:translate-x-3"
+          />
+          <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
+            Defensible automotive valuations that move insurers to yes.
+          </h1>
+          <p className="max-w-2xl mx-auto mt-3 text-gray-600">
+            Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence-based methodology.
+          </p>
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              onClick={() => handleScrollTo('quote')}
+              className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
+            >
+              Start My Quote
+            </button>
+            <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100">
+              Explore Services
+            </a>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
+            <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
+            <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
+            <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
+            <span className="px-3 py-1 rounded-full border bg-white">Works with Attorneys & Shops</span>
+          </div>
+        </div>
+      </section>
 
-  <div className="relative max-w-6xl mx-auto px-4 py-6 sm:py-10 text-center">
-    <img
-      src={logo}
-      alt="PAZ Logo"
-      className="w-36 sm:w-44 md:w-52 lg:w-60 mx-auto mb-4 rounded-none border-none shadow-none ring-0"
-    />
-    <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight text-white">
-      Defensible automotive valuations that move insurers to yes.
-    </h1>
-    <p className="max-w-2xl mx-auto mt-3 text-gray-200">
-      Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence-based methodology.
-    </p>
-    <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-      <button
-        onClick={() => handleScrollTo('quote')}
-        className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
-      >
-        Start My Quote
-      </button>
-      <a
-        href="#services"
-        className="px-5 py-3 rounded-xl border border-gray-300 bg-white/90 hover:bg-white"
-      >
-        Explore Services
-      </a>
-    </div>
-    <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs text-gray-200">
-      <span className="px-3 py-1 rounded-full border border-gray-400 bg-black/40">{combinedYearsLabel}</span>
-      <span className="px-3 py-1 rounded-full border border-gray-400 bg-black/40">48–72h avg turnaround</span>
-      <span className="px-3 py-1 rounded-full border border-gray-400 bg-black/40">Florida + Nationwide Remote</span>
-      <span className="px-3 py-1 rounded-full border border-gray-400 bg-black/40">Works with Attorneys & Shops</span>
-    </div>
-  </div>
-</section>
+      {/* Services */}
+      <section id="services" className="mt-6 w-full">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="p-6 bg-white rounded-2xl shadow-md">
+            <h2 className="text-2xl font-semibold text-center mb-4">Our Services</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="border border-gray-200 rounded-xl p-4">
+                <h3 className="font-semibold">Diminished Value Reports</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  Certified reports that quantify post-repair loss in market value using comps & condition scoring.
+                </p>
+              </div>
+              <div className="border border-gray-200 rounded-xl p-4">
+                <h3 className="font-semibold">Loss of Use Reports</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  Accurate reimbursement calculations for downtime with comparable class benchmarking.
+                </p>
+              </div>
+              <div className="border border-gray-200 rounded-xl p-4">
+                <h3 className="font-semibold">Total Loss Valuation Support</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  Independent ACV opinions & rebuttals when settlement offers miss the mark.
+                </p>
+              </div>
+              <div className="border border-gray-200 rounded-xl p-4">
+                <h3 className="font-semibold">Inspections & EDR (optional)</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  On-site photo mapping and event data retrieval where applicable.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Why Choose Us */}
       <section id="why" className="w-full mt-8">
@@ -703,6 +724,7 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
+
 
 
 
