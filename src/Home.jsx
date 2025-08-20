@@ -180,12 +180,13 @@ const Home = () => {
         </div>
       </header>
 
-    {/* Hero */}
-<section 
+  {/* Hero */}
+<section
   className="relative w-full"
   style={{
-    backgroundImage: `url(${require("./assets/carbon-fiber.png")})`,
-    backgroundSize: "cover",
+    // subtle carbon fiber SVG as a data URL (no file required)
+    backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8' fill='none'><rect width='8' height='8' fill='%23111113'/><path d='M0 2h2V0h2v2h2v2H6v2H4V4H2V2Z' fill='%231a1a1f'/><path d='M2 0h2v2h2v2H4v2H2V4H0V2h2Z' fill='%2317171c' fill-opacity='0.9'/></svg>")`,
+    backgroundSize: "auto",
     backgroundRepeat: "repeat",
     backgroundPosition: "center"
   }}
