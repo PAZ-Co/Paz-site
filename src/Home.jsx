@@ -181,38 +181,38 @@ const Home = () => {
       </header>
 
       {/* Hero */}
-      <section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
-        <div className="max-w-6xl mx-auto px-4 py-10 sm:py-14 text-center">
-          <img
-            src={logo}
-            alt="PAZ Logo"
-            className="w-64 sm:w-72 md:w-80 lg:w-[28rem] mx-auto mb-6 rounded-none border-none shadow-none ring-0 opacity-100 block transform translate-x-2 sm:translate-x-3"
-          />
-          <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
-            Defensible automotive valuations that move insurers to yes.
-          </h1>
-          <p className="max-w-2xl mx-auto mt-3 text-gray-600">
-            Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence-based methodology.
-          </p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-            <button
-              onClick={() => handleScrollTo('quote')}
-              className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
-            >
-              Start My Quote
-            </button>
-            <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100">
-              Explore Services
-            </a>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
-            <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
-            <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
-            <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
-            <span className="px-3 py-1 rounded-full border bg-white">Works with Attorneys & Shops</span>
-          </div>
-        </div>
-      </section>
+<section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
+  <div className="max-w-6xl mx-auto px-4 py-6 sm:py-10 text-center">
+    <img
+      src={logo}
+      alt="PAZ Logo"
+      className="w-36 sm:w-44 md:w-52 lg:w-60 mx-auto mb-4 rounded-none border-none shadow-none ring-0"
+    />
+    <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
+      Defensible automotive valuations that move insurers to yes.
+    </h1>
+    <p className="max-w-2xl mx-auto mt-3 text-gray-600">
+      Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence-based methodology.
+    </p>
+    <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+      <button
+        onClick={() => handleScrollTo('quote')}
+        className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
+      >
+        Start My Quote
+      </button>
+      <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100">
+        Explore Services
+      </a>
+    </div>
+    <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
+      <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
+      <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
+      <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
+      <span className="px-3 py-1 rounded-full border bg-white">Works with Attorneys & Shops</span>
+    </div>
+  </div>
+</section>
 
       {/* Services */}
       <section id="services" className="mt-6 w-full">
