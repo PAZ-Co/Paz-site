@@ -209,7 +209,6 @@ const Home = () => {
       <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
       <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
       <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
-      <span className="px-3 py-1 rounded-full border bg-white">Works with Attorneys & Shops</span>
     </div>
   </div>
 </section>
@@ -258,6 +257,7 @@ const Home = () => {
               <li>✔️ Certified Independent Appraisers</li>
               <li>✔️ 5-Star Rated Service</li>
               <li>✔️ Fast Turnaround Times</li>
+              <li>✔️ Works with Attorneys & Shops</li>
             </ul>
           </div>
         </div>
