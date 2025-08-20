@@ -207,7 +207,7 @@ const Home = () => {
     </div>
     <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
       <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
-      <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
+      <span className="px-3 py-1 rounded-full border bg-white">24-48h avg turnaround</span>
       <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
     </div>
   </div>
