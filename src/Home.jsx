@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import logo from './assets/logo.png';
 import benji from './assets/benji-mascot.png';
+import carbon from './assets/carbon-fiber.png';
 
 /**
  * Precision Appraisal Zone — Home (Autoloss-inspired upgrade)
@@ -184,15 +185,14 @@ const Home = () => {
 <section
   className="relative w-full"
   style={{
-    // subtle carbon fiber SVG as a data URL (no file required)
-    backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8' fill='none'><rect width='8' height='8' fill='%23111113'/><path d='M0 2h2V0h2v2h2v2H6v2H4V4H2V2Z' fill='%231a1a1f'/><path d='M2 0h2v2h2v2H4v2H2V4H0V2h2Z' fill='%2317171c' fill-opacity='0.9'/></svg>")`,
-    backgroundSize: "auto",
+    backgroundImage: `url(${carbon})`,
+    backgroundSize: "200px 200px",   // tweak to 150/250 to change weave scale
     backgroundRepeat: "repeat",
     backgroundPosition: "center"
   }}
 >
-  {/* Overlay to keep it subtle */}
-  <div className="absolute inset-0 bg-black/60"></div>
+  {/* Dim overlay so the weave is subtle */}
+  <div className="absolute inset-0 bg-black/55"></div>
 
   <div className="relative max-w-6xl mx-auto px-4 py-6 sm:py-10 text-center">
     <img
@@ -213,7 +213,10 @@ const Home = () => {
       >
         Start My Quote
       </button>
-      <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white/90 hover:bg-white">
+      <a
+        href="#services"
+        className="px-5 py-3 rounded-xl border border-gray-300 bg-white/90 hover:bg-white"
+      >
         Explore Services
       </a>
     </div>
