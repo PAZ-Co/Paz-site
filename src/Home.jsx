@@ -3,11 +3,11 @@ import logo from './assets/logo.png';
 import benji from './assets/benji-mascot.png';
 
 /**
- * Precision Appraisal Zone — Home (Hero refactor: subtle logo watermark + text-first)
- * - Hero logo is no longer a huge focal element.
- * - Uses a low-opacity, non-interactive watermark in the background.
- * - Tagline + CTAs are now the clear focus above the fold.
- * - All existing features preserved.
+ * Precision Appraisal Zone — Home
+ * Hero refactor (Option 4):
+ * - Two-column hero (logo left, content right)
+ * - Floating left-side logo dock that follows scroll on desktop
+ * - Keeps all existing sections and Benji assistant
  */
 
 const Home = () => {
@@ -154,7 +154,6 @@ const Home = () => {
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {/* SMALL header logo only (keeps brand presence without big hero logo) */}
             <img
               src={logo}
               alt="PAZ Logo"
@@ -184,55 +183,68 @@ const Home = () => {
         </div>
       </header>
 
-      {/* Hero — text-first with subtle logo watermark */}
-      <section className="w-full relative overflow-hidden bg-gradient-to-b from-gray-100 to-gray-50">
-        {/* Watermark layer (non-interactive) */}
-        <div aria-hidden="true" className="absolute inset-0 pointer-events-none select-none">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <img
-              src={logo}
-              alt=""
-              className="w-[420px] sm:w-[520px] md:w-[620px] lg:w-[720px] opacity-10 blur-[1px]"
-              loading="eager"
-              decoding="async"
-            />
-          </div>
-          {/* soft vignette to keep text readable */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white/80" />
-        </div>
+      {/* Floating left-side logo dock (desktop only) */}
+      <button
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="hidden md:flex items-center gap-3 fixed left-3 top-1/2 -translate-y-1/2 z-30
+                   bg-white/90 backdrop-blur border border-gray-200 shadow-lg rounded-2xl px-3 py-2 group"
+      >
+        <img src={logo} alt="PAZ" className="h-8 w-auto" />
+        <span className="text-xs font-medium text-gray-700 pr-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          Back to top
+        </span>
+      </button>
 
-        {/* Foreground content */}
-        <div className="relative max-w-6xl mx-auto px-4 py-10 sm:py-14 text-center">
-          {/* Tiny brand chip instead of big logo */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-200 bg-white/90 text-xs mb-3 shadow-sm">
-            <img src={logo} alt="PAZ" className="h-4 w-auto" />
-            Precision Appraisal Zone
-          </div>
+      {/* Hero — split layout */}
+      <section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
+        <div className="max-w-6xl mx-auto px-4 py-10 sm:py-14">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            {/* Left: prominent logo block (not huge) */}
+            <div className="flex justify-center lg:justify-start">
+              <div className="relative">
+                {/* subtle card behind logo */}
+                <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-3xl bg-gray-200/50 blur-xl"></div>
+                <div className="relative rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+                  <img
+                    src={logo}
+                    alt="Precision Appraisal Zone"
+                    className="w-48 sm:w-56 md:w-64 lg:w-72 h-auto"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </div>
 
-          <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
-            Defensible automotive valuations that move insurers to yes.
-          </h1>
-          <p className="max-w-2xl mx-auto mt-3 text-gray-600">
-            Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence-based methodology.
-          </p>
+            {/* Right: content */}
+            <div className="text-center lg:text-left">
+              <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
+                Defensible automotive valuations that move insurers to yes.
+              </h1>
+              <p className="max-w-2xl mt-3 text-gray-600 mx-auto lg:mx-0">
+                Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence‑based methodology.
+              </p>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-            <button
-              onClick={() => handleScrollTo('quote')}
-              className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
-            >
-              Start My Quote
-            </button>
-            <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white/90 hover:bg-white">
-              Explore Services
-            </a>
-          </div>
+              <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                <button
+                  onClick={() => handleScrollTo('quote')}
+                  className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
+                >
+                  Start My Quote
+                </button>
+                <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100">
+                  Explore Services
+                </a>
+              </div>
 
-          <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
-            <span className="px-3 py-1 rounded-full border bg-white/90">{combinedYearsLabel}</span>
-            <span className="px-3 py-1 rounded-full border bg-white/90">48–72h avg turnaround</span>
-            <span className="px-3 py-1 rounded-full border bg-white/90">Florida + Nationwide Remote</span>
-            <span className="px-3 py-1 rounded-full border bg-white/90">Works with Attorneys & Shops</span>
+              <div className="mt-4 flex flex-wrap gap-2 justify-center lg:justify-start text-xs">
+                <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
+                <span className="px-3 py-1 rounded-full border bg-white">48–72h avg turnaround</span>
+                <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
+                <span className="px-3 py-1 rounded-full border bg-white">Works with Attorneys & Shops</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -586,8 +598,7 @@ const Home = () => {
 };
 
 /** ===========================
- * DV Calculator component
- * (unchanged)
+ * DV Calculator component (unchanged)
  * =========================== */
 const DVCalculator = ({ onStartQuote }) => {
   const [form, setForm] = useState({
@@ -744,4 +755,5 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
+
 
