@@ -432,10 +432,12 @@ const Home = () => {
         <div className="max-w-3xl mx-auto px-4">
           <div className="p-6 bg-white rounded-2xl shadow-md">
             <h2 className="text-2xl font-semibold text-center mb-4">About Us</h2>
-            <p className="text-center text-gray-700">
-              Precision Appraisal Zone is dedicated to helping vehicle owners, law firms, and repair shops fight for fair
-              valuations after an accident. Whether it’s Diminished Value or Total Loss disputes — we’ve got your back.
-            </p>
+           <p className="text-center text-gray-700">
+  Precision Appraisal Zone is dedicated to helping vehicle owners, law firms, and repair shops fight for fair
+  valuations after an accident. Backed by a Florida 320 Adjuster License — we bring expert knowledge of insurance
+  claims, valuation, and settlement processes, ensuring every report stands up under scrutiny. Whether it’s
+  Diminished Value, Loss of Use, or Total Loss disputes — we’ve got your back.
+</p>
           </div>
         </div>
       </section>
