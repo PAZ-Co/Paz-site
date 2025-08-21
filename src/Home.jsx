@@ -123,16 +123,13 @@ const Home = () => {
     }
     // Show quick "Woof!" bubble before opening (rate-limited 30s)
     const now = Date.now();
+    setBenjiOpen(true);
     const canWoof = !prefersReducedMotion.current && now - lastWoofRef.current > 30000;
     if (canWoof) {
       lastWoofRef.current = now;
       setShowWoof(true);
       clearTimeout(woofTimeoutRef.current);
       woofTimeoutRef.current = setTimeout(() => setShowWoof(false), 280);
-      clearTimeout(openTimeoutRef.current);
-      openTimeoutRef.current = setTimeout(() => setBenjiOpen(true), 180);
-    } else {
-      setBenjiOpen(true);
     }
   };
 
@@ -151,8 +148,26 @@ const Home = () => {
         { label: '📱 Text (SMS)', href: smsHref, kind: 'sms' },
       ];
 
+  // ---------- (4) LocalBusiness JSON-LD schema ----------
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Precision Appraisal Zone",
+    "alternateName": "PAZ",
+    "description": "Independent auto appraisals specializing in Diminished Value (DV) and Loss of Use (LoU). Backed by a Florida 320 Adjuster License.",
+    "url": "https://www.precisionappraisalzone.com",
+    "telephone": "+1-954-839-7653",
+    "areaServed": "Florida"
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-start pb-28 text-gray-800">
+      {/* (4) JSON-LD injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+      />
+
       {/* Header */}
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -172,6 +187,7 @@ const Home = () => {
             <a href="#contact" className="hover:text-gray-900">Contact</a>
           </nav>
           <button
+            type="button"                         // (6)
             onClick={() => handleScrollTo('quote')}
             className="hidden sm:inline-flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-xl text-sm shadow hover:shadow-md"
           >
@@ -181,37 +197,44 @@ const Home = () => {
       </header>
 
       {/* Hero */}
-<section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
-  <div className="max-w-6xl mx-auto px-4 py-6 sm:py-10 text-center">
-    <img
-      src={logo}
-      alt="PAZ Logo"
-      className="w-36 sm:w-44 md:w-52 lg:w-60 mx-auto mb-4 rounded-none border-none shadow-none ring-0"
-    />
-    <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
-      Defensible automotive valuations that move insurers to yes.
-    </h1>
-    <p className="max-w-2xl mx-auto mt-3 text-gray-600">
-      Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence-based methodology.
-    </p>
-    <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-      <button
-        onClick={() => handleScrollTo('quote')}
-        className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
-      >
-        Start My Quote
-      </button>
-      <a href="#services" className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100">
-        Explore Services
-      </a>
-    </div>
-    <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
-      <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
-      <span className="px-3 py-1 rounded-full border bg-white">24-48h avg turnaround</span>
-      <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
-    </div>
-  </div>
-</section>
+      <section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
+        <div className="max-w-6xl mx-auto px-4 py-6 sm:py-10 text-center">
+          <img
+            src={logo}
+            alt="PAZ Logo"
+            className="w-36 sm:w-44 md:w-52 lg:w-60 mx-auto mb-4 rounded-none border-none shadow-none ring-0"
+          />
+          <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
+            Defensible automotive valuations that move insurers to yes.
+          </h1>
+          <p className="max-w-2xl mx-auto mt-3 text-gray-600">
+            Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence-based methodology.
+          </p>
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              type="button"                        // (6)
+              aria-label="Start my quote"          // (6)
+              onClick={() => handleScrollTo('quote')}
+              className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
+            >
+              Start My Quote
+            </button>
+            <a
+              href="#services"
+              aria-label="Explore services"        // (6)
+              className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100"
+            >
+              Explore Services
+            </a>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
+            <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
+            <span className="px-3 py-1 rounded-full border bg-white">24-48h avg turnaround</span>
+            <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
+            <span className="px-3 py-1 rounded-full border bg-white">Licensed FL 320 Adjuster</span> {/* (1) */}
+          </div>
+        </div>
+      </section>
 
       {/* Services */}
       <section id="services" className="mt-6 w-full">
@@ -306,6 +329,7 @@ const Home = () => {
                   <div className="text-2xl mt-1">{c.price}</div>
                   <div className="text-sm text-gray-600 mt-1">{c.desc}</div>
                   <button
+                    type="button"                     // (6)
                     onClick={() => handleScrollTo('quote')}
                     className="mt-3 inline-flex items-center justify-center px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
                   >
@@ -318,8 +342,7 @@ const Home = () => {
             <div className="mt-6 rounded-xl border border-gray-200 p-4 bg-gray-50">
               <h3 className="font-medium">Our Guarantee</h3>
               <p className="text-sm text-gray-700 mt-1">
-                If your insurer doesn’t increase the offer by at least your PAZ fee within 60 days and you followed our
-                negotiation steps, we’ll refund 100%. Clear, fair, and simple.
+                If your insurer doesn’t increase the offer by at least the cost of your PAZ report within 60 days—and you followed our negotiation steps—we’ll refund your fee. Fair and simple.
               </p>
             </div>
           </div>
@@ -369,6 +392,7 @@ const Home = () => {
             </div>
             <div className="text-center mt-6">
               <button
+                type="button"                     // (6)
                 onClick={() => handleScrollTo('quote')}
                 className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-gray-900 text-white text-sm shadow hover:shadow-md"
               >
@@ -399,6 +423,7 @@ const Home = () => {
                   <div className="text-xs text-gray-500">{s.status}</div>
                   <p className="text-sm text-gray-700 mt-2">{s.desc}</p>
                   <button
+                    type="button"                 // (6)
                     onClick={() => handleScrollTo('quote')}
                     className="mt-3 inline-flex items-center justify-center px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
                   >
@@ -418,6 +443,7 @@ const Home = () => {
             <h2 className="text-xl font-semibold mb-2">Get a Free Quote</h2>
             <p className="mb-4">Upload your estimate and photos—an appraiser will respond within one business day.</p>
             <button
+              type="button"                     // (6)
               onClick={() => document.dispatchEvent(new CustomEvent('open-benji'))}
               className="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition"
             >
@@ -432,12 +458,12 @@ const Home = () => {
         <div className="max-w-3xl mx-auto px-4">
           <div className="p-6 bg-white rounded-2xl shadow-md">
             <h2 className="text-2xl font-semibold text-center mb-4">About Us</h2>
-           <p className="text-center text-gray-700">
-  Precision Appraisal Zone is dedicated to helping vehicle owners, law firms, and repair shops fight for fair
-  valuations after an accident. Backed by a Florida 320 Adjuster License — we bring expert knowledge of insurance
-  claims, valuation, and settlement processes, ensuring every report stands up under scrutiny. Whether it’s
-  Diminished Value, Loss of Use, or Total Loss disputes — we’ve got your back.
-</p>
+            <p className="text-center text-gray-700">
+              Precision Appraisal Zone is dedicated to helping vehicle owners, law firms, and repair shops fight for fair
+              valuations after an accident. Backed by a Florida 320 Adjuster License — we bring expert knowledge of insurance
+              claims, valuation, and settlement processes, ensuring every report stands up under scrutiny. Whether it’s
+              Diminished Value, Loss of Use, or Total Loss disputes — we’ve got your back.
+            </p>
           </div>
         </div>
       </section>
@@ -546,7 +572,8 @@ const Home = () => {
 
           {/* Benji button */}
           <button
-            aria-label="Open Benji Assistant"
+            type="button"                      // (6)
+            aria-label="Open Benji Assistant"   // (6)
             aria-expanded={benjiOpen}
             className="flex flex-col items-center text-center focus:outline-none"
             onClick={handleBenjiClick}
@@ -707,6 +734,7 @@ const DVCalculator = ({ onStartQuote }) => {
         </div>
         <div className="mt-4 flex flex-col sm:flex-row gap-2">
           <button
+            type="button"                   // (6)
             onClick={onStartQuote}
             className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-gray-900 text-white text-sm shadow hover:shadow-md"
           >
@@ -725,6 +753,7 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
+
 
 
 
