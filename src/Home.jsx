@@ -154,7 +154,7 @@ const Home = () => {
     "@type": "LocalBusiness",
     "name": "Precision Appraisal Zone",
     "alternateName": "PAZ",
-    "description": "Independent auto appraisals specializing in Diminished Value (DV) and Loss of Use (LoU). Backed by a Florida 320 Adjuster License.",
+    "description": "Independent auto appraisals specializing in Diminished Value (DV) and Loss of Use (LoU). Backed by a Florida 620  License.",
     "url": "https://www.precisionappraisalzone.com",
     "telephone": "+1-954-839-7653",
     "areaServed": "Florida"
@@ -231,7 +231,7 @@ const Home = () => {
             <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
             <span className="px-3 py-1 rounded-full border bg-white">24-48h avg turnaround</span>
             <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
-            <span className="px-3 py-1 rounded-full border bg-white">Licensed FL 320 Adjuster</span> {/* (1) */}
+            <span className="px-3 py-1 rounded-full border bg-white">Licensed FL 620 </span> {/* (1) */}
           </div>
         </div>
       </section>
@@ -460,7 +460,7 @@ const Home = () => {
             <h2 className="text-2xl font-semibold text-center mb-4">About Us</h2>
             <p className="text-center text-gray-700">
               Precision Appraisal Zone is dedicated to helping vehicle owners, law firms, and repair shops fight for fair
-              valuations after an accident. Backed by a Florida 320 Adjuster License — we bring expert knowledge of insurance
+              valuations after an accident. Backed by a Florida 620 Adjuster License — we bring expert knowledge of insurance
               claims, valuation, and settlement processes, ensuring every report stands up under scrutiny. Whether it’s
               Diminished Value, Loss of Use, or Total Loss disputes — we’ve got your back.
             </p>
@@ -485,7 +485,7 @@ const Home = () => {
                 },
                 {
                   q: 'Do you work with attorneys or owners?',
-                  a: 'Both. We support law firms, public adjusters, and individual owners.',
+                  a: 'Both. We support law firms, public s, and individual owners.',
                 },
               ].map((item) => (
                 <details key={item.q} className="group py-3">
