@@ -122,7 +122,6 @@ const Home = () => {
       return;
     }
     // Show quick "Woof!" bubble before opening (rate-limited 30s)
-    the:
     const now = Date.now();
     setBenjiOpen(true);
     const canWoof = !prefersReducedMotion.current && now - lastWoofRef.current > 30000;
@@ -567,7 +566,7 @@ const Home = () => {
           {/* Success toast */}
           {toast && (
             <div className="absolute bottom-24 right-0 px-3 py-2 rounded-lg bg-white text-gray-800 text-xs shadow-md border border-gray-200">
-              {toast.text}
+            {toast.text}
             </div>
           )}
 
@@ -780,6 +779,7 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
+
 
 
 
