@@ -122,6 +122,7 @@ const Home = () => {
       return;
     }
     // Show quick "Woof!" bubble before opening (rate-limited 30s)
+    the:
     const now = Date.now();
     setBenjiOpen(true);
     const canWoof = !prefersReducedMotion.current && now - lastWoofRef.current > 30000;
@@ -148,21 +149,23 @@ const Home = () => {
         { label: '📱 Text (SMS)', href: smsHref, kind: 'sms' },
       ];
 
-  // ---------- (4) LocalBusiness JSON-LD schema ----------
+  // ---------- JSON-LD schema (updated for trust/compliance) ----------
   const orgSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "ProfessionalService",
     "name": "Precision Appraisal Zone",
     "alternateName": "PAZ",
-    "description": "Independent auto appraisals specializing in Diminished Value (DV) and Loss of Use (LoU). Backed by a Florida 620  License.",
+    "description": "Independent auto appraisals specializing in Diminished Value (DV) and Loss of Use (LoU). FL 620 licensed. USPAP coursework in progress.",
     "url": "https://www.precisionappraisalzone.com",
     "telephone": "+1-954-839-7653",
-    "areaServed": "Florida"
+    "serviceType": ["Auto Appraisal","Diminished Value","Loss of Use","Total Loss Valuation Support"],
+    "areaServed": ["Florida","United States"],
+    "address": { "@type": "PostalAddress", "addressRegion": "FL", "addressCountry": "US" }
   };
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-start pb-28 text-gray-800">
-      {/* (4) JSON-LD injection */}
+      {/* JSON-LD injection */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
@@ -187,7 +190,7 @@ const Home = () => {
             <a href="#contact" className="hover:text-gray-900">Contact</a>
           </nav>
           <button
-            type="button"                         // (6)
+            type="button"
             onClick={() => handleScrollTo('quote')}
             className="hidden sm:inline-flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-xl text-sm shadow hover:shadow-md"
           >
@@ -212,8 +215,8 @@ const Home = () => {
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <button
-              type="button"                        // (6)
-              aria-label="Start my quote"          // (6)
+              type="button"
+              aria-label="Start my quote"
               onClick={() => handleScrollTo('quote')}
               className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
             >
@@ -221,7 +224,7 @@ const Home = () => {
             </button>
             <a
               href="#services"
-              aria-label="Explore services"        // (6)
+              aria-label="Explore services"
               className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100"
             >
               Explore Services
@@ -229,9 +232,10 @@ const Home = () => {
           </div>
           <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
             <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
-            <span className="px-3 py-1 rounded-full border bg-white">24-48h avg turnaround</span>
+            <span className="px-3 py-1 rounded-full border bg-white">24–48h avg turnaround</span>
             <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
-            <span className="px-3 py-1 rounded-full border bg-white">Licensed FL 620 </span> {/* (1) */}
+            <span className="px-3 py-1 rounded-full border bg-white">Licensed FL 620</span>
+            <span className="px-3 py-1 rounded-full border bg-white">USPAP coursework in progress</span>
           </div>
         </div>
       </section>
@@ -329,7 +333,7 @@ const Home = () => {
                   <div className="text-2xl mt-1">{c.price}</div>
                   <div className="text-sm text-gray-600 mt-1">{c.desc}</div>
                   <button
-                    type="button"                     // (6)
+                    type="button"
                     onClick={() => handleScrollTo('quote')}
                     className="mt-3 inline-flex items-center justify-center px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
                   >
@@ -392,7 +396,7 @@ const Home = () => {
             </div>
             <div className="text-center mt-6">
               <button
-                type="button"                     // (6)
+                type="button"
                 onClick={() => handleScrollTo('quote')}
                 className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-gray-900 text-white text-sm shadow hover:shadow-md"
               >
@@ -423,7 +427,7 @@ const Home = () => {
                   <div className="text-xs text-gray-500">{s.status}</div>
                   <p className="text-sm text-gray-700 mt-2">{s.desc}</p>
                   <button
-                    type="button"                 // (6)
+                    type="button"
                     onClick={() => handleScrollTo('quote')}
                     className="mt-3 inline-flex items-center justify-center px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
                   >
@@ -442,13 +446,30 @@ const Home = () => {
           <div className="bg-indigo-600 text-white p-6 rounded-2xl shadow-lg text-center">
             <h2 className="text-xl font-semibold mb-2">Get a Free Quote</h2>
             <p className="mb-4">Upload your estimate and photos—an appraiser will respond within one business day.</p>
+
+            {/* Consent snippet for compliance */}
+            <div className="text-xs text-indigo-100 mb-3">
+              <label className="inline-flex items-center gap-2">
+                <input type="checkbox" className="accent-white" required />
+                I agree to the{' '}
+                <a className="underline" href="/terms-of-service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+                {' '}and{' '}
+                <a className="underline" href="/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+              </label>
+            </div>
+
             <button
-              type="button"                     // (6)
+              type="button"
               onClick={() => document.dispatchEvent(new CustomEvent('open-benji'))}
               className="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition"
             >
               Submit & Upload Files
             </button>
+
+            {/* short legal notice */}
+            <div className="mt-3 text-[11px] text-indigo-100/90">
+              Precision Appraisal Zone is an independent appraisal service. We do not sell insurance or provide legal advice.
+            </div>
           </div>
         </div>
       </section>
@@ -485,7 +506,7 @@ const Home = () => {
                 },
                 {
                   q: 'Do you work with attorneys or owners?',
-                  a: 'Both. We support law firms, public s, and individual owners.',
+                  a: 'Both. We support law firms, public adjusters, and individual owners.',
                 },
               ].map((item) => (
                 <details key={item.q} className="group py-3">
@@ -511,6 +532,12 @@ const Home = () => {
               <li><strong>Phone:</strong> 954.839.7653</li>
               <li><strong>Location:</strong> South Florida</li>
             </ul>
+            {/* small legal links row */}
+            <div className="mt-4 text-center text-xs text-gray-500 space-x-3">
+              <a className="underline" href="/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+              <span>•</span>
+              <a className="underline" href="/terms-of-service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+            </div>
           </div>
         </div>
       </section>
@@ -572,8 +599,8 @@ const Home = () => {
 
           {/* Benji button */}
           <button
-            type="button"                      // (6)
-            aria-label="Open Benji Assistant"   // (6)
+            type="button"
+            aria-label="Open Benji Assistant"
             aria-expanded={benjiOpen}
             className="flex flex-col items-center text-center focus:outline-none"
             onClick={handleBenjiClick}
@@ -734,7 +761,7 @@ const DVCalculator = ({ onStartQuote }) => {
         </div>
         <div className="mt-4 flex flex-col sm:flex-row gap-2">
           <button
-            type="button"                   // (6)
+            type="button"
             onClick={onStartQuote}
             className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-gray-900 text-white text-sm shadow hover:shadow-md"
           >
@@ -753,6 +780,7 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
+
 
 
 
