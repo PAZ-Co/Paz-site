@@ -345,7 +345,7 @@ const Home = () => {
             <div className="mt-6 rounded-xl border border-gray-200 p-4 bg-gray-50">
               <h3 className="font-medium">Our Guarantee</h3>
               <p className="text-sm text-gray-700 mt-1">
-                If your insurer doesn’t increase the offer by at least the cost of your PAZ report within 90 days—and you followed our negotiation steps—we’ll refund your fee. Fair and simple.
+                If your insurer doesn’t increase the offer by at least the cost of your (PAZ) report within 90 days—and you followed our negotiation steps—we’ll refund your fee. Fair and simple.
               </p>
             </div>
           </div>
