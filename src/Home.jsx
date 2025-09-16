@@ -322,9 +322,9 @@ const Home = () => {
             <p className="text-center text-gray-600 mb-6">Simple, transparent pricing. Rush options available.</p>
             <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-4">
               {[
-                { name: 'DV Report', price: '$395', desc: '48–72h delivery' },
-                { name: 'Loss of Use', price: '$395', desc: '48–72h delivery' },
-                { name: 'LoU and DV Bundle', price: '$595', desc: '48–72h delivery' },
+                { name: 'Diminished Value Report', price: '$395', desc: '48–72h delivery' },
+                { name: 'Loss of Use Report', price: '$395', desc: '48–72h delivery' },
+                { name: 'DV & LoU Report Bundle', price: '$595', desc: '48–72h delivery' },
                 { name: 'Rush Turnaround', price: '+$95', desc: '24h (when feasible)' },
                 { name: 'Total Loss Rebuttal', price: 'from $495', desc: 'ACV opinion + comps' },
               ].map((c) => (
