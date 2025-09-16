@@ -325,7 +325,6 @@ const Home = () => {
                 { name: 'Diminished Value Report', price: '$395', desc: '48–72h delivery' },
                 { name: 'Loss of Use Report', price: '$395', desc: '48–72h delivery' },
                 { name: 'DV & LoU Report Bundle', price: '$595', desc: '48–72h delivery' },
-                { name: 'Rush Turnaround', price: '+$95', desc: '24h (when feasible)' },
                 { name: 'Total Loss Rebuttal', price: 'from $495', desc: 'ACV opinion + comps' },
               ].map((c) => (
                 <div key={c.name} className="border border-gray-200 rounded-xl p-4 text-center">
