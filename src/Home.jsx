@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
-import logo from './assets/logo.png';
+import fullLogo from './assets/logo.png';
+import pazIcon from './assets/paz-icon.png';
 import benji from './assets/benji-mascot.png';
 
 /**
@@ -174,7 +175,7 @@ const Home = () => {
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="PAZ Logo" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
+       <img src={pazIcon} alt="PAZ Icon" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
             <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
           </div>
           <nav className="hidden lg:flex gap-6 text-sm">
@@ -201,10 +202,8 @@ const Home = () => {
       {/* Hero */}
       <section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
         <div className="max-w-6xl mx-auto px-4 py-6 sm:py-10 text-center">
-          <img
-            src={logo}
-            alt="PAZ Logo"
-            className="w-36 sm:w-44 md:w-52 lg:w-60 mx-auto mb-4 rounded-none border-none shadow-none ring-0"
+          <img src={fullLogo} alt="PAZ Logo" className="w-36 sm:w-44 md:w-52 lg:w-60 mx-auto mb-4 rounded-none border-none shadow-none ring-0"
+
           />
           <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
             Defensible automotive valuations that move insurers to yes.
