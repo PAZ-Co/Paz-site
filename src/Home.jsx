@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
-import logo from './assets/logo.png';
+import fullLogo from './assets/logo.png';
+import pazIcon from './assets/paz-icon.png';
 import benji from './assets/benji-mascot.png';
 
 /**
