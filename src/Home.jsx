@@ -175,7 +175,7 @@ const Home = () => {
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-       <img src={pazIcon} alt="PAZ Icon" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
+            <img src={pazIcon} alt="PAZ Icon" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
             <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
           </div>
           <nav className="hidden lg:flex gap-6 text-sm">
@@ -202,15 +202,23 @@ const Home = () => {
       {/* Hero */}
       <section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
         <div className="max-w-6xl mx-auto px-4 py-6 sm:py-10 text-center">
-          <img src={fullLogo} alt="PAZ Logo" className="w-36 sm:w-44 md:w-52 lg:w-60 mx-auto mb-4 rounded-none border-none shadow-none ring-0"
-
+          <img
+            src={fullLogo}
+            alt="PAZ Logo"
+            className="w-36 sm:w-44 md:w-52 lg:w-60 mx-auto mb-4 rounded-none border-none shadow-none ring-0"
           />
-          <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
-            Defensible automotive valuations that move insurers to yes.
+
+          {/* ---- NEW HEADLINE + SUBLINE ---- */}
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
+            Independent reports.
+            <br className="hidden sm:block" />
+            <span className="inline-block">Laser-focused results.</span>
           </h1>
-          <p className="max-w-2xl mx-auto mt-3 text-gray-600">
-            Certified, independent reports for Diminished Value, Loss of Use, and Total Loss—delivered fast with clean, evidence-based methodology.
+          <p className="max-w-2xl mx-auto mt-3 text-gray-600 text-base sm:text-lg md:text-xl">
+            Get insurers to yes, faster.
           </p>
+          {/* ---- /NEW HEADLINE + SUBLINE ---- */}
+
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <button
               type="button"
@@ -565,7 +573,7 @@ const Home = () => {
           {/* Success toast */}
           {toast && (
             <div className="absolute bottom-24 right-0 px-3 py-2 rounded-lg bg-white text-gray-800 text-xs shadow-md border border-gray-200">
-            {toast.text}
+              {toast.text}
             </div>
           )}
 
@@ -778,6 +786,7 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
+
 
 
 
