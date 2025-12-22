@@ -151,16 +151,17 @@ const Home = () => {
 
   // ---------- JSON-LD schema (updated for trust/compliance) ----------
   const orgSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Precision Appraisal Zone",
-    "alternateName": "PAZ",
-    "description": "Independent auto appraisals specializing in Diminished Value (DV) and Loss of Use (LoU). FL 620 licensed. USPAP coursework in progress.",
-    "url": "https://www.precisionappraisalzone.com",
-    "telephone": "+1-954-839-7653",
-    "serviceType": ["Auto Appraisal","Diminished Value","Loss of Use","Total Loss Valuation Support"],
-    "areaServed": ["Florida","United States"],
-    "address": { "@type": "PostalAddress", "addressRegion": "FL", "addressCountry": "US" }
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'Precision Appraisal Zone',
+    alternateName: 'PAZ',
+    description:
+      'Independent valuation and appraisal support specializing in Diminished Value (DV), Loss of Use (LoU), and Total Loss/ACV review. Florida-licensed adjuster (620).',
+    url: 'https://www.precisionappraisalzone.com',
+    telephone: '+1-954-839-7653',
+    serviceType: ['Auto Appraisal', 'Diminished Value', 'Loss of Use', 'Total Loss Valuation Support'],
+    areaServed: ['Florida', 'United States'],
+    address: { '@type': 'PostalAddress', addressRegion: 'FL', addressCountry: 'US' },
   };
 
   return (
@@ -175,19 +176,41 @@ const Home = () => {
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={pazIcon} alt="PAZ Icon" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
+            <img
+              src={pazIcon}
+              alt="PAZ Icon"
+              className="h-10 w-auto rounded-none border-none shadow-none ring-0"
+            />
             <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
           </div>
           <nav className="hidden lg:flex gap-6 text-sm">
-            <a href="#services" className="hover:text-gray-900">Services</a>
-            <a href="#why" className="hover:text-gray-900">Why Us</a>
-            <a href="#process" className="hover:text-gray-900">Process</a>
-            <a href="#pricing" className="hover:text-gray-900">Pricing</a>
-            <a href="#calculator" className="hover:text-gray-900">Calculator</a>
-            <a href="#results" className="hover:text-gray-900">Results</a>
-            <a href="#state-laws" className="hover:text-gray-900">State Laws</a>
-            <a href="#faq" className="hover:text-gray-900">FAQ</a>
-            <a href="#contact" className="hover:text-gray-900">Contact</a>
+            <a href="#services" className="hover:text-gray-900">
+              Services
+            </a>
+            <a href="#why" className="hover:text-gray-900">
+              Why Us
+            </a>
+            <a href="#process" className="hover:text-gray-900">
+              Process
+            </a>
+            <a href="#pricing" className="hover:text-gray-900">
+              Pricing
+            </a>
+            <a href="#calculator" className="hover:text-gray-900">
+              Calculator
+            </a>
+            <a href="#results" className="hover:text-gray-900">
+              Results
+            </a>
+            <a href="#state-laws" className="hover:text-gray-900">
+              State Laws
+            </a>
+            <a href="#faq" className="hover:text-gray-900">
+              FAQ
+            </a>
+            <a href="#contact" className="hover:text-gray-900">
+              Contact
+            </a>
           </nav>
           <button
             type="button"
@@ -208,16 +231,16 @@ const Home = () => {
             className="w-36 sm:w-44 md:w-52 lg:w-60 mx-auto mb-4 rounded-none border-none shadow-none ring-0"
           />
 
-          {/* ---- NEW HEADLINE + SUBLINE ---- */}
+          {/* ---- HEADLINE + UPDATED SUBLINE ---- */}
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
             Independent reports.
             <br className="hidden sm:block" />
             <span className="inline-block">Laser-focused results.</span>
           </h1>
           <p className="max-w-2xl mx-auto mt-3 text-gray-600 text-base sm:text-lg md:text-xl">
-            Get insurers to yes, faster.
+            Defensible valuation support—built on market comps and clear methodology.
           </p>
-          {/* ---- /NEW HEADLINE + SUBLINE ---- */}
+          {/* ---- /HEADLINE + UPDATED SUBLINE ---- */}
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <button
@@ -241,7 +264,7 @@ const Home = () => {
             <span className="px-3 py-1 rounded-full border bg-white">24–48h avg turnaround</span>
             <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
             <span className="px-3 py-1 rounded-full border bg-white">Licensed FL 620</span>
-            <span className="px-3 py-1 rounded-full border bg-white">USPAP coursework in progress</span>
+            {/* USPAP pill removed from hero for cleaner, lower-friction trust */}
           </div>
         </div>
       </section>
@@ -255,7 +278,7 @@ const Home = () => {
               <div className="border border-gray-200 rounded-xl p-4">
                 <h3 className="font-semibold">Diminished Value Reports</h3>
                 <p className="text-sm text-gray-600 mt-1">
-                  Certified reports that quantify post-repair loss in market value using comps & condition scoring.
+                  Defensible reports that quantify post-repair loss in market value using comps & condition scoring.
                 </p>
               </div>
               <div className="border border-gray-200 rounded-xl p-4">
@@ -270,10 +293,13 @@ const Home = () => {
                   Independent ACV opinions & rebuttals when settlement offers miss the mark.
                 </p>
               </div>
+
+              {/* Swapped: Inspections & EDR -> Personal Property Valuation */}
               <div className="border border-gray-200 rounded-xl p-4">
-                <h3 className="font-semibold">Inspections & EDR (optional)</h3>
+                <h3 className="font-semibold">Personal Property Valuation</h3>
                 <p className="text-sm text-gray-600 mt-1">
-                  On-site photo mapping and event data retrieval where applicable.
+                  Market-based valuation and documentation support for insured losses and specialty items, supported by
+                  comparable sales and written analysis.
                 </p>
               </div>
             </div>
@@ -287,7 +313,7 @@ const Home = () => {
           <div className="p-6 bg-white rounded-2xl shadow-md">
             <h2 className="text-2xl font-semibold text-center mb-4">Why Choose Us?</h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-              <li>✔️ Certified Independent Appraisers</li>
+              <li>✔️ Independent valuation specialists</li>
               <li>✔️ 5-Star Rated Service</li>
               <li>✔️ Fast Turnaround Times</li>
               <li>✔️ Works with Attorneys & Shops</li>
@@ -352,7 +378,8 @@ const Home = () => {
             <div className="mt-6 rounded-xl border border-gray-200 p-4 bg-gray-50">
               <h3 className="font-medium">Our Guarantee</h3>
               <p className="text-sm text-gray-700 mt-1">
-                If your insurer doesn’t increase the offer by at least the cost of your (PAZ) report within 90 days—and you followed our negotiation steps—we’ll refund your fee. Fair and simple.
+                If you’re not satisfied that your (PAZ) report clearly addresses the key issues and includes the supporting
+                comps/data discussed, we’ll revise it at no charge within 30 days.
               </p>
             </div>
           </div>
@@ -396,7 +423,9 @@ const Home = () => {
                       <div className="font-semibold">{r.after}</div>
                     </div>
                   </div>
-                  <div className="mt-2 text-xs text-gray-600">{r.note} • {r.days}</div>
+                  <div className="mt-2 text-xs text-gray-600">
+                    {r.note} • {r.days}
+                  </div>
                 </div>
               ))}
             </div>
@@ -419,8 +448,8 @@ const Home = () => {
           <div className="p-6 bg-white rounded-2xl shadow-md">
             <h2 className="text-2xl font-semibold text-center mb-4">State Laws (Overview)</h2>
             <p className="text-gray-700 text-sm text-center max-w-3xl mx-auto">
-              Diminished Value and Loss of Use rules vary by state. We’re building out clear, plain-English pages for each state.
-              Start with Florida below, or contact us and we’ll route you correctly.
+              Diminished Value and Loss of Use rules vary by state. We’re building out clear, plain-English pages for each
+              state. Start with Florida below, or contact us and we’ll route you correctly.
             </p>
             <div className="grid sm:grid-cols-3 gap-4 mt-6">
               {[
@@ -458,9 +487,24 @@ const Home = () => {
               <label className="inline-flex items-center gap-2">
                 <input type="checkbox" className="accent-white" required />
                 I agree to the{' '}
-                <a className="underline" href="/terms-of-service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>
-                {' '}and{' '}
-                <a className="underline" href="/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+                <a
+                  className="underline"
+                  href="/terms-of-service.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Terms of Service
+                </a>{' '}
+                and{' '}
+                <a
+                  className="underline"
+                  href="/privacy-policy.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Privacy Policy
+                </a>
+                .
               </label>
             </div>
 
@@ -474,7 +518,8 @@ const Home = () => {
 
             {/* short legal notice */}
             <div className="mt-3 text-[11px] text-indigo-100/90">
-              Precision Appraisal Zone is an independent appraisal service. We do not sell insurance or provide legal advice.
+              Precision Appraisal Zone is an independent appraisal service. We do not sell insurance or provide legal
+              advice.
             </div>
           </div>
         </div>
@@ -486,8 +531,8 @@ const Home = () => {
           <div className="p-6 bg-white rounded-2xl shadow-md">
             <h2 className="text-2xl font-semibold text-center mb-4">About Us</h2>
             <p className="text-center text-gray-700">
-              Precision Appraisal Zone is dedicated to helping vehicle owners, law firms, and repair shops fight for fair
-              valuations after an accident. Backed by a Florida 620 Adjuster License — we bring expert knowledge of insurance
+              Precision Appraisal Zone supports vehicle owners, law firms, and repair shops with objective valuation
+              reporting after an accident. Backed by a Florida 620 Adjuster License — we bring expert knowledge of insurance
               claims, valuation, and settlement processes, ensuring every report stands up under scrutiny. Whether it’s
               Diminished Value, Loss of Use, or Total Loss disputes — we’ve got your back.
             </p>
@@ -534,15 +579,35 @@ const Home = () => {
           <div className="p-6 bg-white rounded-2xl shadow-md">
             <h2 className="text-2xl font-semibold text-center mb-4">Contact</h2>
             <ul className="text-center space-y-1">
-              <li><strong>Email:</strong> PrecisionAppraisalZone@Gmail.com</li>
-              <li><strong>Phone:</strong> 954.839.7653</li>
-              <li><strong>Location:</strong> South Florida</li>
+              <li>
+                <strong>Email:</strong> PrecisionAppraisalZone@Gmail.com
+              </li>
+              <li>
+                <strong>Phone:</strong> 954.839.7653
+              </li>
+              <li>
+                <strong>Location:</strong> South Florida
+              </li>
             </ul>
             {/* small legal links row */}
             <div className="mt-4 text-center text-xs text-gray-500 space-x-3">
-              <a className="underline" href="/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+              <a
+                className="underline"
+                href="/privacy-policy.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Privacy Policy
+              </a>
               <span>•</span>
-              <a className="underline" href="/terms-of-service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+              <a
+                className="underline"
+                href="/terms-of-service.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Terms of Service
+              </a>
             </div>
           </div>
         </div>
@@ -752,7 +817,7 @@ const DVCalculator = ({ onStartQuote }) => {
         </div>
 
         <div className="text-xs text-gray-500">
-          This tool provides an educational range only and is not a substitute for a certified appraisal.
+          This tool provides an educational range only and is not a substitute for a formal appraisal report.
         </div>
       </div>
 
@@ -765,13 +830,19 @@ const DVCalculator = ({ onStartQuote }) => {
         <div className="text-xs text-gray-600 mt-2">
           Based on your inputs. Real-world DV depends on market comps, condition scoring, options, and state practices.
         </div>
+
+        {/* Conversion nudge */}
+        <div className="mt-3 text-xs text-gray-700">
+          Want a defensible report? Start a free case review.
+        </div>
+
         <div className="mt-4 flex flex-col sm:flex-row gap-2">
           <button
             type="button"
             onClick={onStartQuote}
             className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-gray-900 text-white text-sm shadow hover:shadow-md"
           >
-            Get a Certified DV Report
+            Request a DV Report
           </button>
           <a
             href="#services"
@@ -786,9 +857,6 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
-
-
-
 
 
 
