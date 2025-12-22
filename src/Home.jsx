@@ -159,7 +159,7 @@ const Home = () => {
       'Independent valuation and appraisal support specializing in Diminished Value (DV), Loss of Use (LoU), and Total Loss/ACV review. Florida-licensed adjuster (620).',
     url: 'https://www.precisionappraisalzone.com',
     telephone: '+1-954-839-7653',
-    serviceType: ['Auto Appraisal', 'Diminished Value', 'Loss of Use', 'Total Loss Valuation Support'],
+    serviceType: ['Auto Appraisal', 'Diminished Value', 'Loss of Use', 'Total Loss Valuation Support', 'Personal Property Valuation'],
     areaServed: ['Florida', 'United States'],
     address: { '@type': 'PostalAddress', addressRegion: 'FL', addressCountry: 'US' },
   };
@@ -264,7 +264,6 @@ const Home = () => {
             <span className="px-3 py-1 rounded-full border bg-white">24–48h avg turnaround</span>
             <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
             <span className="px-3 py-1 rounded-full border bg-white">Licensed FL 620</span>
-            {/* USPAP pill removed from hero for cleaner, lower-friction trust */}
           </div>
         </div>
       </section>
@@ -351,14 +350,17 @@ const Home = () => {
       <section id="pricing" className="w-full mt-8">
         <div className="max-w-5xl mx-auto px-4">
           <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-2">Pricing</h2>
+            <h2 className="text-2xl font-semibold text-center mb-2">Pricing (Most Common Requests)</h2>
             <p className="text-center text-gray-600 mb-6">Simple, transparent pricing. Rush options available.</p>
-            <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-4">
+
+            {/* 5 cards: use a 3-col layout on md for better spacing */}
+            <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4">
               {[
                 { name: 'Diminished Value Report', price: '$395', desc: '48–72h delivery' },
                 { name: 'Loss of Use Report', price: '$395', desc: '48–72h delivery' },
                 { name: 'DV & LoU Report Bundle', price: '$595', desc: '48–72h delivery' },
                 { name: 'Total Loss Rebuttal', price: 'from $495', desc: 'ACV opinion + comps' },
+                { name: 'Personal Property Valuation (Non-Vehicle)', price: 'from $295', desc: 'Market-based valuation + documentation support' },
               ].map((c) => (
                 <div key={c.name} className="border border-gray-200 rounded-xl p-4 text-center">
                   <div className="font-semibold">{c.name}</div>
@@ -373,6 +375,10 @@ const Home = () => {
                   </button>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-3 text-center text-xs text-gray-500">
+              Complex items, collections, or expedited deadlines may require a custom quote.
             </div>
 
             <div className="mt-6 rounded-xl border border-gray-200 p-4 bg-gray-50">
@@ -487,21 +493,11 @@ const Home = () => {
               <label className="inline-flex items-center gap-2">
                 <input type="checkbox" className="accent-white" required />
                 I agree to the{' '}
-                <a
-                  className="underline"
-                  href="/terms-of-service.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a className="underline" href="/terms-of-service.html" target="_blank" rel="noopener noreferrer">
                   Terms of Service
                 </a>{' '}
                 and{' '}
-                <a
-                  className="underline"
-                  href="/privacy-policy.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a className="underline" href="/privacy-policy.html" target="_blank" rel="noopener noreferrer">
                   Privacy Policy
                 </a>
                 .
@@ -591,21 +587,11 @@ const Home = () => {
             </ul>
             {/* small legal links row */}
             <div className="mt-4 text-center text-xs text-gray-500 space-x-3">
-              <a
-                className="underline"
-                href="/privacy-policy.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a className="underline" href="/privacy-policy.html" target="_blank" rel="noopener noreferrer">
                 Privacy Policy
               </a>
               <span>•</span>
-              <a
-                className="underline"
-                href="/terms-of-service.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a className="underline" href="/terms-of-service.html" target="_blank" rel="noopener noreferrer">
                 Terms of Service
               </a>
             </div>
@@ -832,9 +818,7 @@ const DVCalculator = ({ onStartQuote }) => {
         </div>
 
         {/* Conversion nudge */}
-        <div className="mt-3 text-xs text-gray-700">
-          Want a defensible report? Start a free case review.
-        </div>
+        <div className="mt-3 text-xs text-gray-700">Want a defensible report? Start a free case review.</div>
 
         <div className="mt-4 flex flex-col sm:flex-row gap-2">
           <button
