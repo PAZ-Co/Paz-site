@@ -159,7 +159,14 @@ const Home = () => {
       'Independent valuation and appraisal support specializing in Diminished Value (DV), Loss of Use (LoU), and Total Loss/ACV review. Florida-licensed adjuster (620).',
     url: 'https://www.precisionappraisalzone.com',
     telephone: '+1-954-839-7653',
-    serviceType: ['Auto Appraisal', 'Diminished Value', 'Loss of Use', 'Total Loss Valuation Support', 'Personal Property Valuation'],
+    serviceType: [
+      'Auto Appraisal',
+      'Diminished Value',
+      'Loss of Use',
+      'Total Loss Valuation Support',
+      'Personal Property Valuation',
+      'Addendum / Rebuttal Support',
+    ],
     areaServed: ['Florida', 'United States'],
     address: { '@type': 'PostalAddress', addressRegion: 'FL', addressCountry: 'US' },
   };
@@ -167,20 +174,13 @@ const Home = () => {
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-start pb-28 text-gray-800">
       {/* JSON-LD injection */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
 
       {/* Header */}
       <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img
-              src={pazIcon}
-              alt="PAZ Icon"
-              className="h-10 w-auto rounded-none border-none shadow-none ring-0"
-            />
+            <img src={pazIcon} alt="PAZ Icon" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
             <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
           </div>
           <nav className="hidden lg:flex gap-6 text-sm">
@@ -293,12 +293,28 @@ const Home = () => {
                 </p>
               </div>
 
-              {/* Swapped: Inspections & EDR -> Personal Property Valuation */}
               <div className="border border-gray-200 rounded-xl p-4">
                 <h3 className="font-semibold">Personal Property Valuation</h3>
                 <p className="text-sm text-gray-600 mt-1">
                   Market-based valuation and documentation support for insured losses and specialty items, supported by
                   comparable sales and written analysis.
+                </p>
+              </div>
+
+              <div className="border border-gray-200 rounded-xl p-4">
+                <h3 className="font-semibold">Addendum / Rebuttal Support</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  Follow-up documentation when an insurer disputes DV/LOU/ACV conclusions. Includes clarification,
+                  additional comps, and supplemental support where appropriate.
+                </p>
+              </div>
+
+              {/* Spacer card to keep 6 clean on mobile? Not needed; grid is 2 cols on sm+. */}
+              <div className="border border-gray-200 rounded-xl p-4">
+                <h3 className="font-semibold">Report Updates (as needed)</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  Corrections and updates when new documentation is provided (e.g., revised estimates, invoices, or mileage
+                  changes).
                 </p>
               </div>
             </div>
@@ -353,14 +369,19 @@ const Home = () => {
             <h2 className="text-2xl font-semibold text-center mb-2">Pricing (Most Common Requests)</h2>
             <p className="text-center text-gray-600 mb-6">Simple, transparent pricing. Rush options available.</p>
 
-            {/* 5 cards: use a 3-col layout on md for better spacing */}
+            {/* 6 cards: clean 3x2 on md */}
             <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4">
               {[
                 { name: 'Diminished Value Report', price: '$395', desc: '48–72h delivery' },
                 { name: 'Loss of Use Report', price: '$395', desc: '48–72h delivery' },
                 { name: 'DV & LoU Report Bundle', price: '$595', desc: '48–72h delivery' },
                 { name: 'Total Loss Rebuttal', price: 'from $495', desc: 'ACV opinion + comps' },
-                { name: 'Personal Property Valuation (Non-Vehicle)', price: 'from $295', desc: 'Market-based valuation + documentation support' },
+                {
+                  name: 'Personal Property Valuation (Non-Vehicle)',
+                  price: 'from $295',
+                  desc: 'Market-based valuation + documentation support',
+                },
+                { name: 'Addendum / Rebuttal Support', price: 'from $195', desc: 'Supplemental clarification + additional comps' },
               ].map((c) => (
                 <div key={c.name} className="border border-gray-200 rounded-xl p-4 text-center">
                   <div className="font-semibold">{c.name}</div>
@@ -841,6 +862,7 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
+
 
 
 
