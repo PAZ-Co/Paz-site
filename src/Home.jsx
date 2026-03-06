@@ -373,7 +373,7 @@ const Home = () => {
             <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4">
               {[
                 { name: 'Diminished Value Report', price: '$395', desc: '48–72h delivery' },
-                { name: 'Loss of Use Report', price: '$395', desc: '48–72h delivery' },
+                { name: 'Loss of Use Report', price: '$295', desc: '48–72h delivery' },
                 { name: 'DV & LoU Report Bundle', price: '$595', desc: '48–72h delivery' },
                 { name: 'Total Loss Rebuttal', price: 'from $495', desc: 'ACV opinion + comps' },
                 {
@@ -381,7 +381,7 @@ const Home = () => {
                   price: 'from $295',
                   desc: 'Market-based valuation + documentation support',
                 },
-                { name: 'Addendum / Rebuttal Support', price: 'from $195', desc: 'Supplemental clarification + additional comps' },
+                { name: 'Addendum / Rebuttal Support', price: 'from $295', desc: 'Supplemental clarification + additional comps' },
               ].map((c) => (
                 <div key={c.name} className="border border-gray-200 rounded-xl p-4 text-center">
                   <div className="font-semibold">{c.name}</div>
