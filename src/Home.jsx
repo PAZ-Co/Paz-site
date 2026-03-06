@@ -375,13 +375,13 @@ const Home = () => {
                 { name: 'Diminished Value Report', price: '$395', desc: '48–72h delivery' },
                 { name: 'Loss of Use Report', price: '$295', desc: '48–72h delivery' },
                 { name: 'DV & LoU Report Bundle', price: '$595', desc: '48–72h delivery' },
-                { name: 'Total Loss Rebuttal', price: 'from $495', desc: 'ACV opinion + comps' },
+                { name: 'Total Loss Rebuttal', price: 'from $395', desc: 'ACV Assessment + comps' },
                 {
                   name: 'Personal Property Valuation (Non-Vehicle)',
                   price: 'from $295',
                   desc: 'Market-based valuation + documentation support',
                 },
-                { name: 'Addendum / Rebuttal Support', price: 'from $295', desc: 'Supplemental clarification + additional comps' },
+                { name: 'Addendum / Rebuttal Support', price: 'from $395', desc: 'Supplemental clarification + additional comps' },
               ].map((c) => (
                 <div key={c.name} className="border border-gray-200 rounded-xl p-4 text-center">
                   <div className="font-semibold">{c.name}</div>
