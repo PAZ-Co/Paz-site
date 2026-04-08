@@ -660,30 +660,49 @@ const Home = () => {
           <div className="grid gap-8 lg:grid-cols-2">
             <div className="rounded-[28px] border border-gray-200 bg-white p-8 shadow-sm">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
-                Sample deliverables
+                What’s Included
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
-                Show visitors what a professional report looks like.
+                What goes into a PAZ report
               </h2>
               <p className="mt-4 text-sm leading-6 text-gray-600">
-                Add blurred screenshots of your real report pages here later. This section
-                will sell the professionalism of your formatting fast.
+                Every assignment is built around the file, the market, and the claim issue at
+                hand. Our reports are designed to be clean, professional, and easy to follow.
               </p>
 
-              <div className="mt-6 grid grid-cols-2 gap-4">
+              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {[
-                  'Market comps page',
-                  'Methodology section',
-                  'Charts / visuals',
-                  'Photo evidence',
-                  'Certification page',
-                  'Conclusion page',
+                  {
+                    title: 'Independent File Review',
+                    desc: 'Documentation is reviewed based on the specific loss, vehicle, and claim position.',
+                  },
+                  {
+                    title: 'Market-Based Support',
+                    desc: 'Relevant comparable data and supporting research are used where appropriate.',
+                  },
+                  {
+                    title: 'Clear Methodology',
+                    desc: 'Written reasoning is structured so the conclusion is easier to understand and defend.',
+                  },
+                  {
+                    title: 'Organized Findings',
+                    desc: 'Reports are formatted clearly for owners, attorneys, shops, and claim review.',
+                  },
+                  {
+                    title: 'Professional PDF Delivery',
+                    desc: 'Final reports are delivered in a polished, easy-to-share format.',
+                  },
+                  {
+                    title: 'Addendum Support',
+                    desc: 'Follow-up clarification or supplemental support is available when needed.',
+                  },
                 ].map((item) => (
                   <div
-                    key={item}
-                    className="flex min-h-[110px] items-center justify-center rounded-2xl border border-dashed border-gray-300 bg-gray-50 px-4 text-center text-sm text-gray-500"
+                    key={item.title}
+                    className="rounded-2xl border border-gray-200 bg-gray-50 p-5"
                   >
-                    {item}
+                    <h3 className="text-base font-semibold text-gray-900">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-gray-600">{item.desc}</p>
                   </div>
                 ))}
               </div>
