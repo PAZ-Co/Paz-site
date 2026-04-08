@@ -351,7 +351,7 @@ const Home = () => {
               onClick={() => handleScrollTo('quote')}
               className="hidden sm:inline-flex rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-black"
             >
-              Start My Report
+              Start My Quote
             </button>
 
             <button
@@ -386,156 +386,54 @@ const Home = () => {
         )}
       </header>
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 via-white to-white">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:py-20">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div className="max-w-2xl">
-              <div className="mb-5 inline-flex items-center rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-600 shadow-sm">
-                Independent appraisal support for owners, attorneys, and collision shops
-              </div>
+      <section className="w-full bg-gradient-to-b from-gray-50 to-white">
+        <div className="mx-auto max-w-6xl px-4 py-10 text-center sm:py-14 lg:py-16">
+          <img
+            src={fullLogo}
+            alt="PAZ Logo"
+            className="mx-auto mb-5 w-36 rounded-none border-none shadow-none ring-0 sm:w-44 md:w-52 lg:w-56"
+          />
 
-              <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-                Independent auto appraisals that help move insurers to yes.
-              </h1>
+          <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+            Independent reports.
+            <br className="hidden sm:block" />
+            <span className="inline-block">Laser-focused results.</span>
+          </h1>
 
-              <p className="mt-5 max-w-xl text-base leading-7 text-gray-600 sm:text-lg">
-                Precision Appraisal Zone (PAZ) provides Diminished Value, Loss of Use,
-                Total Loss valuation support, and estimate validation backed by real
-                market data and clear written methodology.
-              </p>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-gray-600 sm:text-lg md:text-xl">
+            Defensible valuation support built on market comps and clear methodology.
+          </p>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <button
-                  type="button"
-                  onClick={() => handleScrollTo('quote')}
-                  className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-black"
-                >
-                  Start My Report
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleScrollTo('services')}
-                  className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-medium text-gray-900 transition hover:bg-gray-50"
-                >
-                  View Services
-                </button>
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-700">
-                  {combinedYearsLabel}
-                </span>
-                <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-700">
-                  24–48h average turnaround
-                </span>
-                <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-700">
-                  Florida + nationwide remote
-                </span>
-                <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-700">
-                  Licensed FL 620
-                </span>
-              </div>
-
-              <div className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4 shadow-sm">
-                <p className="text-sm font-medium text-gray-900">
-                  Already received an insurer offer?
-                </p>
-                <p className="mt-1 text-sm text-gray-600">
-                  We’ll review the file and tell you whether the number looks defensible
-                  or light.
-                </p>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="rounded-[28px] border border-gray-200 bg-white p-6 shadow-xl shadow-gray-200/60">
-                <img
-                  src={fullLogo}
-                  alt="PAZ Logo"
-                  className="mx-auto mb-6 w-40 rounded-none border-none shadow-none ring-0 sm:w-48"
-                />
-
-                <div className="space-y-4">
-                  <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
-                    <div className="text-xs font-medium uppercase tracking-wide text-gray-500">
-                      Best for
-                    </div>
-                    <div className="mt-2 text-sm text-gray-700">
-                      Diminished Value • Loss of Use • Total Loss • Estimate Validation
-                    </div>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="rounded-2xl border border-gray-200 p-4">
-                      <div className="text-xs uppercase tracking-wide text-gray-500">
-                        Turnaround
-                      </div>
-                      <div className="mt-2 text-2xl font-semibold text-gray-900">
-                        24–48h
-                      </div>
-                      <div className="mt-1 text-sm text-gray-600">
-                        for most common report types
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl border border-gray-200 p-4">
-                      <div className="text-xs uppercase tracking-wide text-gray-500">
-                        Built for
-                      </div>
-                      <div className="mt-2 text-2xl font-semibold text-gray-900">
-                        Real leverage
-                      </div>
-                      <div className="mt-1 text-sm text-gray-600">
-                        negotiation, rebuttal, and legal support
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-gray-200 p-4">
-                    <div className="text-sm font-medium text-gray-900">
-                      What clients typically send
-                    </div>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {['Estimate', 'Photos', 'Insurer Offer', 'Valuation Report', 'Invoices'].map(
-                        (item) => (
-                          <span
-                            key={item}
-                            className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700"
-                          >
-                            {item}
-                          </span>
-                        )
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => handleScrollTo('quote')}
+              className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-black"
+            >
+              Start My Quote
+            </button>
+            <button
+              type="button"
+              onClick={() => handleScrollTo('services')}
+              className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-medium text-gray-900 transition hover:bg-gray-50"
+            >
+              Explore Services
+            </button>
           </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {[
-              {
-                title: 'Independent Reports',
-                desc: 'Not insurer-generated templates. Each assignment is reviewed from scratch.',
-              },
-              {
-                title: 'Defensible Methodology',
-                desc: 'Clear logic, real data, and structured reporting built to hold up under review.',
-              },
-              {
-                title: 'Professional Presentation',
-                desc: 'Clean PDF reports built for owners, attorneys, shops, and claim disputes.',
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
-              >
-                <h3 className="text-base font-semibold text-gray-900">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-gray-600">{item.desc}</p>
-              </div>
-            ))}
+          <div className="mt-5 flex flex-wrap justify-center gap-2 text-xs">
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
+              {combinedYearsLabel}
+            </span>
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
+              24–48h turnaround
+            </span>
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
+              Florida + Nationwide
+            </span>
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
+              FL Licensed 620
+            </span>
           </div>
         </div>
       </section>
@@ -668,7 +566,7 @@ const Home = () => {
                   onClick={() => handleScrollTo('quote')}
                   className="mt-6 inline-flex rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-black"
                 >
-                  Start My Report
+                  Start My Quote
                 </button>
               </div>
             ))}
