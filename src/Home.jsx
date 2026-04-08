@@ -3,65 +3,57 @@ import fullLogo from './assets/logo.png';
 import pazIcon from './assets/paz-icon.png';
 import benji from './assets/benji-mascot.png';
 
-/**
- * Precision Appraisal Zone — Home (Autoloss-inspired upgrade)
- * - Preserves Benji helper (bottom-right)
- * - Adds: Pricing & Guarantee, DV Calculator (estimate-only), Results, State Laws hub
- * - Expanded nav + smooth-scroll CTAs
- * - TailwindCSS only; drop-in replacement for your existing <Home />
- */
-
 const Home = () => {
   const handleScrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Combined experience label
   const combinedYearsLabel = '10+ years combined experience';
 
-  // --- Ask Benji (Option A: Quick-Action Popover) + Upgrades ---
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [benjiOpen, setBenjiOpen] = useState(false);
-  const [isCoarse, setIsCoarse] = useState(false); // mobile-ish pointer detection
-  const [toast, setToast] = useState(null); // { text: string }
+  const [isCoarse, setIsCoarse] = useState(false);
+  const [toast, setToast] = useState(null);
   const [showWoof, setShowWoof] = useState(false);
 
   const containerRef = useRef(null);
   const lastWoofRef = useRef(0);
   const woofTimeoutRef = useRef(null);
-  const openTimeoutRef = useRef(null);
   const toastTimeoutRef = useRef(null);
+  const prefersReducedMotion = useRef(false);
 
-  const phone = '+19548397653'; // from 954.839.7653
-  const email = 'PrecisionAppraisalZone@gmail.com';
+  const phone = '+19548397653';
+  const email = 'david@paz.services';
 
   const smsHref = `sms:${phone}?&body=${encodeURIComponent(
-    "Hi PAZ, I'd like a DV quote. Year/Make/Model: ____  Repair total: $____  City/State: ____"
+    "Hi Precision Appraisal Zone (PAZ), I'd like a quote. Year/Make/Model: ____ Claim type: ____ City/State: ____"
   )}`;
   const telHref = `tel:${phone}`;
   const mailHref = `mailto:${email}?subject=${encodeURIComponent(
     'Free Case Review'
   )}&body=${encodeURIComponent(
-    'Name:\nPhone:\nYear/Make/Model:\nRepair total:\nCity/State:\n\nBrief details:'
+    'Name:\nPhone:\nVehicle:\nClaim type:\nCity/State:\n\nBrief details:'
   )}`;
   const waHref = `https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(
-    "Hi PAZ, I'd like a DV quote."
+    "Hi Precision Appraisal Zone (PAZ), I'd like a free case review."
   )}`;
 
-  // Detect coarse pointer (mobile/tablet) & prefers-reduced-motion once on mount
-  const prefersReducedMotion = useRef(false);
   useEffect(() => {
     const coarse = window.matchMedia?.('(pointer: coarse)');
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+
     setIsCoarse(coarse?.matches ?? false);
     prefersReducedMotion.current = !!reduce?.matches;
 
-    const onChange = () => setIsCoarse(window.matchMedia('(pointer: coarse)').matches);
+    const onChange = () => {
+      setIsCoarse(window.matchMedia('(pointer: coarse)').matches);
+    };
+
     coarse?.addEventListener?.('change', onChange);
     return () => coarse?.removeEventListener?.('change', onChange);
   }, []);
 
-  // Close on outside click or ESC while open
   useEffect(() => {
     if (!benjiOpen) return;
 
@@ -71,36 +63,34 @@ const Home = () => {
         setBenjiOpen(false);
       }
     };
+
     const onKeyDown = (e) => {
       if (e.key === 'Escape') setBenjiOpen(false);
     };
 
     document.addEventListener('mousedown', onDocMouseDown);
     document.addEventListener('keydown', onKeyDown);
+
     return () => {
       document.removeEventListener('mousedown', onDocMouseDown);
       document.removeEventListener('keydown', onKeyDown);
     };
   }, [benjiOpen]);
 
-  // Listen for a global "open-benji" event so other buttons can open the popover
   useEffect(() => {
     const open = () => setBenjiOpen(true);
     document.addEventListener('open-benji', open);
     return () => document.removeEventListener('open-benji', open);
   }, []);
 
-  // Cleanup timeouts on unmount
   useEffect(() => {
     return () => {
       clearTimeout(woofTimeoutRef.current);
-      clearTimeout(openTimeoutRef.current);
       clearTimeout(toastTimeoutRef.current);
     };
   }, []);
 
   const handleActionClick = (kind) => {
-    // Tiny success toast that auto-dismisses
     const msg =
       kind === 'sms'
         ? 'Opening Messages…'
@@ -113,7 +103,6 @@ const Home = () => {
     setToast({ text: msg });
     clearTimeout(toastTimeoutRef.current);
     toastTimeoutRef.current = setTimeout(() => setToast(null), 2000);
-
     setBenjiOpen(false);
   };
 
@@ -122,10 +111,13 @@ const Home = () => {
       setBenjiOpen(false);
       return;
     }
-    // Show quick "Woof!" bubble before opening (rate-limited 30s)
-    const now = Date.now();
+
     setBenjiOpen(true);
-    const canWoof = !prefersReducedMotion.current && now - lastWoofRef.current > 30000;
+
+    const now = Date.now();
+    const canWoof =
+      !prefersReducedMotion.current && now - lastWoofRef.current > 30000;
+
     if (canWoof) {
       lastWoofRef.current = now;
       setShowWoof(true);
@@ -134,7 +126,6 @@ const Home = () => {
     }
   };
 
-  // Order actions based on pointer type
   const actions = isCoarse
     ? [
         { label: '📱 Text (SMS)', href: smsHref, kind: 'sms' },
@@ -149,440 +140,783 @@ const Home = () => {
         { label: '📱 Text (SMS)', href: smsHref, kind: 'sms' },
       ];
 
-  // ---------- JSON-LD schema (updated for trust/compliance) ----------
   const orgSchema = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'Precision Appraisal Zone',
     alternateName: 'PAZ',
     description:
-      'Independent valuation and appraisal support specializing in Diminished Value (DV), Loss of Use (LoU), and Total Loss/ACV review. Florida-licensed adjuster (620).',
+      'Independent auto appraisal and valuation support specializing in Diminished Value, Loss of Use, Total Loss valuation support, and estimate validation.',
     url: 'https://www.precisionappraisalzone.com',
     telephone: '+1-954-839-7653',
+    email: 'david@paz.services',
+    areaServed: ['Florida', 'United States'],
+    address: {
+      '@type': 'PostalAddress',
+      addressRegion: 'FL',
+      addressCountry: 'US',
+    },
     serviceType: [
       'Auto Appraisal',
-      'Diminished Value',
-      'Loss of Use',
+      'Diminished Value Report',
+      'Loss of Use Report',
       'Total Loss Valuation Support',
-      'Personal Property Valuation',
+      'Repair Estimate Validation',
       'Addendum / Rebuttal Support',
     ],
-    areaServed: ['Florida', 'United States'],
-    address: { '@type': 'PostalAddress', addressRegion: 'FL', addressCountry: 'US' },
   };
 
+  const navItems = [
+    ['services', 'Services'],
+    ['why', 'Why PAZ'],
+    ['process', 'Process'],
+    ['pricing', 'Pricing'],
+    ['calculator', 'DV Calculator'],
+    ['results', 'Results'],
+    ['faq', 'FAQ'],
+    ['contact', 'Contact'],
+  ];
+
+  const serviceCards = [
+    {
+      title: 'Diminished Value Reports',
+      desc: 'Defensible reports quantifying post-repair loss in market value using market comps, repair severity, and written methodology.',
+      points: ['Market-backed analysis', 'Negotiation-ready PDF', 'Popular for owner and attorney claims'],
+    },
+    {
+      title: 'Loss of Use Reports',
+      desc: 'Support for fair rental-rate recovery using comparable vehicle-class benchmarking and clear written justification.',
+      points: ['Comparable rental benchmarks', 'Clear adopted rate', 'Useful for negotiations and demand packages'],
+    },
+    {
+      title: 'Total Loss Valuation Support',
+      desc: 'Independent ACV opinions and rebuttals when insurer total-loss offers come in low.',
+      points: ['Comparable vehicle analysis', 'Retail-market support', 'Strong rebuttal positioning'],
+    },
+    {
+      title: 'Repair Estimate Validation',
+      desc: 'Technical review of insurer versus repair-facility estimates with focus on omitted operations, OEM procedures, and scope gaps.',
+      points: ['Great for shops and attorneys', 'OEM-focused analysis', 'Strong supplement support'],
+    },
+  ];
+
+  const whyCards = [
+    {
+      title: 'Independent, Not Insurer-Generated',
+      desc: 'Every report is built from an independent review of the documentation, market, and scope.',
+    },
+    {
+      title: 'Methodology You Can Follow',
+      desc: 'Clear written reasoning, not black-box numbers, so the report is easier to defend.',
+    },
+    {
+      title: 'Built for Real Negotiation',
+      desc: 'Structured to help owners, attorneys, and shops push back effectively when offers come in light.',
+    },
+    {
+      title: 'Fast, Professional Turnaround',
+      desc: 'Most common report types are completed within 24–48 hours once documentation is in.',
+    },
+  ];
+
+  const processSteps = [
+    {
+      step: '1',
+      title: 'Send Your Documents',
+      desc: 'Estimate, photos, valuation, invoice, or any insurer paperwork you have.',
+    },
+    {
+      step: '2',
+      title: 'We Review the File',
+      desc: 'We analyze the vehicle, damages, scope, market data, and claim context.',
+    },
+    {
+      step: '3',
+      title: 'We Build the Report',
+      desc: 'You receive a clean, polished PDF built for negotiation or legal support.',
+    },
+    {
+      step: '4',
+      title: 'Need Follow-Up?',
+      desc: 'We can help with clarification, addenda, or rebuttal support where needed.',
+    },
+  ];
+
+  const pricingCards = [
+    { name: 'Diminished Value Report', price: '$395', desc: 'Most common owner claim report' },
+    { name: 'Loss of Use Report', price: '$395', desc: 'Daily-rate support with written analysis' },
+    { name: 'DV + LOU Bundle', price: '$595', desc: 'Best value for combined claims' },
+    { name: 'Total Loss / ACV Support', price: 'From $495', desc: 'Independent ACV review and support' },
+    { name: 'Estimate Validation', price: 'Custom', desc: 'Scope depends on vehicle, estimate, and OEM issues' },
+    { name: 'Addendum / Rebuttal Support', price: 'From $195', desc: 'Follow-up support when needed' },
+  ];
+
+  const results = [
+    {
+      caseId: 'BMW M4',
+      before: '$2,500',
+      after: '$9,450',
+      note: 'DV + LOU support',
+    },
+    {
+      caseId: 'Tesla Model 3',
+      before: '$0',
+      after: '$4,200',
+      note: 'DV support',
+    },
+    {
+      caseId: 'F-150 Platinum',
+      before: '$1,100',
+      after: '$6,350',
+      note: 'DV + LOU support',
+    },
+  ];
+
+  const reviews = [
+    {
+      quote:
+        'Professional, responsive, and easy to work with. The report gave us exactly what we needed to push back.',
+      name: 'Client Review',
+    },
+    {
+      quote:
+        'Clean report, strong support, and fast turnaround. Helped make the valuation much easier to defend.',
+      name: 'South Florida Client',
+    },
+    {
+      quote:
+        'Very knowledgeable and thorough. You can tell the report is built to hold up under scrutiny.',
+      name: 'Vehicle Owner',
+    },
+  ];
+
+  const faqs = [
+    {
+      q: 'What do you need to get started?',
+      a: 'Usually the estimate, photos, VIN, mileage, and any insurer valuation or offer already made. If you have more documents, send those too.',
+    },
+    {
+      q: 'How fast is turnaround?',
+      a: 'Most common reports are completed within 24–48 hours after we receive the needed documentation.',
+    },
+    {
+      q: 'Do you work with attorneys, shops, and owners?',
+      a: 'Yes. Precision Appraisal Zone (PAZ) works with vehicle owners, collision centers, law firms, and related claim professionals.',
+    },
+    {
+      q: 'Is the DV calculator a formal appraisal?',
+      a: 'No. It is only an educational estimate. A formal report requires a document review and market-backed written analysis.',
+    },
+  ];
+
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-start pb-28 text-gray-800">
-      {/* JSON-LD injection */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
+    <div className="min-h-screen bg-white text-gray-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+      />
 
-      {/* Header */}
-      <header className="w-full bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <header className="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <img src={pazIcon} alt="PAZ Icon" className="h-10 w-auto rounded-none border-none shadow-none ring-0" />
-            <span className="font-semibold tracking-tight">Precision Appraisal Zone</span>
+            <img
+              src={pazIcon}
+              alt="PAZ Icon"
+              className="h-10 w-auto rounded-none border-none shadow-none ring-0"
+            />
+            <div className="leading-tight">
+              <div className="text-sm font-semibold tracking-tight">
+                Precision Appraisal Zone
+              </div>
+              <div className="text-[11px] text-gray-500">(PAZ)</div>
+            </div>
           </div>
-          <nav className="hidden lg:flex gap-6 text-sm">
-            <a href="#services" className="hover:text-gray-900">
-              Services
-            </a>
-            <a href="#why" className="hover:text-gray-900">
-              Why Us
-            </a>
-            <a href="#process" className="hover:text-gray-900">
-              Process
-            </a>
-            <a href="#pricing" className="hover:text-gray-900">
-              Pricing
-            </a>
-            <a href="#calculator" className="hover:text-gray-900">
-              Calculator
-            </a>
-            <a href="#results" className="hover:text-gray-900">
-              Results
-            </a>
-            <a href="#state-laws" className="hover:text-gray-900">
-              State Laws
-            </a>
-            <a href="#faq" className="hover:text-gray-900">
-              FAQ
-            </a>
-            <a href="#contact" className="hover:text-gray-900">
-              Contact
-            </a>
+
+          <nav className="hidden lg:flex items-center gap-6 text-sm text-gray-600">
+            {navItems.map(([id, label]) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => handleScrollTo(id)}
+                className="transition hover:text-gray-900"
+              >
+                {label}
+              </button>
+            ))}
           </nav>
-          <button
-            type="button"
-            onClick={() => handleScrollTo('quote')}
-            className="hidden sm:inline-flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-xl text-sm shadow hover:shadow-md"
-          >
-            Free Case Review
-          </button>
-        </div>
-      </header>
 
-      {/* Hero */}
-      <section className="w-full bg-gradient-to-b from-gray-100 to-gray-50">
-        <div className="max-w-6xl mx-auto px-4 py-6 sm:py-10 text-center">
-          <img
-            src={fullLogo}
-            alt="PAZ Logo"
-            className="w-36 sm:w-44 md:w-52 lg:w-60 mx-auto mb-4 rounded-none border-none shadow-none ring-0"
-          />
-
-          {/* ---- HEADLINE + UPDATED SUBLINE ---- */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
-            Independent reports.
-            <br className="hidden sm:block" />
-            <span className="inline-block">Laser-focused results.</span>
-          </h1>
-          <p className="max-w-2xl mx-auto mt-3 text-gray-600 text-base sm:text-lg md:text-xl">
-            Defensible valuation support—built on market comps and clear methodology.
-          </p>
-          {/* ---- /HEADLINE + UPDATED SUBLINE ---- */}
-
-          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="flex items-center gap-2">
             <button
               type="button"
-              aria-label="Start my quote"
               onClick={() => handleScrollTo('quote')}
-              className="bg-gray-900 text-white px-5 py-3 rounded-xl font-medium shadow hover:shadow-md"
+              className="hidden sm:inline-flex rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-black"
             >
-              Start My Quote
+              Start My Report
             </button>
-            <a
-              href="#services"
-              aria-label="Explore services"
-              className="px-5 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-100"
+
+            <button
+              type="button"
+              className="inline-flex lg:hidden rounded-xl border border-gray-300 px-3 py-2 text-sm"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              aria-label="Toggle menu"
             >
-              Explore Services
-            </a>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
-            <span className="px-3 py-1 rounded-full border bg-white">{combinedYearsLabel}</span>
-            <span className="px-3 py-1 rounded-full border bg-white">24–48h avg turnaround</span>
-            <span className="px-3 py-1 rounded-full border bg-white">Florida + Nationwide Remote</span>
-            <span className="px-3 py-1 rounded-full border bg-white">Licensed FL 620</span>
+              Menu
+            </button>
           </div>
         </div>
-      </section>
 
-      {/* Services */}
-      <section id="services" className="mt-6 w-full">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-4">Our Services</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="border border-gray-200 rounded-xl p-4">
-                <h3 className="font-semibold">Diminished Value Reports</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  Defensible reports that quantify post-repair loss in market value using comps & condition scoring.
-                </p>
-              </div>
-              <div className="border border-gray-200 rounded-xl p-4">
-                <h3 className="font-semibold">Loss of Use Reports</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  Accurate reimbursement calculations for downtime with comparable class benchmarking.
-                </p>
-              </div>
-              <div className="border border-gray-200 rounded-xl p-4">
-                <h3 className="font-semibold">Total Loss Valuation Support</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  Independent ACV opinions & rebuttals when settlement offers miss the mark.
-                </p>
-              </div>
+        {mobileMenuOpen && (
+          <div className="border-t border-gray-200 bg-white lg:hidden">
+            <div className="mx-auto flex max-w-7xl flex-col px-4 py-3">
+              {navItems.map(([id, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => {
+                    handleScrollTo(id);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="border-b border-gray-100 py-3 text-left text-sm text-gray-700 last:border-b-0"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </header>
 
-              <div className="border border-gray-200 rounded-xl p-4">
-                <h3 className="font-semibold">Personal Property Valuation</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  Market-based valuation and documentation support for insured losses and specialty items, supported by
-                  comparable sales and written analysis.
-                </p>
+      <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 via-white to-white">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:py-20">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div className="max-w-2xl">
+              <div className="mb-5 inline-flex items-center rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-600 shadow-sm">
+                Independent appraisal support for owners, attorneys, and collision shops
               </div>
 
-              <div className="border border-gray-200 rounded-xl p-4">
-                <h3 className="font-semibold">Addendum / Rebuttal Support</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  Follow-up documentation when an insurer disputes DV/LOU/ACV conclusions. Includes clarification,
-                  additional comps, and supplemental support where appropriate.
-                </p>
+              <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+                Independent auto appraisals that help move insurers to yes.
+              </h1>
+
+              <p className="mt-5 max-w-xl text-base leading-7 text-gray-600 sm:text-lg">
+                Precision Appraisal Zone (PAZ) provides Diminished Value, Loss of Use,
+                Total Loss valuation support, and estimate validation backed by real
+                market data and clear written methodology.
+              </p>
+
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => handleScrollTo('quote')}
+                  className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-black"
+                >
+                  Start My Report
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleScrollTo('services')}
+                  className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-medium text-gray-900 transition hover:bg-gray-50"
+                >
+                  View Services
+                </button>
               </div>
 
-              {/* Spacer card to keep 6 clean on mobile? Not needed; grid is 2 cols on sm+. */}
-              <div className="border border-gray-200 rounded-xl p-4">
-                <h3 className="font-semibold">Report Updates (as needed)</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  Corrections and updates when new documentation is provided (e.g., revised estimates, invoices, or mileage
-                  changes).
+              <div className="mt-6 flex flex-wrap gap-2">
+                <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-700">
+                  {combinedYearsLabel}
+                </span>
+                <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-700">
+                  24–48h average turnaround
+                </span>
+                <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-700">
+                  Florida + nationwide remote
+                </span>
+                <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-700">
+                  Licensed FL 620
+                </span>
+              </div>
+
+              <div className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4 shadow-sm">
+                <p className="text-sm font-medium text-gray-900">
+                  Already received an insurer offer?
+                </p>
+                <p className="mt-1 text-sm text-gray-600">
+                  We’ll review the file and tell you whether the number looks defensible
+                  or light.
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Why Choose Us */}
-      <section id="why" className="w-full mt-8">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-4">Why Choose Us?</h2>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-              <li>✔️ Independent valuation specialists</li>
-              <li>✔️ 5-Star Rated Service</li>
-              <li>✔️ Fast Turnaround Times</li>
-              <li>✔️ Works with Attorneys & Shops</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+            <div className="relative">
+              <div className="rounded-[28px] border border-gray-200 bg-white p-6 shadow-xl shadow-gray-200/60">
+                <img
+                  src={fullLogo}
+                  alt="PAZ Logo"
+                  className="mx-auto mb-6 w-40 rounded-none border-none shadow-none ring-0 sm:w-48"
+                />
 
-      {/* Process */}
-      <section id="process" className="w-full mt-8">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-4">How It Works</h2>
-            <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-4 text-sm">
-              {[
-                { step: '1', title: 'Free Review', desc: 'Share estimates, photos, and details.' },
-                { step: '2', title: 'Evidence', desc: 'We pull comps, auction data, OEM positions.' },
-                { step: '3', title: 'Report', desc: 'Clean PDF ready for negotiation or demand.' },
-                { step: '4', title: 'Support', desc: 'We clarify methods and addenda if needed.' },
-              ].map((s) => (
-                <div key={s.step} className="border border-gray-200 rounded-xl p-4">
-                  <div className="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center font-semibold mb-2">
-                    {s.step}
+                <div className="space-y-4">
+                  <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+                    <div className="text-xs font-medium uppercase tracking-wide text-gray-500">
+                      Best for
+                    </div>
+                    <div className="mt-2 text-sm text-gray-700">
+                      Diminished Value • Loss of Use • Total Loss • Estimate Validation
+                    </div>
                   </div>
-                  <div className="font-medium">{s.title}</div>
-                  <div className="text-gray-600 mt-1">{s.desc}</div>
+
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="rounded-2xl border border-gray-200 p-4">
+                      <div className="text-xs uppercase tracking-wide text-gray-500">
+                        Turnaround
+                      </div>
+                      <div className="mt-2 text-2xl font-semibold text-gray-900">
+                        24–48h
+                      </div>
+                      <div className="mt-1 text-sm text-gray-600">
+                        for most common report types
+                      </div>
+                    </div>
+
+                    <div className="rounded-2xl border border-gray-200 p-4">
+                      <div className="text-xs uppercase tracking-wide text-gray-500">
+                        Built for
+                      </div>
+                      <div className="mt-2 text-2xl font-semibold text-gray-900">
+                        Real leverage
+                      </div>
+                      <div className="mt-1 text-sm text-gray-600">
+                        negotiation, rebuttal, and legal support
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-gray-200 p-4">
+                    <div className="text-sm font-medium text-gray-900">
+                      What clients typically send
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {['Estimate', 'Photos', 'Insurer Offer', 'Valuation Report', 'Invoices'].map(
+                        (item) => (
+                          <span
+                            key={item}
+                            className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700"
+                          >
+                            {item}
+                          </span>
+                        )
+                      )}
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {[
+              {
+                title: 'Independent Reports',
+                desc: 'Not insurer-generated templates. Each assignment is reviewed from scratch.',
+              },
+              {
+                title: 'Defensible Methodology',
+                desc: 'Clear logic, real data, and structured reporting built to hold up under review.',
+              },
+              {
+                title: 'Professional Presentation',
+                desc: 'Clean PDF reports built for owners, attorneys, shops, and claim disputes.',
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
+              >
+                <h3 className="text-base font-semibold text-gray-900">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-gray-600">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing & Guarantee */}
-      <section id="pricing" className="w-full mt-8">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-2">Pricing (Most Common Requests)</h2>
-            <p className="text-center text-gray-600 mb-6">Simple, transparent pricing. Rush options available.</p>
+      <section id="services" className="w-full py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+              Services
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+              Built around the claim issues that matter most.
+            </h2>
+            <p className="mt-4 text-base text-gray-600">
+              Clear scope, clean reporting, and real support for the moments when the
+              insurer’s number or position needs a closer look.
+            </p>
+          </div>
 
-            {/* 6 cards: clean 3x2 on md */}
-            <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4">
-              {[
-                { name: 'Diminished Value Report', price: '$395', desc: '48–72h delivery' },
-                { name: 'Loss of Use Report', price: '$295', desc: '48–72h delivery' },
-                { name: 'DV & LoU Report Bundle', price: '$595', desc: '48–72h delivery' },
-                { name: 'Actual Cash Value Report', price: 'from $395', desc: 'ACV Assessment + comps' },
-                {
-                  name: 'Personal Property Valuation (Non-Vehicle)',
-                  price: 'from $295',
-                  desc: 'Market-based valuation + documentation support',
-                },
-                { name: 'Addendum / Rebuttal Support', price: 'from $395', desc: 'Supplemental clarification + additional comps' },
-              ].map((c) => (
-                <div key={c.name} className="border border-gray-200 rounded-xl p-4 text-center">
-                  <div className="font-semibold">{c.name}</div>
-                  <div className="text-2xl mt-1">{c.price}</div>
-                  <div className="text-sm text-gray-600 mt-1">{c.desc}</div>
-                  <button
-                    type="button"
-                    onClick={() => handleScrollTo('quote')}
-                    className="mt-3 inline-flex items-center justify-center px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
-                  >
-                    Get Started
-                  </button>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {serviceCards.map((card) => (
+              <div
+                key={card.title}
+                className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md"
+              >
+                <h3 className="text-xl font-semibold text-gray-900">{card.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-gray-600">{card.desc}</p>
+
+                <ul className="mt-5 space-y-2 text-sm text-gray-700">
+                  {card.points.map((point) => (
+                    <li key={point} className="flex items-start gap-2">
+                      <span className="mt-0.5 text-gray-900">•</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  type="button"
+                  onClick={() => handleScrollTo('quote')}
+                  className="mt-6 inline-flex rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-900 transition hover:bg-gray-50"
+                >
+                  Start a Case Review
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="why" className="w-full bg-gray-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+              Why PAZ
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+              A stronger alternative to generic claim-side numbers.
+            </h2>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {whyCards.map((card) => (
+              <div
+                key={card.title}
+                className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
+              >
+                <h3 className="text-lg font-semibold text-gray-900">{card.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-gray-600">{card.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="process" className="w-full py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+              Process
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+              Simple to start. Built to look professional.
+            </h2>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {processSteps.map((step) => (
+              <div
+                key={step.step}
+                className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-900 text-sm font-semibold text-white">
+                  {step.step}
                 </div>
-              ))}
-            </div>
+                <h3 className="mt-4 text-lg font-semibold text-gray-900">{step.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-gray-600">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="mt-3 text-center text-xs text-gray-500">
-              Complex items, collections, or expedited deadlines may require a custom quote.
-            </div>
+      <section id="pricing" className="w-full bg-gray-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+              Pricing
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+              Straightforward pricing for the most common requests.
+            </h2>
+            <p className="mt-4 text-base text-gray-600">
+              Transparent starting points. More technical or document-heavy matters may
+              require a custom quote.
+            </p>
+          </div>
 
-            <div className="mt-6 rounded-xl border border-gray-200 p-4 bg-gray-50">
-              <h3 className="font-medium">Our Guarantee</h3>
-              <p className="text-sm text-gray-700 mt-1">
-                If you’re not satisfied that your (PAZ) report clearly addresses the key issues and includes the supporting
-                comps/data discussed, we’ll revise it at no charge within 30 days.
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {pricingCards.map((card) => (
+              <div
+                key={card.name}
+                className="rounded-3xl border border-gray-200 bg-white p-6 text-center shadow-sm"
+              >
+                <h3 className="text-lg font-semibold text-gray-900">{card.name}</h3>
+                <div className="mt-3 text-3xl font-semibold text-gray-900">{card.price}</div>
+                <p className="mt-2 text-sm text-gray-600">{card.desc}</p>
+                <button
+                  type="button"
+                  onClick={() => handleScrollTo('quote')}
+                  className="mt-6 inline-flex rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-black"
+                >
+                  Start My Report
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-semibold text-gray-900">Our Promise</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
+              If new documentation comes in after delivery, we can revise the report as
+              needed within a reasonable window so the final product reflects the best
+              available file.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="calculator" className="w-full py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="rounded-[28px] border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+                DV Calculator
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+                Quick estimate for educational purposes.
+              </h2>
+              <p className="mt-4 text-sm text-gray-600">
+                This tool is not a formal appraisal. For a defensible number, request a
+                full review and report.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Calculator (estimate-only) */}
-      <section id="calculator" className="w-full mt-8">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-2">Diminished Value Calculator</h2>
-            <p className="text-center text-gray-600 mb-6 text-sm">
-              Quick estimate for education only — not a formal appraisal. For a defensible report, start a free case review.
-            </p>
-            <DVCalculator onStartQuote={() => handleScrollTo('quote')} />
-          </div>
-        </div>
-      </section>
-
-      {/* Results */}
-      <section id="results" className="w-full mt-8">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-4">Results Our Clients Feel</h2>
-            <div className="grid md:grid-cols-3 gap-4">
-              {[
-                { caseId: 'BMW M4', before: '$2,500', after: '$9,450', days: '9 days', note: 'DV + LOU' },
-                { caseId: 'Tesla Model 3', before: '$0', after: '$4,200', days: '12 days', note: 'DV only' },
-                { caseId: 'F-150 Platinum', before: '$1,100', after: '$6,350', days: '8 days', note: 'DV + LOU' },
-              ].map((r) => (
-                <div key={r.caseId} className="border border-gray-200 rounded-xl p-4">
-                  <div className="text-sm text-gray-500">Case</div>
-                  <div className="font-medium">{r.caseId}</div>
-                  <div className="mt-2 grid grid-cols-2 gap-2 text-sm">
-                    <div className="rounded-lg bg-gray-50 p-2">
-                      <div className="text-gray-500">Before</div>
-                      <div className="font-semibold">{r.before}</div>
-                    </div>
-                    <div className="rounded-lg bg-gray-50 p-2">
-                      <div className="text-gray-500">After</div>
-                      <div className="font-semibold">{r.after}</div>
-                    </div>
-                  </div>
-                  <div className="mt-2 text-xs text-gray-600">
-                    {r.note} • {r.days}
-                  </div>
-                </div>
-              ))}
+            <div className="mt-8">
+              <DVCalculator onStartQuote={() => handleScrollTo('quote')} />
             </div>
-            <div className="text-center mt-6">
-              <button
-                type="button"
-                onClick={() => handleScrollTo('quote')}
-                className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-gray-900 text-white text-sm shadow hover:shadow-md"
+          </div>
+        </div>
+      </section>
+
+      <section id="results" className="w-full bg-gray-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+              Results
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+              The kind of movement clients are looking for.
+            </h2>
+            <p className="mt-4 text-base text-gray-600">
+              Examples shown for illustration of outcome positioning and client value.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {results.map((r) => (
+              <div
+                key={r.caseId}
+                className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
               >
-                Start Your Free Review
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+                <div className="text-sm text-gray-500">Case type</div>
+                <div className="mt-1 text-lg font-semibold text-gray-900">{r.caseId}</div>
 
-      {/* State Laws hub (starter) */}
-      <section id="state-laws" className="w-full mt-8">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-4">State Laws (Overview)</h2>
-            <p className="text-gray-700 text-sm text-center max-w-3xl mx-auto">
-              Diminished Value and Loss of Use rules vary by state. We’re building out clear, plain-English pages for each
-              state. Start with Florida below, or contact us and we’ll route you correctly.
-            </p>
-            <div className="grid sm:grid-cols-3 gap-4 mt-6">
-              {[
-                { state: 'Florida', status: 'Live soon', desc: 'Owner claims recognized; negotiation best practices.' },
-                { state: 'Georgia', status: 'Queued', desc: 'Common DV precedent; strict documentation helps.' },
-                { state: 'North Carolina', status: 'Queued', desc: 'Case-by-case; comp grids recommended.' },
-              ].map((s) => (
-                <div key={s.state} className="border border-gray-200 rounded-xl p-4">
-                  <div className="font-medium">{s.state}</div>
-                  <div className="text-xs text-gray-500">{s.status}</div>
-                  <p className="text-sm text-gray-700 mt-2">{s.desc}</p>
-                  <button
-                    type="button"
-                    onClick={() => handleScrollTo('quote')}
-                    className="mt-3 inline-flex items-center justify-center px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
-                  >
-                    Ask About {s.state}
-                  </button>
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                  <div className="rounded-2xl bg-gray-50 p-4">
+                    <div className="text-xs uppercase tracking-wide text-gray-500">
+                      Before
+                    </div>
+                    <div className="mt-2 text-xl font-semibold text-gray-900">
+                      {r.before}
+                    </div>
+                  </div>
+                  <div className="rounded-2xl bg-gray-50 p-4">
+                    <div className="text-xs uppercase tracking-wide text-gray-500">
+                      After
+                    </div>
+                    <div className="mt-2 text-xl font-semibold text-gray-900">
+                      {r.after}
+                    </div>
+                  </div>
                 </div>
-              ))}
+
+                <p className="mt-4 text-sm text-gray-600">{r.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div className="rounded-[28px] border border-gray-200 bg-white p-8 shadow-sm">
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+                Sample deliverables
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
+                Show visitors what a professional report looks like.
+              </h2>
+              <p className="mt-4 text-sm leading-6 text-gray-600">
+                Add blurred screenshots of your real report pages here later. This section
+                will sell the professionalism of your formatting fast.
+              </p>
+
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                {[
+                  'Market comps page',
+                  'Methodology section',
+                  'Charts / visuals',
+                  'Photo evidence',
+                  'Certification page',
+                  'Conclusion page',
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex min-h-[110px] items-center justify-center rounded-2xl border border-dashed border-gray-300 bg-gray-50 px-4 text-center text-sm text-gray-500"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[28px] border border-gray-200 bg-gray-50 p-8 shadow-sm">
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+                Reviews
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
+                Social proof helps close hesitation.
+              </h2>
+
+              <div className="mt-6 space-y-4">
+                {reviews.map((review) => (
+                  <div
+                    key={review.quote}
+                    className="rounded-2xl border border-gray-200 bg-white p-5"
+                  >
+                    <div className="text-sm text-gray-700">★★★★★</div>
+                    <p className="mt-3 text-sm leading-6 text-gray-600">
+                      “{review.quote}”
+                    </p>
+                    <div className="mt-3 text-sm font-medium text-gray-900">
+                      {review.name}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Free Quote CTA */}
-      <section className="w-full mt-8" id="quote">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="bg-indigo-600 text-white p-6 rounded-2xl shadow-lg text-center">
-            <h2 className="text-xl font-semibold mb-2">Get a Free Quote</h2>
-            <p className="mb-4">Upload your estimate and photos—an appraiser will respond within one business day.</p>
+      <section id="quote" className="w-full bg-gray-900 py-16 text-white sm:py-20">
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-400">
+            Free case review
+          </p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+            Ready to send your file?
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-gray-300 sm:text-base">
+            Send your estimate, photos, valuation, or insurer paperwork and Precision
+            Appraisal Zone (PAZ) will review the file and respond as quickly as possible.
+          </p>
 
-            {/* Consent snippet for compliance */}
-            <div className="text-xs text-indigo-100 mb-3">
-              <label className="inline-flex items-center gap-2">
-                <input type="checkbox" className="accent-white" required />
+          <div className="mx-auto mt-8 max-w-xl rounded-3xl border border-white/10 bg-white/5 p-5 text-left">
+            <label className="inline-flex items-start gap-3 text-xs leading-5 text-gray-300">
+              <input type="checkbox" className="mt-1 accent-white" required />
+              <span>
                 I agree to the{' '}
-                <a className="underline" href="/terms-of-service.html" target="_blank" rel="noopener noreferrer">
+                <a
+                  className="underline"
+                  href="/terms-of-service.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Terms of Service
                 </a>{' '}
                 and{' '}
-                <a className="underline" href="/privacy-policy.html" target="_blank" rel="noopener noreferrer">
+                <a
+                  className="underline"
+                  href="/privacy-policy.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Privacy Policy
                 </a>
                 .
-              </label>
-            </div>
+              </span>
+            </label>
 
             <button
               type="button"
               onClick={() => document.dispatchEvent(new CustomEvent('open-benji'))}
-              className="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-100"
             >
-              Submit & Upload Files
+              Contact PAZ / Upload Files
             </button>
 
-            {/* short legal notice */}
-            <div className="mt-3 text-[11px] text-indigo-100/90">
-              Precision Appraisal Zone is an independent appraisal service. We do not sell insurance or provide legal
-              advice.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section className="w-full mt-8">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-4">About Us</h2>
-            <p className="text-center text-gray-700">
-              Precision Appraisal Zone supports vehicle owners, law firms, and repair shops with objective valuation
-              reporting after an accident. Backed by a Florida 620 Adjuster License — we bring expert knowledge of insurance
-              claims, valuation, and settlement processes, ensuring every report stands up under scrutiny. Whether it’s
-              Diminished Value, Loss of Use, or Total Loss disputes — we’ve got your back.
+            <p className="mt-4 text-[11px] leading-5 text-gray-400">
+              Precision Appraisal Zone (PAZ) is an independent appraisal service. We do
+              not provide legal advice or sell insurance on this site.
             </p>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="w-full mt-8">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-4">FAQ</h2>
-            <div className="divide-y">
-              {[
-                {
-                  q: 'What documents do you need?',
-                  a: 'Estimate(s), repair invoices if available, photos, police report, and the insurer’s latest offer.',
-                },
-                {
-                  q: 'How fast is turnaround?',
-                  a: 'Most DV/LOU reports are delivered within 2–3 business days after we receive complete documentation.',
-                },
-                {
-                  q: 'Do you work with attorneys or owners?',
-                  a: 'Both. We support law firms, public adjusters, and individual owners.',
-                },
-              ].map((item) => (
-                <details key={item.q} className="group py-3">
-                  <summary className="flex justify-between cursor-pointer text-left font-medium">
+      <section className="w-full py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-4">
+          <div className="rounded-[28px] border border-gray-200 bg-white p-8 text-center shadow-sm">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+              About
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
+              Independent support for claim disputes and valuation questions.
+            </h2>
+            <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-gray-600 sm:text-base">
+              Precision Appraisal Zone (PAZ) supports vehicle owners, law firms, and
+              repair facilities with professional valuation and technical reporting after
+              a loss. From Diminished Value and Loss of Use to Total Loss support and
+              estimate validation, the goal is simple: provide a clean, defensible report
+              backed by real analysis.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="w-full bg-gray-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-4">
+          <div className="rounded-[28px] border border-gray-200 bg-white p-8 shadow-sm">
+            <div className="text-center">
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+                FAQ
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
+                Common questions
+              </h2>
+            </div>
+
+            <div className="mt-8 divide-y divide-gray-200">
+              {faqs.map((item) => (
+                <details key={item.q} className="group py-4">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium text-gray-900">
                     <span>{item.q}</span>
-                    <span className="text-gray-400 group-open:rotate-180 transition">⌄</span>
+                    <span className="text-gray-400 transition group-open:rotate-180">
+                      ⌄
+                    </span>
                   </summary>
-                  <p className="text-sm text-gray-600 mt-2">{item.a}</p>
+                  <p className="mt-3 text-sm leading-6 text-gray-600">{item.a}</p>
                 </details>
               ))}
             </div>
@@ -590,29 +924,51 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="w-full mt-8">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold text-center mb-4">Contact</h2>
-            <ul className="text-center space-y-1">
-              <li>
-                <strong>Email:</strong> PrecisionAppraisalZone@Gmail.com
-              </li>
-              <li>
-                <strong>Phone:</strong> 954.839.7653
-              </li>
-              <li>
-                <strong>Location:</strong> South Florida
-              </li>
-            </ul>
-            {/* small legal links row */}
-            <div className="mt-4 text-center text-xs text-gray-500 space-x-3">
-              <a className="underline" href="/privacy-policy.html" target="_blank" rel="noopener noreferrer">
+      <section id="contact" className="w-full py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-4">
+          <div className="rounded-[28px] border border-gray-200 bg-white p-8 shadow-sm">
+            <div className="text-center">
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
+                Contact
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
+                Get in touch
+              </h2>
+            </div>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-center">
+                <div className="text-xs uppercase tracking-wide text-gray-500">Email</div>
+                <div className="mt-2 text-sm font-medium text-gray-900">{email}</div>
+              </div>
+              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-center">
+                <div className="text-xs uppercase tracking-wide text-gray-500">Phone</div>
+                <div className="mt-2 text-sm font-medium text-gray-900">954.839.7653</div>
+              </div>
+              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-center">
+                <div className="text-xs uppercase tracking-wide text-gray-500">Service area</div>
+                <div className="mt-2 text-sm font-medium text-gray-900">
+                  South Florida + remote nationwide
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs text-gray-500">
+              <a
+                className="underline"
+                href="/privacy-policy.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Privacy Policy
               </a>
               <span>•</span>
-              <a className="underline" href="/terms-of-service.html" target="_blank" rel="noopener noreferrer">
+              <a
+                className="underline"
+                href="/terms-of-service.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Terms of Service
               </a>
             </div>
@@ -620,62 +976,61 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Benji VA Bubble (popover + Woof + toast) */}
+      <footer className="border-t border-gray-200 bg-white py-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 text-center text-sm text-gray-500 md:flex-row md:text-left">
+          <div>© {new Date().getFullYear()} Precision Appraisal Zone (PAZ). All rights reserved.</div>
+          <div>Serving Miami-Dade • Broward • Palm Beach • Florida statewide • Remote nationwide</div>
+        </div>
+      </footer>
+
       <div className="fixed bottom-4 right-4 z-50 flex items-end gap-2 select-none">
-        {/* helper bubble */}
-        <div className="bg-white text-gray-800 text-xs px-3 py-2 rounded-lg shadow-md max-w-[160px] border border-gray-200">
-          Hi there! Need help?
+        <div className="hidden max-w-[170px] rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs text-gray-800 shadow-md sm:block">
+          Need help getting started?
         </div>
 
-        {/* Benji + popover container (click/ESC/Outside managed) */}
         <div className="relative" ref={containerRef}>
-          {/* Woof micro-pop */}
           {showWoof && (
             <div
               role="status"
               aria-live="polite"
-              className="absolute bottom-20 right-0 px-3 py-1 rounded-full bg-gray-900 text-white text-xs shadow-md border border-gray-800
-                         transform transition duration-200 ease-out"
+              className="absolute bottom-20 right-0 rounded-full border border-gray-800 bg-gray-900 px-3 py-1 text-xs text-white shadow-md"
             >
               Woof!
-              <span className="absolute -bottom-1 right-6 w-0 h-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-gray-900" />
+              <span className="absolute -bottom-1 right-6 h-0 w-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-gray-900" />
             </div>
           )}
 
-          {/* Success toast */}
           {toast && (
-            <div className="absolute bottom-24 right-0 px-3 py-2 rounded-lg bg-white text-gray-800 text-xs shadow-md border border-gray-200">
+            <div className="absolute bottom-24 right-0 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs text-gray-800 shadow-md">
               {toast.text}
             </div>
           )}
 
-          {/* Popover */}
           {benjiOpen && (
             <div
-              className="absolute bottom-16 right-0 w-64 bg-white border border-gray-200 shadow-lg rounded-xl p-3 text-sm"
+              className="absolute bottom-16 right-0 w-64 rounded-xl border border-gray-200 bg-white p-3 text-sm shadow-lg"
               role="dialog"
               aria-label="Contact options"
             >
-              <div className="font-medium text-gray-800 mb-2">Ask Benji</div>
+              <div className="mb-2 font-medium text-gray-800">Ask Benji</div>
               <div className="flex flex-col gap-2">
                 {actions.map((a) => (
                   <a
                     key={a.kind}
                     href={a.href}
                     onClick={() => handleActionClick(a.kind)}
-                    className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 hover:bg-gray-100"
                   >
                     {a.label}
                   </a>
                 ))}
               </div>
-              <div className="mt-2 text-[11px] text-gray-500 text-center">
-                SMS works best on mobile devices. Press <span className="font-semibold">Esc</span> to close.
+              <div className="mt-2 text-center text-[11px] text-gray-500">
+                SMS works best on mobile. Press <span className="font-semibold">Esc</span> to close.
               </div>
             </div>
           )}
 
-          {/* Benji button */}
           <button
             type="button"
             aria-label="Open Benji Assistant"
@@ -686,9 +1041,9 @@ const Home = () => {
             <img
               src={benji}
               alt="Benji the Pup of Peace"
-              className="w-14 h-14 rounded-full shadow-md border border-gray-300 transition-transform hover:scale-110"
+              className="h-14 w-14 rounded-full border border-gray-300 shadow-md transition-transform hover:scale-110"
             />
-            <span className="text-[11px] mt-1 font-medium">Ask Benji</span>
+            <span className="mt-1 text-[11px] font-medium">Ask Benji</span>
           </button>
         </div>
       </div>
@@ -696,12 +1051,6 @@ const Home = () => {
   );
 };
 
-/** ===========================
- * DV Calculator component
- * Simple, front-end only, estimate for education (not an appraisal).
- * Formula: base ~20% of repair total; +10% if frame; +5% if airbags; +1% per panel (max +5%).
- * Outputs a range (±20%). Floor at $250, ceiling at 35% of repair total (soft).
- * =========================== */
 const DVCalculator = ({ onStartQuote }) => {
   const [form, setForm] = useState({
     year: '',
@@ -718,16 +1067,18 @@ const DVCalculator = ({ onStartQuote }) => {
   const parsed = useMemo(() => {
     const repair = Math.max(0, Number(form.repairTotal) || 0);
     const panels = Math.min(10, Math.max(0, Number(form.panels) || 0));
-    let pct = 0.20; // 20% of repair total baseline
-    if (form.frame) pct += 0.10;
+
+    let pct = 0.2;
+    if (form.frame) pct += 0.1;
     if (form.airbags) pct += 0.05;
-    pct += Math.min(0.05, 0.01 * panels); // +1% per panel, cap +5%
+    pct += Math.min(0.05, 0.01 * panels);
 
     const raw = repair * pct;
     const floor = repair > 0 ? Math.max(250, raw * 0.8) : 0;
-    const ceilCap = repair * 0.35; // soft cap
+    const ceilCap = repair * 0.35;
     const low = Math.min(raw * 0.8, ceilCap);
     const high = Math.min(raw * 1.2, ceilCap);
+
     return {
       repair,
       estimateLow: Math.max(floor, Math.round(low)),
@@ -736,51 +1087,54 @@ const DVCalculator = ({ onStartQuote }) => {
   }, [form]);
 
   const currency = (n) =>
-    n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    n.toLocaleString(undefined, {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    });
 
   return (
-    <div className="grid md:grid-cols-2 gap-6">
-      {/* Form */}
-      <div className="space-y-3">
-        <div className="grid grid-cols-3 gap-3">
+    <div className="grid gap-6 md:grid-cols-2">
+      <div className="space-y-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <input
-            className="col-span-1 rounded-xl border border-gray-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
             placeholder="Year"
             value={form.year}
             onChange={(e) => setForm({ ...form, year: e.target.value })}
             inputMode="numeric"
           />
           <input
-            className="col-span-1 rounded-xl border border-gray-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
             placeholder="Make"
             value={form.make}
             onChange={(e) => setForm({ ...form, make: e.target.value })}
           />
           <input
-            className="col-span-1 rounded-xl border border-gray-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
             placeholder="Model"
             value={form.model}
             onChange={(e) => setForm({ ...form, model: e.target.value })}
           />
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <input
-            className="col-span-1 rounded-xl border border-gray-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
             placeholder="Mileage"
             value={form.mileage}
             onChange={(e) => setForm({ ...form, mileage: e.target.value })}
             inputMode="numeric"
           />
           <input
-            className="col-span-1 rounded-xl border border-gray-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
             placeholder="Repair Total ($)"
             value={form.repairTotal}
             onChange={(e) => setForm({ ...form, repairTotal: e.target.value })}
             inputMode="decimal"
           />
           <select
-            className="col-span-1 rounded-xl border border-gray-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
             value={form.state}
             onChange={(e) => setForm({ ...form, state: e.target.value })}
           >
@@ -793,8 +1147,8 @@ const DVCalculator = ({ onStartQuote }) => {
           </select>
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
-          <label className="col-span-1 inline-flex items-center gap-2 text-sm text-gray-700">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <label className="inline-flex items-center gap-2 text-sm text-gray-700">
             <input
               type="checkbox"
               className="accent-gray-900"
@@ -803,7 +1157,8 @@ const DVCalculator = ({ onStartQuote }) => {
             />
             Frame Damage
           </label>
-          <label className="col-span-1 inline-flex items-center gap-2 text-sm text-gray-700">
+
+          <label className="inline-flex items-center gap-2 text-sm text-gray-700">
             <input
               type="checkbox"
               className="accent-gray-900"
@@ -812,48 +1167,49 @@ const DVCalculator = ({ onStartQuote }) => {
             />
             Airbag Deploy
           </label>
-          <div className="col-span-1">
-            <input
-              className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-800"
-              placeholder="Panels Affected"
-              value={form.panels}
-              onChange={(e) => setForm({ ...form, panels: e.target.value })}
-              inputMode="numeric"
-            />
-          </div>
+
+          <input
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            placeholder="Panels Affected"
+            value={form.panels}
+            onChange={(e) => setForm({ ...form, panels: e.target.value })}
+            inputMode="numeric"
+          />
         </div>
 
-        <div className="text-xs text-gray-500">
-          This tool provides an educational range only and is not a substitute for a formal appraisal report.
+        <div className="text-xs leading-5 text-gray-500">
+          Educational estimate only. Real-world diminished value depends on market
+          comps, condition, equipment, severity, state practices, and documentation.
         </div>
       </div>
 
-      {/* Output */}
-      <div className="rounded-xl border border-gray-200 p-4 bg-gray-50">
-        <div className="text-sm text-gray-600">Estimated DV Range</div>
-        <div className="text-3xl font-semibold mt-1">
-          {parsed.repair > 0 ? `${currency(parsed.estimateLow)} — ${currency(parsed.estimateHigh)}` : '—'}
-        </div>
-        <div className="text-xs text-gray-600 mt-2">
-          Based on your inputs. Real-world DV depends on market comps, condition scoring, options, and state practices.
+      <div className="rounded-3xl border border-gray-200 bg-gray-50 p-6">
+        <div className="text-sm text-gray-600">Estimated DV range</div>
+        <div className="mt-2 text-3xl font-semibold text-gray-900">
+          {parsed.repair > 0
+            ? `${currency(parsed.estimateLow)} — ${currency(parsed.estimateHigh)}`
+            : '—'}
         </div>
 
-        {/* Conversion nudge */}
-        <div className="mt-3 text-xs text-gray-700">Want a defensible report? Start a free case review.</div>
+        <p className="mt-3 text-sm leading-6 text-gray-600">
+          Based on the inputs above. For a true supportable number, request a formal
+          review and written report.
+        </p>
 
-        <div className="mt-4 flex flex-col sm:flex-row gap-2">
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <button
             type="button"
             onClick={onStartQuote}
-            className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-gray-900 text-white text-sm shadow hover:shadow-md"
+            className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-black"
           >
             Request a DV Report
           </button>
+
           <a
             href="#services"
-            className="inline-flex items-center justify-center px-4 py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-100 text-sm"
+            className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-900 transition hover:bg-gray-50"
           >
-            See What’s Included
+            View Services
           </a>
         </div>
       </div>
@@ -862,9 +1218,5 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
-
-
-
-
 
 
