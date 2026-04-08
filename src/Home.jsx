@@ -375,7 +375,7 @@ const Home = () => {
                 { name: 'Diminished Value Report', price: '$395', desc: '48–72h delivery' },
                 { name: 'Loss of Use Report', price: '$295', desc: '48–72h delivery' },
                 { name: 'DV & LoU Report Bundle', price: '$595', desc: '48–72h delivery' },
-                { name: 'Total Loss Rebuttal', price: 'from $395', desc: 'ACV Assessment + comps' },
+                { name: 'Actual Cash Value Report', price: 'from $395', desc: 'ACV Assessment + comps' },
                 {
                   name: 'Personal Property Valuation (Non-Vehicle)',
                   price: 'from $295',
