@@ -2,6 +2,10 @@ import React, { useMemo, useState, useEffect, useRef } from 'react';
 import fullLogo from './assets/logo.png';
 import pazIcon from './assets/paz-icon.png';
 import benji from './assets/benji-mascot.png';
+import serviceDV from './assets/service-dv.jpg';
+import serviceLOU from './assets/service-lou.jpg';
+import serviceTL from './assets/service-total-loss.jpg';
+import serviceEV from './assets/service-estimate-validation.jpg';
 
 const Home = () => {
   const handleScrollTo = (id) => {
@@ -10,13 +14,11 @@ const Home = () => {
   };
 
   const combinedYearsLabel = '10+ years combined experience';
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [benjiOpen, setBenjiOpen] = useState(false);
   const [isCoarse, setIsCoarse] = useState(false);
   const [toast, setToast] = useState(null);
   const [showWoof, setShowWoof] = useState(false);
-
   const containerRef = useRef(null);
   const lastWoofRef = useRef(0);
   const woofTimeoutRef = useRef(null);
@@ -42,7 +44,6 @@ const Home = () => {
   useEffect(() => {
     const coarse = window.matchMedia?.('(pointer: coarse)');
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)');
-
     setIsCoarse(coarse?.matches ?? false);
     prefersReducedMotion.current = !!reduce?.matches;
 
@@ -113,7 +114,6 @@ const Home = () => {
     }
 
     setBenjiOpen(true);
-
     const now = Date.now();
     const canWoof =
       !prefersReducedMotion.current && now - lastWoofRef.current > 30000;
@@ -180,23 +180,43 @@ const Home = () => {
   const serviceCards = [
     {
       title: 'Diminished Value Reports',
+      image: serviceDV,
       desc: 'Defensible reports quantifying post-repair loss in market value using market comps, repair severity, and written methodology.',
-      points: ['Market-backed analysis', 'Negotiation-ready PDF', 'Popular for owner and attorney claims'],
+      points: [
+        'Market-backed analysis',
+        'Negotiation-ready PDF',
+        'Popular for owner and attorney claims',
+      ],
     },
     {
       title: 'Loss of Use Reports',
+      image: serviceLOU,
       desc: 'Support for fair rental-rate recovery using comparable vehicle-class benchmarking and clear written justification.',
-      points: ['Comparable rental benchmarks', 'Clear adopted rate', 'Useful for negotiations and demand packages'],
+      points: [
+        'Comparable rental benchmarks',
+        'Clear adopted rate',
+        'Useful for negotiations and demand packages',
+      ],
     },
     {
       title: 'Total Loss Valuation Support',
+      image: serviceTL,
       desc: 'Independent ACV opinions and rebuttals when insurer total-loss offers come in low.',
-      points: ['Comparable vehicle analysis', 'Retail-market support', 'Strong rebuttal positioning'],
+      points: [
+        'Comparable vehicle analysis',
+        'Retail-market support',
+        'Strong rebuttal positioning',
+      ],
     },
     {
       title: 'Repair Estimate Validation',
+      image: serviceEV,
       desc: 'Technical review of insurer versus repair-facility estimates with focus on omitted operations, OEM procedures, and scope gaps.',
-      points: ['Great for shops and attorneys', 'OEM-focused analysis', 'Strong supplement support'],
+      points: [
+        'Great for shops and attorneys',
+        'OEM-focused analysis',
+        'Strong supplement support',
+      ],
     },
   ];
 
@@ -332,7 +352,7 @@ const Home = () => {
             </div>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-6 text-sm text-gray-600">
+          <nav className="hidden items-center gap-6 text-sm text-gray-600 lg:flex">
             {navItems.map(([id, label]) => (
               <button
                 key={id}
@@ -349,14 +369,13 @@ const Home = () => {
             <button
               type="button"
               onClick={() => handleScrollTo('quote')}
-              className="hidden sm:inline-flex rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-black"
+              className="hidden rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-black sm:inline-flex"
             >
               Start My Quote
             </button>
-
             <button
               type="button"
-              className="inline-flex lg:hidden rounded-xl border border-gray-300 px-3 py-2 text-sm"
+              className="inline-flex rounded-xl border border-gray-300 px-3 py-2 text-sm lg:hidden"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               aria-label="Toggle menu"
             >
@@ -393,17 +412,14 @@ const Home = () => {
             alt="PAZ Logo"
             className="mx-auto mb-5 w-36 rounded-none border-none shadow-none ring-0 sm:w-44 md:w-52 lg:w-56"
           />
-
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
             Independent reports.
             <br className="hidden sm:block" />
             <span className="inline-block">Laser-focused results.</span>
           </h1>
-
           <p className="mx-auto mt-4 max-w-2xl text-base text-gray-600 sm:text-lg md:text-xl">
             Defensible valuation support built on market comps and clear methodology.
           </p>
-
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
             <button
               type="button"
@@ -420,7 +436,6 @@ const Home = () => {
               Explore Services
             </button>
           </div>
-
           <div className="mt-5 flex flex-wrap justify-center gap-2 text-xs">
             <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
               {combinedYearsLabel}
@@ -448,8 +463,7 @@ const Home = () => {
               Built around the claim issues that matter most.
             </h2>
             <p className="mt-4 text-base text-gray-600">
-              Clear scope, clean reporting, and real support for the moments when the
-              insurer’s number or position needs a closer look.
+              Clear scope, clean reporting, and real support for the moments when the insurer’s number or position needs a closer look.
             </p>
           </div>
 
@@ -457,27 +471,33 @@ const Home = () => {
             {serviceCards.map((card) => (
               <div
                 key={card.title}
-                className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md"
+                className="group relative min-h-[380px] overflow-hidden rounded-3xl shadow-md"
               >
-                <h3 className="text-xl font-semibold text-gray-900">{card.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-gray-600">{card.desc}</p>
-
-                <ul className="mt-5 space-y-2 text-sm text-gray-700">
-                  {card.points.map((point) => (
-                    <li key={point} className="flex items-start gap-2">
-                      <span className="mt-0.5 text-gray-900">•</span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <button
-                  type="button"
-                  onClick={() => handleScrollTo('quote')}
-                  className="mt-6 inline-flex rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-900 transition hover:bg-gray-50"
-                >
-                  Start a Case Review
-                </button>
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/60" />
+                <div className="relative z-10 flex h-full flex-col justify-end p-6 text-white">
+                  <h3 className="text-xl font-semibold">{card.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-gray-200">{card.desc}</p>
+                  <ul className="mt-5 space-y-2 text-sm text-gray-200">
+                    {card.points.map((point) => (
+                      <li key={point} className="flex items-start gap-2">
+                        <span className="mt-0.5 text-white">•</span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    type="button"
+                    onClick={() => handleScrollTo('quote')}
+                    className="mt-6 inline-flex w-fit rounded-xl bg-white px-4 py-2 text-sm font-medium text-gray-900 transition hover:bg-gray-200"
+                  >
+                    Start a Case Review
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -494,7 +514,6 @@ const Home = () => {
               A stronger alternative to generic claim-side numbers.
             </h2>
           </div>
-
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {whyCards.map((card) => (
               <div
@@ -519,7 +538,6 @@ const Home = () => {
               Simple to start. Built to look professional.
             </h2>
           </div>
-
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {processSteps.map((step) => (
               <div
@@ -547,11 +565,9 @@ const Home = () => {
               Straightforward pricing for the most common requests.
             </h2>
             <p className="mt-4 text-base text-gray-600">
-              Transparent starting points. More technical or document-heavy matters may
-              require a custom quote.
+              Transparent starting points. More technical or document-heavy matters may require a custom quote.
             </p>
           </div>
-
           <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {pricingCards.map((card) => (
               <div
@@ -571,13 +587,10 @@ const Home = () => {
               </div>
             ))}
           </div>
-
           <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
             <h3 className="text-lg font-semibold text-gray-900">Our Promise</h3>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-              If new documentation comes in after delivery, we can revise the report as
-              needed within a reasonable window so the final product reflects the best
-              available file.
+              If new documentation comes in after delivery, we can revise the report as needed within a reasonable window so the final product reflects the best available file.
             </p>
           </div>
         </div>
@@ -594,11 +607,9 @@ const Home = () => {
                 Quick estimate for educational purposes.
               </h2>
               <p className="mt-4 text-sm text-gray-600">
-                This tool is not a formal appraisal. For a defensible number, request a
-                full review and report.
+                This tool is not a formal appraisal. For a defensible number, request a full review and report.
               </p>
             </div>
-
             <div className="mt-8">
               <DVCalculator onStartQuote={() => handleScrollTo('quote')} />
             </div>
@@ -619,7 +630,6 @@ const Home = () => {
               Examples shown for illustration of outcome positioning and client value.
             </p>
           </div>
-
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {results.map((r) => (
               <div
@@ -628,7 +638,6 @@ const Home = () => {
               >
                 <div className="text-sm text-gray-500">Case type</div>
                 <div className="mt-1 text-lg font-semibold text-gray-900">{r.caseId}</div>
-
                 <div className="mt-5 grid grid-cols-2 gap-3">
                   <div className="rounded-2xl bg-gray-50 p-4">
                     <div className="text-xs uppercase tracking-wide text-gray-500">
@@ -647,7 +656,6 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-
                 <p className="mt-4 text-sm text-gray-600">{r.note}</p>
               </div>
             ))}
@@ -666,10 +674,8 @@ const Home = () => {
                 What goes into a PAZ report
               </h2>
               <p className="mt-4 text-sm leading-6 text-gray-600">
-                Every assignment is built around the file, the market, and the claim issue at
-                hand. Our reports are designed to be clean, professional, and easy to follow.
+                Every assignment is built around the file, the market, and the claim issue at hand. Our reports are designed to be clean, professional, and easy to follow.
               </p>
-
               <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {[
                   {
@@ -715,7 +721,6 @@ const Home = () => {
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
                 Social proof helps close hesitation.
               </h2>
-
               <div className="mt-6 space-y-4">
                 {reviews.map((review) => (
                   <div
@@ -746,10 +751,8 @@ const Home = () => {
             Ready to send your file?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-gray-300 sm:text-base">
-            Send your estimate, photos, valuation, or insurer paperwork and Precision
-            Appraisal Zone (PAZ) will review the file and respond as quickly as possible.
+            Send your estimate, photos, valuation, or insurer paperwork and Precision Appraisal Zone (PAZ) will review the file and respond as quickly as possible.
           </p>
-
           <div className="mx-auto mt-8 max-w-xl rounded-3xl border border-white/10 bg-white/5 p-5 text-left">
             <label className="inline-flex items-start gap-3 text-xs leading-5 text-gray-300">
               <input type="checkbox" className="mt-1 accent-white" required />
@@ -775,7 +778,6 @@ const Home = () => {
                 .
               </span>
             </label>
-
             <button
               type="button"
               onClick={() => document.dispatchEvent(new CustomEvent('open-benji'))}
@@ -783,10 +785,8 @@ const Home = () => {
             >
               Contact PAZ / Upload Files
             </button>
-
             <p className="mt-4 text-[11px] leading-5 text-gray-400">
-              Precision Appraisal Zone (PAZ) is an independent appraisal service. We do
-              not provide legal advice or sell insurance on this site.
+              Precision Appraisal Zone (PAZ) is an independent appraisal service. We do not provide legal advice or sell insurance on this site.
             </p>
           </div>
         </div>
@@ -802,11 +802,7 @@ const Home = () => {
               Independent support for claim disputes and valuation questions.
             </h2>
             <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-gray-600 sm:text-base">
-              Precision Appraisal Zone (PAZ) supports vehicle owners, law firms, and
-              repair facilities with professional valuation and technical reporting after
-              a loss. From Diminished Value and Loss of Use to Total Loss support and
-              estimate validation, the goal is simple: provide a clean, defensible report
-              backed by real analysis.
+              Precision Appraisal Zone (PAZ) supports vehicle owners, law firms, and repair facilities with professional valuation and technical reporting after a loss. From Diminished Value and Loss of Use to Total Loss support and estimate validation, the goal is simple: provide a clean, defensible report backed by real analysis.
             </p>
           </div>
         </div>
@@ -823,7 +819,6 @@ const Home = () => {
                 Common questions
               </h2>
             </div>
-
             <div className="mt-8 divide-y divide-gray-200">
               {faqs.map((item) => (
                 <details key={item.q} className="group py-4">
@@ -852,7 +847,6 @@ const Home = () => {
                 Get in touch
               </h2>
             </div>
-
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-center">
                 <div className="text-xs uppercase tracking-wide text-gray-500">Email</div>
@@ -869,7 +863,6 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs text-gray-500">
               <a
                 className="underline"
@@ -900,7 +893,7 @@ const Home = () => {
         </div>
       </footer>
 
-      <div className="fixed bottom-4 right-4 z-50 flex items-end gap-2 select-none">
+      <div className="fixed bottom-4 right-4 z-50 flex select-none items-end gap-2">
         <div className="hidden max-w-[170px] rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs text-gray-800 shadow-md sm:block">
           Need help getting started?
         </div>
@@ -1074,7 +1067,6 @@ const DVCalculator = ({ onStartQuote }) => {
             />
             Frame Damage
           </label>
-
           <label className="inline-flex items-center gap-2 text-sm text-gray-700">
             <input
               type="checkbox"
@@ -1084,7 +1076,6 @@ const DVCalculator = ({ onStartQuote }) => {
             />
             Airbag Deploy
           </label>
-
           <input
             className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
             placeholder="Panels Affected"
@@ -1095,8 +1086,7 @@ const DVCalculator = ({ onStartQuote }) => {
         </div>
 
         <div className="text-xs leading-5 text-gray-500">
-          Educational estimate only. Real-world diminished value depends on market
-          comps, condition, equipment, severity, state practices, and documentation.
+          Educational estimate only. Real-world diminished value depends on market comps, condition, equipment, severity, state practices, and documentation.
         </div>
       </div>
 
@@ -1107,12 +1097,9 @@ const DVCalculator = ({ onStartQuote }) => {
             ? `${currency(parsed.estimateLow)} — ${currency(parsed.estimateHigh)}`
             : '—'}
         </div>
-
         <p className="mt-3 text-sm leading-6 text-gray-600">
-          Based on the inputs above. For a true supportable number, request a formal
-          review and written report.
+          Based on the inputs above. For a true supportable number, request a formal review and written report.
         </p>
-
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <button
             type="button"
@@ -1121,7 +1108,6 @@ const DVCalculator = ({ onStartQuote }) => {
           >
             Request a DV Report
           </button>
-
           <a
             href="#services"
             className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-900 transition hover:bg-gray-50"
@@ -1135,5 +1121,4 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
-
 
