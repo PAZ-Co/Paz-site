@@ -170,7 +170,6 @@ const Home = () => {
     ['services', 'Services'],
     ['why', 'Why PAZ'],
     ['process', 'Process'],
-    ['pricing', 'Pricing'],
     ['calculator', 'DV Calculator'],
     ['results', 'Results'],
     ['faq', 'FAQ'],
@@ -260,15 +259,6 @@ const Home = () => {
       title: 'Need Follow-Up?',
       desc: 'We can help with clarification, addenda, or rebuttal support where needed.',
     },
-  ];
-
-  const pricingCards = [
-    { name: 'Diminished Value Report', price: '$395', desc: 'Most common owner claim report' },
-    { name: 'Loss of Use Report', price: '$395', desc: 'Daily-rate support with written analysis' },
-    { name: 'DV + LOU Bundle', price: '$595', desc: 'Best value for combined claims' },
-    { name: 'Total Loss / ACV Support', price: 'From $495', desc: 'Independent ACV review and support' },
-    { name: 'Estimate Validation', price: 'Custom', desc: 'Scope depends on vehicle, estimate, and OEM issues' },
-    { name: 'Addendum / Rebuttal Support', price: 'From $195', desc: 'Follow-up support when needed' },
   ];
 
   const results = [
@@ -551,47 +541,6 @@ const Home = () => {
                 <p className="mt-2 text-sm leading-6 text-gray-600">{step.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="pricing" className="w-full bg-gray-50 py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
-              Pricing
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
-              Straightforward pricing for the most common requests.
-            </h2>
-            <p className="mt-4 text-base text-gray-600">
-              Transparent starting points. More technical or document-heavy matters may require a custom quote.
-            </p>
-          </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {pricingCards.map((card) => (
-              <div
-                key={card.name}
-                className="rounded-3xl border border-gray-200 bg-white p-6 text-center shadow-sm"
-              >
-                <h3 className="text-lg font-semibold text-navy">{card.name}</h3>
-                <div className="mt-3 text-3xl font-semibold text-navy">{card.price}</div>
-                <p className="mt-2 text-sm text-gray-600">{card.desc}</p>
-                <button
-                  type="button"
-                  onClick={() => handleScrollTo('quote')}
-                  className="mt-6 inline-flex rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-black"
-                >
-                  Start My Quote
-                </button>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-navy">Our Promise</h3>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-              If new documentation comes in after delivery, we can revise the report as needed within a reasonable window so the final product reflects the best available file.
-            </p>
           </div>
         </div>
       </section>
