@@ -361,7 +361,7 @@ const Home = () => {
               onClick={() => handleScrollTo('quote')}
               className="hidden rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-black sm:inline-flex"
             >
-              Start My Quote
+              Free Case Review
             </button>
             <button
               type="button"
@@ -416,7 +416,7 @@ const Home = () => {
               onClick={() => handleScrollTo('quote')}
               className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-black"
             >
-              Start My Quote
+              Free Case Review
             </button>
             <button
               type="button"
