@@ -226,7 +226,7 @@ const Home = () => {
     },
     {
       title: 'Methodology You Can Follow',
-      desc: 'Clear written reasoning, not black-box numbers, so the report is easier to defend.',
+      desc: 'Clear written reasoning, not black-box numbers, so the report is easier to understand and defend.',
     },
     {
       title: 'Built for Real Negotiation',
@@ -408,7 +408,7 @@ const Home = () => {
             <span className="inline-block">Laser-focused results.</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-gray-600 sm:text-lg md:text-xl">
-            Defensible valuation support built on market comps and clear methodology.
+            Defensible valuation support built on market comps, claim analysis, and clear written methodology.
           </p>
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
             <button
@@ -453,7 +453,7 @@ const Home = () => {
               Built around the claim issues that matter most.
             </h2>
             <p className="mt-4 text-base text-gray-600">
-              Clear scope, clean reporting, and real support for the moments when the insurer’s number or position needs a closer look.
+              Clear scope, clean reporting, and real support for the moments when an insurer’s number or position needs a closer look.
             </p>
           </div>
 
@@ -503,6 +503,9 @@ const Home = () => {
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
               A stronger alternative to generic claim-side numbers.
             </h2>
+            <p className="mt-4 text-base text-gray-600">
+              Independent review, clean presentation, and support built for real-world claim disputes.
+            </p>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {whyCards.map((card) => (
@@ -527,6 +530,9 @@ const Home = () => {
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
               Simple to start. Built to look professional.
             </h2>
+            <p className="mt-4 text-base text-gray-600">
+              A straightforward process from first contact to final PDF delivery.
+            </p>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {processSteps.map((step) => (
@@ -556,7 +562,7 @@ const Home = () => {
                 Quick estimate for educational purposes.
               </h2>
               <p className="mt-4 text-sm text-gray-600">
-                This tool is not a formal appraisal. For a defensible number, request a full review and report.
+                This tool is not a formal appraisal. For a defensible number, request a full review and written report.
               </p>
             </div>
             <div className="mt-8">
@@ -576,7 +582,7 @@ const Home = () => {
               The kind of movement clients are looking for.
             </h2>
             <p className="mt-4 text-base text-gray-600">
-              Examples shown for illustration of outcome positioning and client value.
+              Illustrative examples showing the type of claim improvement strong support can help create.
             </p>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -623,7 +629,7 @@ const Home = () => {
                 What goes into a PAZ report
               </h2>
               <p className="mt-4 text-sm leading-6 text-gray-600">
-                Every assignment is built around the file, the market, and the claim issue at hand. Our reports are designed to be clean, professional, and easy to follow.
+                Every assignment is built around the file, the market, and the claim issue at hand. Reports are designed to be clean, professional, and easy to follow.
               </p>
               <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {[
@@ -665,11 +671,14 @@ const Home = () => {
 
             <div className="rounded-[28px] border border-gray-200 bg-gray-50 p-8 shadow-sm">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
-                Reviews
+                Client Feedback
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy">
-                Social proof helps close hesitation.
+                Professionalism people notice.
               </h2>
+              <p className="mt-4 text-sm leading-6 text-gray-600">
+                Clear communication, strong presentation, and reports built to support the claim—not just fill space.
+              </p>
               <div className="mt-6 space-y-4">
                 {reviews.map((review) => (
                   <div
