@@ -1,4 +1,4 @@
-importimport React, { useMemo, useState, useEffect, useRef } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import fullLogo from './assets/logo.png';
 import pazIcon from './assets/paz-icon.png';
 import benji from './assets/benji-mascot.png';
@@ -369,7 +369,7 @@ const Home = () => {
             <button
               type="button"
               onClick={() => handleScrollTo('quote')}
-              className="hidden rounded-xl bg-navy px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:opacity-90 sm:inline-flex"
+              className="hidden rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-black sm:inline-flex"
             >
               Start My Quote
             </button>
@@ -395,7 +395,7 @@ const Home = () => {
                     handleScrollTo(id);
                     setMobileMenuOpen(false);
                   }}
-                  className="border-b border-gray-100 py-3 text-left text-sm text-gray-600 last:border-b-0"
+                  className="border-b border-gray-100 py-3 text-left text-sm text-gray-700 last:border-b-0"
                 >
                   {label}
                 </button>
@@ -424,7 +424,7 @@ const Home = () => {
             <button
               type="button"
               onClick={() => handleScrollTo('quote')}
-              className="inline-flex items-center justify-center rounded-xl bg-navy px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90"
+              className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-black"
             >
               Start My Quote
             </button>
@@ -437,16 +437,16 @@ const Home = () => {
             </button>
           </div>
           <div className="mt-5 flex flex-wrap justify-center gap-2 text-xs">
-            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-600">
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
               {combinedYearsLabel}
             </span>
-            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-600">
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
               24–48h turnaround
             </span>
-            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-600">
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
               Florida + Nationwide
             </span>
-            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-600">
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
               FL Licensed 620
             </span>
           </div>
@@ -493,7 +493,7 @@ const Home = () => {
                   <button
                     type="button"
                     onClick={() => handleScrollTo('quote')}
-                    className="mt-6 inline-flex w-fit rounded-xl bg-white px-4 py-2 text-sm font-medium text-navy transition hover:bg-gray-200"
+                    className="mt-6 inline-flex w-fit rounded-xl bg-white px-4 py-2 text-sm font-medium text-gray-900 transition hover:bg-gray-200"
                   >
                     Start a Case Review
                   </button>
@@ -580,7 +580,7 @@ const Home = () => {
                 <button
                   type="button"
                   onClick={() => handleScrollTo('quote')}
-                  className="mt-6 inline-flex rounded-xl bg-navy px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
+                  className="mt-6 inline-flex rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-black"
                 >
                   Start My Quote
                 </button>
@@ -742,19 +742,19 @@ const Home = () => {
         </div>
       </section>
 
-      <section id="quote" className="w-full bg-navy py-16 text-white sm:py-20">
+      <section id="quote" className="w-full bg-gray-900 py-16 text-white sm:py-20">
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-300">
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-400">
             Free case review
           </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
             Ready to send your file?
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-gray-200 sm:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-gray-300 sm:text-base">
             Send your estimate, photos, valuation, or insurer paperwork and Precision Appraisal Zone (PAZ) will review the file and respond as quickly as possible.
           </p>
           <div className="mx-auto mt-8 max-w-xl rounded-3xl border border-white/10 bg-white/5 p-5 text-left">
-            <label className="inline-flex items-start gap-3 text-xs leading-5 text-gray-200">
+            <label className="inline-flex items-start gap-3 text-xs leading-5 text-gray-300">
               <input type="checkbox" className="mt-1 accent-white" required />
               <span>
                 I agree to the{' '}
@@ -781,11 +781,11 @@ const Home = () => {
             <button
               type="button"
               onClick={() => document.dispatchEvent(new CustomEvent('open-benji'))}
-              className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-semibold text-navy transition hover:bg-gray-100"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-100"
             >
               Contact PAZ / Upload Files
             </button>
-            <p className="mt-4 text-[11px] leading-5 text-gray-300">
+            <p className="mt-4 text-[11px] leading-5 text-gray-400">
               Precision Appraisal Zone (PAZ) is an independent appraisal service. We do not provide legal advice or sell insurance on this site.
             </p>
           </div>
@@ -903,10 +903,10 @@ const Home = () => {
             <div
               role="status"
               aria-live="polite"
-              className="absolute bottom-20 right-0 rounded-full border border-navy bg-navy px-3 py-1 text-xs text-white shadow-md"
+              className="absolute bottom-20 right-0 rounded-full border border-gray-800 bg-gray-900 px-3 py-1 text-xs text-white shadow-md"
             >
               Woof!
-              <span className="absolute -bottom-1 right-6 h-0 w-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-navy" />
+              <span className="absolute -bottom-1 right-6 h-0 w-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-gray-900" />
             </div>
           )}
 
@@ -1061,7 +1061,7 @@ const DVCalculator = ({ onStartQuote }) => {
           <label className="inline-flex items-center gap-2 text-sm text-gray-700">
             <input
               type="checkbox"
-              className="accent-navy"
+              className="accent-gray-900"
               checked={form.frame}
               onChange={(e) => setForm({ ...form, frame: e.target.checked })}
             />
@@ -1070,7 +1070,7 @@ const DVCalculator = ({ onStartQuote }) => {
           <label className="inline-flex items-center gap-2 text-sm text-gray-700">
             <input
               type="checkbox"
-              className="accent-navy"
+              className="accent-gray-900"
               checked={form.airbags}
               onChange={(e) => setForm({ ...form, airbags: e.target.checked })}
             />
@@ -1104,7 +1104,7 @@ const DVCalculator = ({ onStartQuote }) => {
           <button
             type="button"
             onClick={onStartQuote}
-            className="inline-flex items-center justify-center rounded-xl bg-navy px-4 py-3 text-sm font-medium text-white transition hover:opacity-90"
+            className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-black"
           >
             Request a DV Report
           </button>
