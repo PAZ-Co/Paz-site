@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react';
+importimport React, { useMemo, useState, useEffect, useRef } from 'react';
 import fullLogo from './assets/logo.png';
 import pazIcon from './assets/paz-icon.png';
 import benji from './assets/benji-mascot.png';
@@ -345,7 +345,7 @@ const Home = () => {
               className="h-10 w-auto rounded-none border-none shadow-none ring-0"
             />
             <div className="leading-tight">
-              <div className="text-sm font-semibold tracking-tight">
+              <div className="text-sm font-semibold tracking-tight text-navy">
                 Precision Appraisal Zone
               </div>
               <div className="text-[11px] text-gray-500">(PAZ)</div>
@@ -358,7 +358,7 @@ const Home = () => {
                 key={id}
                 type="button"
                 onClick={() => handleScrollTo(id)}
-                className="transition hover:text-gray-900"
+                className="transition hover:text-navy"
               >
                 {label}
               </button>
@@ -369,13 +369,13 @@ const Home = () => {
             <button
               type="button"
               onClick={() => handleScrollTo('quote')}
-              className="hidden rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-black sm:inline-flex"
+              className="hidden rounded-xl bg-navy px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:opacity-90 sm:inline-flex"
             >
               Start My Quote
             </button>
             <button
               type="button"
-              className="inline-flex rounded-xl border border-gray-300 px-3 py-2 text-sm lg:hidden"
+              className="inline-flex rounded-xl border border-gray-300 px-3 py-2 text-sm text-gray-700 lg:hidden"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               aria-label="Toggle menu"
             >
@@ -395,7 +395,7 @@ const Home = () => {
                     handleScrollTo(id);
                     setMobileMenuOpen(false);
                   }}
-                  className="border-b border-gray-100 py-3 text-left text-sm text-gray-700 last:border-b-0"
+                  className="border-b border-gray-100 py-3 text-left text-sm text-gray-600 last:border-b-0"
                 >
                   {label}
                 </button>
@@ -412,7 +412,7 @@ const Home = () => {
             alt="PAZ Logo"
             className="mx-auto mb-5 w-36 rounded-none border-none shadow-none ring-0 sm:w-44 md:w-52 lg:w-56"
           />
-          <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+          <h1 className="text-4xl font-semibold tracking-tight text-navy sm:text-5xl md:text-6xl">
             Independent reports.
             <br className="hidden sm:block" />
             <span className="inline-block">Laser-focused results.</span>
@@ -424,29 +424,29 @@ const Home = () => {
             <button
               type="button"
               onClick={() => handleScrollTo('quote')}
-              className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-black"
+              className="inline-flex items-center justify-center rounded-xl bg-navy px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90"
             >
               Start My Quote
             </button>
             <button
               type="button"
               onClick={() => handleScrollTo('services')}
-              className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-medium text-gray-900 transition hover:bg-gray-50"
+              className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-medium text-navy transition hover:bg-gray-50"
             >
               Explore Services
             </button>
           </div>
           <div className="mt-5 flex flex-wrap justify-center gap-2 text-xs">
-            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-600">
               {combinedYearsLabel}
             </span>
-            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-600">
               24–48h turnaround
             </span>
-            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-600">
               Florida + Nationwide
             </span>
-            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700">
+            <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-600">
               FL Licensed 620
             </span>
           </div>
@@ -459,7 +459,7 @@ const Home = () => {
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
               Services
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
               Built around the claim issues that matter most.
             </h2>
             <p className="mt-4 text-base text-gray-600">
@@ -493,7 +493,7 @@ const Home = () => {
                   <button
                     type="button"
                     onClick={() => handleScrollTo('quote')}
-                    className="mt-6 inline-flex w-fit rounded-xl bg-white px-4 py-2 text-sm font-medium text-gray-900 transition hover:bg-gray-200"
+                    className="mt-6 inline-flex w-fit rounded-xl bg-white px-4 py-2 text-sm font-medium text-navy transition hover:bg-gray-200"
                   >
                     Start a Case Review
                   </button>
@@ -510,7 +510,7 @@ const Home = () => {
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
               Why PAZ
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
               A stronger alternative to generic claim-side numbers.
             </h2>
           </div>
@@ -520,7 +520,7 @@ const Home = () => {
                 key={card.title}
                 className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
               >
-                <h3 className="text-lg font-semibold text-gray-900">{card.title}</h3>
+                <h3 className="text-lg font-semibold text-navy">{card.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-gray-600">{card.desc}</p>
               </div>
             ))}
@@ -534,7 +534,7 @@ const Home = () => {
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
               Process
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
               Simple to start. Built to look professional.
             </h2>
           </div>
@@ -544,10 +544,10 @@ const Home = () => {
                 key={step.step}
                 className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-900 text-sm font-semibold text-white">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-navy text-sm font-semibold text-white">
                   {step.step}
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-900">{step.title}</h3>
+                <h3 className="mt-4 text-lg font-semibold text-navy">{step.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-gray-600">{step.desc}</p>
               </div>
             ))}
@@ -561,7 +561,7 @@ const Home = () => {
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
               Pricing
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
               Straightforward pricing for the most common requests.
             </h2>
             <p className="mt-4 text-base text-gray-600">
@@ -574,13 +574,13 @@ const Home = () => {
                 key={card.name}
                 className="rounded-3xl border border-gray-200 bg-white p-6 text-center shadow-sm"
               >
-                <h3 className="text-lg font-semibold text-gray-900">{card.name}</h3>
-                <div className="mt-3 text-3xl font-semibold text-gray-900">{card.price}</div>
+                <h3 className="text-lg font-semibold text-navy">{card.name}</h3>
+                <div className="mt-3 text-3xl font-semibold text-navy">{card.price}</div>
                 <p className="mt-2 text-sm text-gray-600">{card.desc}</p>
                 <button
                   type="button"
                   onClick={() => handleScrollTo('quote')}
-                  className="mt-6 inline-flex rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-black"
+                  className="mt-6 inline-flex rounded-xl bg-navy px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
                 >
                   Start My Quote
                 </button>
@@ -588,7 +588,7 @@ const Home = () => {
             ))}
           </div>
           <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900">Our Promise</h3>
+            <h3 className="text-lg font-semibold text-navy">Our Promise</h3>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
               If new documentation comes in after delivery, we can revise the report as needed within a reasonable window so the final product reflects the best available file.
             </p>
@@ -603,7 +603,7 @@ const Home = () => {
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
                 DV Calculator
               </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
                 Quick estimate for educational purposes.
               </h2>
               <p className="mt-4 text-sm text-gray-600">
@@ -623,7 +623,7 @@ const Home = () => {
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
               Results
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
               The kind of movement clients are looking for.
             </h2>
             <p className="mt-4 text-base text-gray-600">
@@ -637,13 +637,13 @@ const Home = () => {
                 className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
               >
                 <div className="text-sm text-gray-500">Case type</div>
-                <div className="mt-1 text-lg font-semibold text-gray-900">{r.caseId}</div>
+                <div className="mt-1 text-lg font-semibold text-navy">{r.caseId}</div>
                 <div className="mt-5 grid grid-cols-2 gap-3">
                   <div className="rounded-2xl bg-gray-50 p-4">
                     <div className="text-xs uppercase tracking-wide text-gray-500">
                       Before
                     </div>
-                    <div className="mt-2 text-xl font-semibold text-gray-900">
+                    <div className="mt-2 text-xl font-semibold text-navy">
                       {r.before}
                     </div>
                   </div>
@@ -651,7 +651,7 @@ const Home = () => {
                     <div className="text-xs uppercase tracking-wide text-gray-500">
                       After
                     </div>
-                    <div className="mt-2 text-xl font-semibold text-gray-900">
+                    <div className="mt-2 text-xl font-semibold text-navy">
                       {r.after}
                     </div>
                   </div>
@@ -670,7 +670,7 @@ const Home = () => {
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
                 What’s Included
               </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy">
                 What goes into a PAZ report
               </h2>
               <p className="mt-4 text-sm leading-6 text-gray-600">
@@ -707,7 +707,7 @@ const Home = () => {
                     key={item.title}
                     className="rounded-2xl border border-gray-200 bg-gray-50 p-5"
                   >
-                    <h3 className="text-base font-semibold text-gray-900">{item.title}</h3>
+                    <h3 className="text-base font-semibold text-navy">{item.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-gray-600">{item.desc}</p>
                   </div>
                 ))}
@@ -718,7 +718,7 @@ const Home = () => {
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
                 Reviews
               </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy">
                 Social proof helps close hesitation.
               </h2>
               <div className="mt-6 space-y-4">
@@ -731,7 +731,7 @@ const Home = () => {
                     <p className="mt-3 text-sm leading-6 text-gray-600">
                       “{review.quote}”
                     </p>
-                    <div className="mt-3 text-sm font-medium text-gray-900">
+                    <div className="mt-3 text-sm font-medium text-navy">
                       {review.name}
                     </div>
                   </div>
@@ -742,19 +742,19 @@ const Home = () => {
         </div>
       </section>
 
-      <section id="quote" className="w-full bg-gray-900 py-16 text-white sm:py-20">
+      <section id="quote" className="w-full bg-navy py-16 text-white sm:py-20">
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-400">
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-300">
             Free case review
           </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
             Ready to send your file?
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-gray-300 sm:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-gray-200 sm:text-base">
             Send your estimate, photos, valuation, or insurer paperwork and Precision Appraisal Zone (PAZ) will review the file and respond as quickly as possible.
           </p>
           <div className="mx-auto mt-8 max-w-xl rounded-3xl border border-white/10 bg-white/5 p-5 text-left">
-            <label className="inline-flex items-start gap-3 text-xs leading-5 text-gray-300">
+            <label className="inline-flex items-start gap-3 text-xs leading-5 text-gray-200">
               <input type="checkbox" className="mt-1 accent-white" required />
               <span>
                 I agree to the{' '}
@@ -781,11 +781,11 @@ const Home = () => {
             <button
               type="button"
               onClick={() => document.dispatchEvent(new CustomEvent('open-benji'))}
-              className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-100"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-semibold text-navy transition hover:bg-gray-100"
             >
               Contact PAZ / Upload Files
             </button>
-            <p className="mt-4 text-[11px] leading-5 text-gray-400">
+            <p className="mt-4 text-[11px] leading-5 text-gray-300">
               Precision Appraisal Zone (PAZ) is an independent appraisal service. We do not provide legal advice or sell insurance on this site.
             </p>
           </div>
@@ -798,7 +798,7 @@ const Home = () => {
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
               About
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy">
               Independent support for claim disputes and valuation questions.
             </h2>
             <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-gray-600 sm:text-base">
@@ -815,14 +815,14 @@ const Home = () => {
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
                 FAQ
               </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy">
                 Common questions
               </h2>
             </div>
             <div className="mt-8 divide-y divide-gray-200">
               {faqs.map((item) => (
                 <details key={item.q} className="group py-4">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium text-gray-900">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium text-navy">
                     <span>{item.q}</span>
                     <span className="text-gray-400 transition group-open:rotate-180">
                       ⌄
@@ -843,22 +843,22 @@ const Home = () => {
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
                 Contact
               </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900">
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-navy">
                 Get in touch
               </h2>
             </div>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-center">
                 <div className="text-xs uppercase tracking-wide text-gray-500">Email</div>
-                <div className="mt-2 text-sm font-medium text-gray-900">{email}</div>
+                <div className="mt-2 text-sm font-medium text-navy">{email}</div>
               </div>
               <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-center">
                 <div className="text-xs uppercase tracking-wide text-gray-500">Phone</div>
-                <div className="mt-2 text-sm font-medium text-gray-900">954.839.7653</div>
+                <div className="mt-2 text-sm font-medium text-navy">954.839.7653</div>
               </div>
               <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-center">
                 <div className="text-xs uppercase tracking-wide text-gray-500">Service area</div>
-                <div className="mt-2 text-sm font-medium text-gray-900">
+                <div className="mt-2 text-sm font-medium text-navy">
                   South Florida + remote nationwide
                 </div>
               </div>
@@ -903,10 +903,10 @@ const Home = () => {
             <div
               role="status"
               aria-live="polite"
-              className="absolute bottom-20 right-0 rounded-full border border-gray-800 bg-gray-900 px-3 py-1 text-xs text-white shadow-md"
+              className="absolute bottom-20 right-0 rounded-full border border-navy bg-navy px-3 py-1 text-xs text-white shadow-md"
             >
               Woof!
-              <span className="absolute -bottom-1 right-6 h-0 w-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-gray-900" />
+              <span className="absolute -bottom-1 right-6 h-0 w-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-navy" />
             </div>
           )}
 
@@ -922,14 +922,14 @@ const Home = () => {
               role="dialog"
               aria-label="Contact options"
             >
-              <div className="mb-2 font-medium text-gray-800">Ask Benji</div>
+              <div className="mb-2 font-medium text-navy">Ask Benji</div>
               <div className="flex flex-col gap-2">
                 {actions.map((a) => (
                   <a
                     key={a.kind}
                     href={a.href}
                     onClick={() => handleActionClick(a.kind)}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 hover:bg-gray-100"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     {a.label}
                   </a>
@@ -953,7 +953,7 @@ const Home = () => {
               alt="Benji the Pup of Peace"
               className="h-14 w-14 rounded-full border border-gray-300 shadow-md transition-transform hover:scale-110"
             />
-            <span className="mt-1 text-[11px] font-medium">Ask Benji</span>
+            <span className="mt-1 text-[11px] font-medium text-gray-700">Ask Benji</span>
           </button>
         </div>
       </div>
@@ -1008,20 +1008,20 @@ const DVCalculator = ({ onStartQuote }) => {
       <div className="space-y-4">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <input
-            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-navy"
             placeholder="Year"
             value={form.year}
             onChange={(e) => setForm({ ...form, year: e.target.value })}
             inputMode="numeric"
           />
           <input
-            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-navy"
             placeholder="Make"
             value={form.make}
             onChange={(e) => setForm({ ...form, make: e.target.value })}
           />
           <input
-            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-navy"
             placeholder="Model"
             value={form.model}
             onChange={(e) => setForm({ ...form, model: e.target.value })}
@@ -1030,21 +1030,21 @@ const DVCalculator = ({ onStartQuote }) => {
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <input
-            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-navy"
             placeholder="Mileage"
             value={form.mileage}
             onChange={(e) => setForm({ ...form, mileage: e.target.value })}
             inputMode="numeric"
           />
           <input
-            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-navy"
             placeholder="Repair Total ($)"
             value={form.repairTotal}
             onChange={(e) => setForm({ ...form, repairTotal: e.target.value })}
             inputMode="decimal"
           />
           <select
-            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-navy"
             value={form.state}
             onChange={(e) => setForm({ ...form, state: e.target.value })}
           >
@@ -1061,7 +1061,7 @@ const DVCalculator = ({ onStartQuote }) => {
           <label className="inline-flex items-center gap-2 text-sm text-gray-700">
             <input
               type="checkbox"
-              className="accent-gray-900"
+              className="accent-navy"
               checked={form.frame}
               onChange={(e) => setForm({ ...form, frame: e.target.checked })}
             />
@@ -1070,14 +1070,14 @@ const DVCalculator = ({ onStartQuote }) => {
           <label className="inline-flex items-center gap-2 text-sm text-gray-700">
             <input
               type="checkbox"
-              className="accent-gray-900"
+              className="accent-navy"
               checked={form.airbags}
               onChange={(e) => setForm({ ...form, airbags: e.target.checked })}
             />
             Airbag Deploy
           </label>
           <input
-            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-800"
+            className="rounded-xl border border-gray-300 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-navy"
             placeholder="Panels Affected"
             value={form.panels}
             onChange={(e) => setForm({ ...form, panels: e.target.value })}
@@ -1092,7 +1092,7 @@ const DVCalculator = ({ onStartQuote }) => {
 
       <div className="rounded-3xl border border-gray-200 bg-gray-50 p-6">
         <div className="text-sm text-gray-600">Estimated DV range</div>
-        <div className="mt-2 text-3xl font-semibold text-gray-900">
+        <div className="mt-2 text-3xl font-semibold text-navy">
           {parsed.repair > 0
             ? `${currency(parsed.estimateLow)} — ${currency(parsed.estimateHigh)}`
             : '—'}
@@ -1104,13 +1104,13 @@ const DVCalculator = ({ onStartQuote }) => {
           <button
             type="button"
             onClick={onStartQuote}
-            className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-black"
+            className="inline-flex items-center justify-center rounded-xl bg-navy px-4 py-3 text-sm font-medium text-white transition hover:opacity-90"
           >
             Request a DV Report
           </button>
           <a
             href="#services"
-            className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-900 transition hover:bg-gray-50"
+            className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-navy transition hover:bg-gray-50"
           >
             View Services
           </a>
@@ -1121,4 +1121,3 @@ const DVCalculator = ({ onStartQuote }) => {
 };
 
 export default Home;
-
