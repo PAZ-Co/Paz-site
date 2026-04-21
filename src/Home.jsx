@@ -403,7 +403,7 @@ const Home = () => {
             className="mx-auto mb-5 w-36 rounded-none border-none shadow-none ring-0 sm:w-44 md:w-52 lg:w-56"
           />
           <h1 className="text-4xl font-semibold tracking-tight text-navy sm:text-5xl md:text-6xl">
-            Independent reports.
+            Independent Appraisals.
             <br className="hidden sm:block" />
             <span className="inline-block">Laser-focused results.</span>
           </h1>
